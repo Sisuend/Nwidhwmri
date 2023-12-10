@@ -2119,6 +2119,13 @@ getgenv().HyperCahayas = function(p)
 
 local Library = Update:Window("Ganteng Hub","",Enum.KeyCode.RightControl);
 
+newLib:AddChangelog({
+    ["new ui"] = "[1.0.0] BETA",
+    ["added yapping"] = "New Update Date : 10/12/2023",
+    ["new ui"] = "[1.0.1] BETA",
+    ["added yapping"] = "New Update Date : 10/12/2023",
+})
+
 -- LOADING HERE
 task.wait(.1) 
 checkServer() 
@@ -7576,7 +7583,7 @@ spawn(function()
                     local initialPosition = model.PrimaryPart.Position
                     local targetPosition = model.PrimaryPart.Position + Vector3.new(0, height, 0)
 
-                    while (model.PrimaryPart.Position - targetPosition).Magnitude > 0.1 and _G.BiirTrax do
+                    while (model.PrimaryPart.Position - targetPosition).Magnitude > 0.1 and _G.clearCD do
                         local newY = initialPosition.Y + height
                         local newPosition = Vector3.new(model.PrimaryPart.Position.X, newY, model.PrimaryPart.Position.Z)
                         model:SetPrimaryPartCFrame(CFrame.new(newPosition))
@@ -7609,7 +7616,7 @@ spawn(function()
                     local speed = 1 / speedFactor
                     local targetPosition = model.PrimaryPart.Position + moveDirection * speed
 
-                    while (model.PrimaryPart.Position - targetPosition).Magnitude > 0.1 and _G.BiirTrax do
+                    while (model.PrimaryPart.Position - targetPosition).Magnitude > 0.1 and _G.clearCD do
                         model:SetPrimaryPartCFrame(model.PrimaryPart.CFrame + moveDirection * speed)
                         task.wait()
                     end
