@@ -2120,10 +2120,7 @@ getgenv().HyperCahayas = function(p)
 local Library = Update:Window("Ganteng Hub","",Enum.KeyCode.RightControl);
 
 newLib:AddChangelog({
-    ["new ui"] = "[1.0.0] BETA",
-    ["added yapping"] = "New Update Date : 10/12/2023",
-    ["new ui"] = "[1.0.1] BETA",
-    ["added yapping"] = "New Update Date : 10/12/2023",
+    ["BETA 1.0.0"] = "Update Add Some Fearure And Fixing",
 })
 
 -- LOADING HERE
