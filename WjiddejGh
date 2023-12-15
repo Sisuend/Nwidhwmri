@@ -2117,6 +2117,7 @@ local Library = Update:Window("Ganteng Hub","",Enum.KeyCode.RightControl);
 
 newLib:AddChangelog({
     ["BETA 1.0.0"] = "Update Add Some Fearure And Fixing",
+    ["BETA 2.0.0"] = "Update Add Some Fearure And Fixing",
 })
 
 -- LOADING HERE
