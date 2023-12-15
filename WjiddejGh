@@ -5880,7 +5880,7 @@ FrozenIsland = SE:AddLabel("")
 spawn(function()
     pcall(function()
         while wait() do
-            if game.Workspace._WorldOrigin.Locations:FindFirstChild('KitsuneIsland') then
+            if game.Workspace._WorldOrigin.Locations:FindFirstChild('Kitsune Island') then
                 kitsune:Set('🏝️: Kitsune Island Spawning')
             else
                 kitsune:Set('❌: Kitsune Island Not Found')
@@ -5901,7 +5901,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BjirFrozenCuy then
-                HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Frozen Dimension").CFrame * CFrame.new(0,150,150))
+                HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Kitsune Island").CFrame * CFrame.new(0,150,150))
             end
         end)
     end
