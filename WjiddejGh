@@ -5967,12 +5967,6 @@ spawn(function()
     end
 end)
 
-_G.GachaMetter = 25
-
-SE:AddSlider("Select Azure Ember For Auto Gacha [ NORMAL : 25 ]",1,25,25,function(value)
-_G.GachaMetter = value
-end)
-
 SE:AddToggle('Auto Gacha Kitsune Stone', false, function(value)
 _G.GachaStone = value
 end) 
@@ -5984,7 +5978,7 @@ spawn(function()
             local bijiApi = "Azure Ember"
             local bijiCount = checkCount(bijiApi)
           
-            if _G.GachaStone and bijiCount > _G.GachaMetter then
+            if _G.GachaStone and bijiCount > 24 then
                 game:GetService("ReplicatedStorage").Modules.Net["RF/KitsuneStatuePray"]:InvokeServer()
             end
         end)
