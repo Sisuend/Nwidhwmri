@@ -6012,27 +6012,27 @@ BoatLssistSis = {
 spawn(function()
     while wait() do
         pcall(function()
-            if SelectBoat == "Beast Hunter" then
+            if _G.Bajikur == "Beast Hunter" then
                 _G.Dangers = "Beast Hunter"
-            elseif SelectBoat == "MarineSloop" then
+            elseif _G.Bajikur == "MarineSloop" then
                 _G.Dangers = "MarineSloop"
-            elseif SelectBoat == "MarineBrigade" then
+            elseif _G.Bajikur == "MarineBrigade" then
                 _G.Dangers = "MarineBrigade"
-            elseif SelectBoat == "MarineGrandBrigade" then
+            elseif _G.Bajikur == "MarineGrandBrigade" then
                 _G.Dangers = "MarineGrandBrigade"
-            elseif SelectBoat == "PirateSloop" then
+            elseif _G.Bajikur == "PirateSloop" then
                 _G.Dangers = "PirateSloop"
-            elseif SelectBoat == "PirateBrigade" then
+            elseif _G.Bajikur == "PirateBrigade" then
                 _G.Dangers = "PirateBrigade"
-            elseif SelectBoat == "PirateGrandBrigade" then
+            elseif _G.Bajikur == "PirateGrandBrigade" then
                 _G.Dangers = "PirateGrandBrigade"
-            elseif SelectBoat == "Miracle" then
+            elseif _G.Bajikur == "Miracle" then
                 _G.Dangers = "Miracle"
-            elseif SelectBoat == "The Sentinel" then
+            elseif _G.Bajikur == "The Sentinel" then
                 _G.Dangers = "The Sentinel"
-            elseif SelectBoat == "Guardian" then
+            elseif _G.Bajikur == "Guardian" then
                 _G.Dangers = "Guardian"
-            elseif SelectBoat == "Lantern" then
+            elseif _G.Bajikur == "Lantern" then
                 _G.Dangers = "Lantern"
             end
         end)
@@ -6040,8 +6040,8 @@ spawn(function()
 end)
 
 
-SE:AddDropdown("Select Boats For Dangers 6",BoatListSis,function(value)
-    _G.selectedBoat = value
+SE:AddDropdown("Select Boats For Dangers 6",BoatLssistSis,function(value)
+    _G.Bajikur = value
 end)
 SE:AddLabel("Before Teleport Mustbe Buy Boat, With Same Name U pIck")
 
