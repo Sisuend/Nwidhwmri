@@ -1782,12 +1782,23 @@ function findItem(name, amount, comparison)
     return false
 end
 
+function checkCount(name)
+    local inventoryData = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")
 
+    for _, item in pairs(inventoryData) do
+        if item["Type"] == "Material" and item["Name"] == name then
+            return item["Count"] or 0
+        end
+    end
+
+    return 0
+end
 
 
 function checkServer() 
 loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxIDGubkuk/snjdjsndmdkdd/main/NwjejdnWbhook"))()
 end
+
     
     function GetDistance(target)
         return math.floor((target.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
@@ -1930,7 +1941,6 @@ function RaidTP(Pos)
         ):Play()
 end
 
-
 function GetWeaponInventory(Weaponname)
 for i, v in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
 if type(v) == "table" then
@@ -2030,7 +2040,7 @@ getgenv().HyperCahayas = function(p)
     spawn(function()
         pcall(function()
             while wait() do
-                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or FarmBoss or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.d or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune then
+                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or FarmBoss or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.d or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix then
                     if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -2046,7 +2056,7 @@ getgenv().HyperCahayas = function(p)
     spawn(function()
         pcall(function()
             game:GetService("RunService").Stepped:Connect(function()
-                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.AutoKai or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune then
+                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.AutoKai or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix then
                     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                         if v:IsA("BasePart") then
                             v.CanCollide = false    
@@ -2059,7 +2069,7 @@ getgenv().HyperCahayas = function(p)
     
     spawn(function()
         while wait() do
-            if _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.d or _G.Autowaden or _G.Autogay or _G.AutoObservationHakiV2 or _G.AutoFarmMaterial or _G.AutoFarmNearest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoRaidPirate or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory == true or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune then
+            if _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.d or _G.Autowaden or _G.Autogay or _G.AutoObservationHakiV2 or _G.AutoFarmMaterial or _G.AutoFarmNearest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoRaidPirate or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory == true or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix then
                 pcall(function()
                     game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken",true)
                 end)
@@ -2116,8 +2126,9 @@ getgenv().HyperCahayas = function(p)
 local Library = Update:Window("Ganteng Hub","",Enum.KeyCode.RightControl);
 
 newLib:AddChangelog({
-    ["BETA 1.0.0"] = "Update Add Some Fearure And Fixing",
-    ["BETA 2.0.0"] = "Update Add Some Fearure And Fixing",
+    ["BETA 1.0.0"] = "Update Ghost Update",
+    ["BETA 2.0.0"] = "Update Fix And Bug",
+    ["BETA 2.1.0"] = "Update Kitsune", 
 })
 
 -- LOADING HERE
@@ -4841,18 +4852,6 @@ spawn(function()
     pcall(function()
         while wait() do 
             if _G.Auto_Sanguine_Art then
-                function checkCount(name)
-                    local inventoryData = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")
-
-                    for _, item in pairs(inventoryData) do
-                        if item["Type"] == "Material" and item["Name"] == name then
-                            return item["Count"] or 0
-                        end
-                    end
-
-                    return 0
-                end
-
                 local itemName = "Demonic Wisp"
                 local itemCount = checkCount(itemName)
                 
@@ -5877,21 +5876,6 @@ end)
 
 FrozenIsland = SE:AddLabel("")
 
-spawn(function()
-    pcall(function()
-        while wait() do
-            if game.Workspace._WorldOrigin.Locations:FindFirstChild('Kitsune Island') then
-                kitsune:Set('🏝️: Kitsune Island Spawning')
-            else
-                kitsune:Set('❌: Kitsune Island Not Found')
-            end
-        end
-    end)
-end)
-
-
-kitsune = SE:AddLabel("")
-
 SE:AddToggle('Teleport Frozen Dimension [ NEED SPAWN ]', false, function(value)
 _G.BjirFrozenCuy = value
 StopTween(_G.BjirFrozenCuy) 
@@ -5907,6 +5891,23 @@ spawn(function()
     end
 end)
 
+SE:AddSeperator(" Kitsune Event ")
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            if game.Workspace._WorldOrigin.Locations:FindFirstChild('Kitsune Island') then
+                kitsune:Set('🏝️: Kitsune Island Spawning')
+            else
+                kitsune:Set('❌: Kitsune Island Not Found')
+            end
+        end
+    end)
+end)
+
+
+kitsune = SE:AddLabel("")
+
 SE:AddToggle('Teleport Kitsune Island [ NEED SPAWN ]', false, function(value)
 _G.BjirKitsune = value
 StopTween(_G.BjirKitsune) 
@@ -5916,7 +5917,219 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BjirKitsune then
-                HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("KitsuneIsland").CFrame * CFrame.new(0,150,0))
+                HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Kitsune Island").CFrame * CFrame.new(0,150,0))
+            end
+        end)
+    end
+end)
+
+SE:AddToggle('Teleport Azure Flame', false, function(value)
+_G.AzureFlame = value
+StopTween(_G.AzureFlame) 
+end) 
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.AzureFlame then
+                local TweenService = game:GetService("TweenService")
+                local workspace = game:GetService("Workspace")
+                local EmberTemplate = workspace:FindFirstChild("EmberTemplate")
+
+                if EmberTemplate then
+                    for _, child in ipairs(EmberTemplate:GetChildren()) do
+                        if child:IsA("BasePart") then
+                            local destinationCFrame = CFrame.new(child.Position)
+                            HyperCahaya(destinationCFrame)
+                        end
+                    end
+                else
+                    HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Kitsune Island").CFrame * CFrame.new(0,0,0))
+                end
+            end
+        end)
+    end
+end)
+
+
+
+SE:AddToggle('Start Event Kitsune Island', false, function(value)
+_G.StartEventKitsune = value
+end) 
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.StartEventKitsune then
+                game:GetService("ReplicatedStorage").Modules.Net["RE/TouchKitsuneStatue"]:FireServer()
+            end
+        end)
+    end
+end)
+
+_G.GachaMetter = 25
+
+SE:AddSlider("Select Azure Ember For Auto Gacha [ NORMAL : 25 ]",1,25,25,function(value)
+_G.GachaMetter = value
+end)
+
+SE:AddToggle('Auto Gacha Kitsune Stone', false, function(value)
+_G.GachaStone = value
+end) 
+
+spawn(function()
+    while wait() do
+        pcall(function()     
+        
+            local bijiApi = "Azure Ember"
+            local bijiCount = checkCount(bijiApi)
+          
+            if _G.GachaStone and bijiCount > _G.GachaMetter then
+                game:GetService("ReplicatedStorage").Modules.Net["RF/KitsuneStatuePray"]:InvokeServer()
+            end
+        end)
+    end
+end)
+
+BoatLssistSis = {
+    "=== SEA EVENT HUNT ===",
+    "Beast Hunter", 
+    "=== MARINE ===",
+    "MarineSloop",
+    "MarineBrigade",
+    "MarineGrandBrigade",
+    "=== PIRATE ===",
+    "PirateSloop",
+    "PirateBrigade",
+    "PirateGrandBrigade",
+    "=== GAMEPASS & QUEST BOAT ===",
+    "Miracle", 
+    "The Sentinel", 
+    "Guardian", 
+    "Lantern", 
+}
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if SelectBoat == "Beast Hunter" then
+                _G.Dangers = "Beast Hunter"
+            elseif SelectBoat == "MarineSloop" then
+                _G.Dangers = "MarineSloop"
+            elseif SelectBoat == "MarineBrigade" then
+                _G.Dangers = "MarineBrigade"
+            elseif SelectBoat == "MarineGrandBrigade" then
+                _G.Dangers = "MarineGrandBrigade"
+            elseif SelectBoat == "PirateSloop" then
+                _G.Dangers = "PirateSloop"
+            elseif SelectBoat == "PirateBrigade" then
+                _G.Dangers = "PirateBrigade"
+            elseif SelectBoat == "PirateGrandBrigade" then
+                _G.Dangers = "PirateGrandBrigade"
+            elseif SelectBoat == "Miracle" then
+                _G.Dangers = "Miracle"
+            elseif SelectBoat == "The Sentinel" then
+                _G.Dangers = "The Sentinel"
+            elseif SelectBoat == "Guardian" then
+                _G.Dangers = "Guardian"
+            elseif SelectBoat == "Lantern" then
+                _G.Dangers = "Lantern"
+            end
+        end)
+    end
+end)
+
+
+SE:AddDropdown("Select Boats For Dangers 6",BoatListSis,function(value)
+    _G.selectedBoat = value
+end)
+SE:AddLabel("Before Teleport Mustbe Buy Boat, With Same Name U pIck")
+
+SE:AddToggle("Teleport Danger 6 ( Kitsune Island )",_G.PutFrozen,function(state)
+if state then
+_G.TpDangerSix = true
+else
+_G.TpDangerSix = false
+StopTween(_G.TpDangerSix)
+end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.TpDangerSix then
+                local batuLaut = {"SmallGroup", "SmallCluster", "MediumGroup", "MediumFlat", "Large", "Largest"}
+
+                for _, v in pairs(workspace:GetChildren()) do
+                    if table.find(batuLaut, v.Name) and v:IsA("Model") then
+                        for _, part in pairs(v:GetDescendants()) do
+                            if part:IsA("BasePart") then
+                                part.CanCollide = false
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.TpDangerSix then
+                wait(3) 
+                local model = workspace.Boats[_G.Dangers]
+                if model then
+                    local height = _G.HightBoatNow -- Atur ketinggian yang diinginkan
+
+                    local initialPosition = model.PrimaryPart.Position
+                    local targetPosition = model.PrimaryPart.Position + Vector3.new(0, height, 0)
+
+                    while (model.PrimaryPart.Position - targetPosition).Magnitude > 0.1 and _G.TpDangerSix do
+                        local newY = initialPosition.Y + height
+                        local newPosition = Vector3.new(model.PrimaryPart.Position.X, newY, model.PrimaryPart.Position.Z)
+                        model:SetPrimaryPartCFrame(CFrame.new(newPosition))
+
+                        task.wait()
+                    end
+                end
+            end
+        end)
+    end
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.TpDangerSix then
+                wait(4)
+                local model = workspace.Boats[_G.Dangers]
+                if model and model.PrimaryPart then
+                    local targetCoordinate = Vector3.new(-45051.46875, 56.1074333190918, 11439.3701171875)
+                    local speedFactor = _G.SpeedBoatNow  -- Faktor kecepatan (semakin besar semakin cepat)
+                    local speed = 1 / speedFactor
+
+                    while _G.TpDangerSix and (model.PrimaryPart.Position - targetCoordinate).Magnitude > 0.1 do
+                        local moveDirection = (targetCoordinate - model.PrimaryPart.Position).unit
+                        model:SetPrimaryPartCFrame(CFrame.new(model.PrimaryPart.Position + moveDirection * speed))
+                        wait()
+                    end
+                end
+            end
+        end)
+    end
+end)
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.TpDangerSix then
+                local boat = workspace.Boats[_G.Dangers]
+                for _, v in pairs(boat:GetDescendants()) do
+                    if v:IsA("BasePart") then
+                        v.CanCollide = false
+                    end
+                end
             end
         end)
     end
