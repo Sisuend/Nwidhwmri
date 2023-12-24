@@ -7571,11 +7571,7 @@ end)
             while wait() do
                 if _G.AutoObservation then
                     if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 3000 then
-                        game:GetService("StarterGui"):SetCore("SendNotification", {
-                            Icon = "rbxassetid://0";
-                            Title = "Status Observation", 
-                            Text = "You Have Max Points"
-                        })
+                        notif("Observation Status", "Your Observation Its Max Lvl") 
                         wait(2)
                     else
                         if World2 then
@@ -9428,7 +9424,7 @@ spawn(function()
 end)
 
 
-SE:AddDropdown("Select Boats For Auto Sail",BoatListSis,function(value)
+SE:AddDropdown("Select Boats Global",BoatListSis,function(value)
     _G.selectedBoatSail = value
 end)
     
@@ -9505,6 +9501,10 @@ spawn(function()
     end
 end)
 
+--SE:AddToggle('Auto Kill Sea Beast', true, function(value)
+--_G.SaveAntiDie = value
+--notif("Sea Event", "Anti Die Aktif, So U Cant Die By Sea Event") 
+--end) 
 
 SE:AddSeperator(" Optional Feature ") 
 
@@ -9739,7 +9739,14 @@ spawn(function()
                                         v.Head.CanCollide = false 
                                         MakoriGayMag = false
                                         PosGay = v.HumanoidRootPart.CFrame
+                                        local player = game.Players.LocalPlayer
+                                        local character = player.Character or player.CharacterAdded:Wait()
+                                        local humanoid = character:WaitForChild("Humanoid")
+                                        if humanoid.Health <= 4000 then
+                                        HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(2,150,2))
+                                        else
                                         HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(2,60,2))
+                                        end
                                         game:GetService("VirtualUser"):CaptureController()
                                         game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
                                     until not _G.bjirTerrorshark or not v.Parent or v.Humanoid.Health <= 0
@@ -10948,7 +10955,7 @@ end)
         _G.TeleportPlyFriend = value
         pcall(function()
             if _G.TeleportPlyFriend then
-                repeat HyperCahaya(game:GetService("Players")[_G.SelectPlyJir].Character.HumanoidRootPart.CFrame) wait() until _G.TeleportPlyFriend == false
+                repeat HyperCahaya(game:GetService("Players")[_G.SelectPlyAnjay].Character.HumanoidRootPart.CFrame) wait() until _G.TeleportPlyFriend == false
             end
             StopTween(_G.TeleportPlyFriend)
         end)
@@ -10957,7 +10964,7 @@ end)
 SE:AddSeperator(" Leviathan + Leviathan Heart ") 
 
 SE:AddToggle("Auto Find Leviathan",_G.leviOnly,function(state)
-    if state and workspace.Boats["Beast Hunter"] then
+    if state then
         _G.leviOnly = true
     else
         _G.leviOnly = false
