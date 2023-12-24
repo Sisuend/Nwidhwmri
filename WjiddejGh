@@ -10525,6 +10525,10 @@ if _G.bjirTrax then
     _G.BiirTrax = true
 end
 if _G.BiirTrax then
+if workspace.Boats:FindFirstChild(_G.selectedBoatSail) then
+workspace.Boats[_G.selectedBoatSail]:Destroy()
+notif("System", "Some Boat Has Ben Destroy") 
+end
 
 wait(1) 
 
@@ -10550,13 +10554,8 @@ spawn(function()
         pcall(function()
             if _G.BiirTrax then
                 for _, v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
-                    if v.Name:find("VehicleSeat") then
-                        if workspace.Boats:FindFirstChild(_G.selectedBoatSail) then
-                           workspace.Boats[_G.selectedBoatSail]:Destroy()
-                           notif("System", "Some Boat Has Ben Destroy") 
-                        end
-                        
-                        wait(1) 
+                    if v.Name:find("VehicleSeat") then                    
+                        wait(1)
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         break
                     end
@@ -10764,11 +10763,6 @@ spawn(function()
             if _G.sailOnly then
                 for _, v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
-                        if workspace.Boats:FindFirstChild(_G.selectedBoatSail) then
-                           workspace.Boats[_G.selectedBoatSail]:Destroy()
-                           notif("System", "Some Boat Has Ben Destroy") 
-                        end
-                        
                         wait(1) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         break
