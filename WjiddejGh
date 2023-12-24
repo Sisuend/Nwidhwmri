@@ -2041,7 +2041,7 @@ getgenv().HyperCahayas = function(p)
     spawn(function()
         pcall(function()
             while wait() do
-                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or FarmBoss or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.d or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix then
+                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or FarmBoss or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.d or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix or _G.TeleportPlyFriend or Kitsune or Frozen or Mirrage then
                     if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -2057,7 +2057,7 @@ getgenv().HyperCahayas = function(p)
     spawn(function()
         pcall(function()
             game:GetService("RunService").Stepped:Connect(function()
-                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.AutoKai or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix then
+                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.AutoKai or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix or _G.TeleportPlyFriend or Kitsune or Frozen or Mirrage then
                     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                         if v:IsA("BasePart") then
                             v.CanCollide = false    
@@ -2070,7 +2070,7 @@ getgenv().HyperCahayas = function(p)
     
     spawn(function()
         while wait() do
-            if _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.d or _G.Autowaden or _G.Autogay or _G.AutoObservationHakiV2 or _G.AutoFarmMaterial or _G.AutoFarmNearest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoRaidPirate or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory == true or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix then
+            if _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.d or _G.Autowaden or _G.Autogay or _G.AutoObservationHakiV2 or _G.AutoFarmMaterial or _G.AutoFarmNearest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoRaidPirate or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory == true or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix or _G.TeleportPlyFriend or Kitsune or Frozen or Mirrage then
                 pcall(function()
                     game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken",true)
                 end)
@@ -2124,12 +2124,14 @@ getgenv().HyperCahayas = function(p)
     end)
     
 
+
 local Library = Update:Window("Ganteng Hub","",Enum.KeyCode.RightControl);
 
 newLib:AddChangelog({
-    ["BETA 1.0.0"] = "Update Ghost Update",
-    ["BETA 2.0.0"] = "Update Fix And Bug",
+    ["BETA 2.2.0"] = "Update Fix Bug", 
     ["BETA 2.1.0"] = "Update Kitsune", 
+    ["BETA 2.0.0"] = "Update Fix Bug",
+    ["BETA 1.0.0"] = "Update Ghost Update",
 })
 
 -- LOADING HERE
@@ -6113,6 +6115,7 @@ spawn(function()
 								if game:GetService("Workspace").Map["Haunted Castle"].Candle1.Transparency == 0 then
 									if game:GetService("Workspace").Map["Haunted Castle"].Placard1.Left.Part.Transparency == 0 then
 										Quest2 = true
+										notif("Soul Guitar","Started Puzzle 2") 
 										repeat wait() HyperCahaya(CFrame.new(-8762.69140625, 176.84783935546875, 6171.3076171875)) until (CFrame.new(-8762.69140625, 176.84783935546875, 6171.3076171875).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or not _G.AutoNevaSoulGuitar
 										wait(1)
 										fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard7.Left.ClickDetector)
@@ -6132,6 +6135,7 @@ spawn(function()
 									elseif game:GetService("Workspace").Map["Haunted Castle"].Tablet.Segment1:FindFirstChild("ClickDetector") then
 										if game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part1:FindFirstChild("ClickDetector") then
 											Quest4 = true
+											notif("Soul Guitar","Started Puzzle 4") 
 											repeat wait() HyperCahaya(CFrame.new(-9553.5986328125, 65.62338256835938, 6041.58837890625)) until (CFrame.new(-9553.5986328125, 65.62338256835938, 6041.58837890625).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or not _G.AutoNevaSoulGuitar
 											wait(1)
 											HyperCahaya(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.CFrame)
@@ -6164,8 +6168,14 @@ spawn(function()
 											wait(1)
 											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector)
 										else
-											Quest3 = true
-											--Not Work Yet
+											Quest3 = true	
+											notif("Soul Guitar","Started Puzzle 3")
+											for _, v in pairs(game:GetService("Workspace").Map["Haunted Castle"].Tablet:GetChildren()) do
+											    if v:FindFirstChild("ClickDetector") and v.Line.p.Y < -999 then
+											        fireclickdetector(v.ClickDetector)
+											        task.wait(0.2)
+											    end
+											end
 										end
 									else
 										if game:GetService("Workspace").NPCs:FindFirstChild("Ghost") then
@@ -6186,7 +6196,7 @@ spawn(function()
 														v.Humanoid.JumpPower = 0
 														v.Humanoid.WalkSpeed = 0
 														v.HumanoidRootPart.CanCollide = false
-														v.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,20,0)
+														v.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,20,2)
 														HyperCahaya(CFrame.new(-10160.787109375, 138.6616973876953, 5955.03076171875))
 														game:GetService'VirtualUser':CaptureController()
 														game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
@@ -9352,6 +9362,150 @@ spawn(function()
     end
 end)
 
+SE:AddSeperator(" Setting Boat ")    
+
+_G.SpeedBoatNow = 17
+_G.HightBoatNow = 150
+          
+SE:AddSlider("Boat Speeed : [ NORMAL : 17 ]",1,25,17,function(value)
+_G.SpeedBoatNow = value
+end)
+
+
+SE:AddLabel("Semakin Kecil Angka, Akan Semakin Cepat Speed Nya")
+
+
+SE:AddSlider("Boat Hight : [ NORMAL : 150 ]",5,1000,150,function(value)
+_G.HightBoatNow = value
+end)
+
+BoatListSis = {
+    "=== SEA EVENT HUNT ===",
+    "Beast Hunter", 
+    "=== MARINE ===",
+    "MarineSloop",
+    "MarineBrigade",
+    "MarineGrandBrigade",
+    "=== PIRATE ===",
+    "PirateSloop",
+    "PirateBrigade",
+    "PirateGrandBrigade",
+    "=== GAMEPASS & QUEST BOAT ===",
+    "Miracle", 
+    "The Sentinel", 
+    "Guardian", 
+    "Lantern", 
+}
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if SelectBoat == "Beast Hunter" then
+                _G.selectedBoatSail = "Beast Hunter"
+            elseif SelectBoat == "MarineSloop" then
+                _G.selectedBoatSail = "MarineSloop"
+            elseif SelectBoat == "MarineBrigade" then
+                _G.selectedBoatSail = "MarineBrigade"
+            elseif SelectBoat == "MarineGrandBrigade" then
+                _G.selectedBoatSail = "MarineGrandBrigade"
+            elseif SelectBoat == "PirateSloop" then
+                _G.selectedBoatSail = "PirateSloop"
+            elseif SelectBoat == "PirateBrigade" then
+                _G.selectedBoatSail = "PirateBrigade"
+            elseif SelectBoat == "PirateGrandBrigade" then
+                _G.selectedBoatSail = "PirateGrandBrigade"
+            elseif SelectBoat == "Miracle" then
+                _G.selectedBoatSail = "Miracle"
+            elseif SelectBoat == "The Sentinel" then
+                _G.selectedBoatSail = "The Sentinel"
+            elseif SelectBoat == "Guardian" then
+                _G.selectedBoatSail = "Guardian"
+            elseif SelectBoat == "Lantern" then
+                _G.selectedBoatSail = "Lantern"
+            end
+        end)
+    end
+end)
+
+
+SE:AddDropdown("Select Boats For Auto Sail",BoatListSis,function(value)
+    _G.selectedBoatSail = value
+end)
+    
+BoatList = {
+    "=== SEA EVENT HUNT ===",
+    "Beast Hunter", 
+    "=== MARINE ===",
+    "MarineSloop",
+    "MarineBrigade",
+    "MarineGrandBrigade",
+    "=== PIRATE ===",
+    "PirateSloop",
+    "PirateBrigade",
+    "PirateGrandBrigade",
+    "=== GAMEPASS & QUEST BOAT ===",
+    "Miracle", 
+    "The Sentinel", 
+    "Guardian", 
+    "Lantern"
+}
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if SelectBoat == "Beast Hunter" then
+                _G.selectedBoatBuy = "Beast Hunter"
+            elseif SelectBoat == "MarineSloop" then
+                _G.selectedBoatBuy = "MarineSloop"
+            elseif SelectBoat == "MarineBrigade" then
+                _G.selectedBoatBuy = "MarineBrigade"
+            elseif SelectBoat == "MarineGrandBrigade" then
+                _G.selectedBoatBuy = "MarineGrandBrigade"
+            elseif SelectBoat == "PirateSloop" then
+                _G.selectedBoatBuy = "PirateSloop"
+            elseif SelectBoat == "PirateBrigade" then
+                _G.selectedBoatBuy = "PirateBrigade"
+            elseif SelectBoat == "PirateGrandBrigade" then
+                _G.selectedBoatBuy = "PirateGrandBrigade"
+            elseif SelectBoat == "Miracle" then
+                _G.selectedBoatBuy = "Miracle"
+            elseif SelectBoat == "The Sentinel" then
+                _G.selectedBoatBuy = "The Sentinel"
+            elseif SelectBoat == "Guardian" then
+                _G.selectedBoatBuy = "Guardian"
+            elseif SelectBoat == "Lantern" then
+                _G.selectedBoatBuy = "Lantern"
+            end
+        end)
+    end
+end)
+
+
+SE:AddDropdown("Select Boats For Buy Boat",BoatList,function(value)
+    _G.selectedBoatBuy = value
+end)
+
+    PlayerslistJir = {}
+    
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        table.insert(PlayerslistJir,v.Name)
+    end
+    
+    local SelectedPlyJir = SE:AddDropdown("Select Friend :",PlayerslistJir,function(value)
+        _G.SelectPlyAnjay = value
+    end)
+
+spawn(function()
+    while wait(4) do
+        PlayerslistJir = {}
+        SelectedPlyJir:Clear()
+        for _, player in pairs(game:GetService("Players"):GetChildren()) do  
+            SelectedPlyJir:Add(player.Name)
+        end
+    end
+end)
+
+
 SE:AddSeperator(" Optional Feature ") 
 
     SE:AddToggle('Auto Kill Sea Beast', _G.AutoSeaBest, function(value)
@@ -10062,24 +10216,50 @@ end)
         end
     end)
 
-
-SE:AddSeperator(" Setting Boat ")    
-
-_G.SpeedBoatNow = 17
-_G.HightBoatNow = 150
-          
-SE:AddSlider("Boat Speeed : [ NORMAL : 17 ]",1,25,17,function(value)
-_G.SpeedBoatNow = value
+SE:AddToggle('Auto Stop If Found Mirage Island', false, function(value)
+Mirrage = value
+StopTween(Mirrage) 
 end)
 
-
-SE:AddLabel("Semakin Kecil Angka, Akan Semakin Cepat Speed Nya")
-
-
-SE:AddSlider("Boat Hight : [ NORMAL : 150 ]",5,1000,150,function(value)
-_G.HightBoatNow = value
+spawn(function()
+    while wait() do
+        pcall(function()
+            if Mirrage then
+                HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Mirage Island").CFrame * CFrame.new(0,150,0))
+            end
+        end)
+    end
 end)
-    
+
+SE:AddToggle('Auto Stop If Found Frozen Dimension', false, function(value)
+Frozen = value
+StopTween(Frozen) 
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if Frozen then
+                HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Frozen Dimension").CFrame * CFrame.new(0,150,0))
+            end
+        end)
+    end
+end)
+
+SE:AddToggle('Auto Stop If Found Kitsune Island', false, function(value)
+Kitsune = value
+StopTween(Kitsune) 
+end)
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if Kitsune then
+                HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Kitsune Island").CFrame * CFrame.new(0,150,0))
+            end
+        end)
+    end
+end)
           
 SE:AddSeperator(" Item Drop ") 
 
@@ -10163,7 +10343,7 @@ function two(gotoCFrame) --- Tween
 end
 two(CFrame.new(-30939.830078125, 3.729933261871338, 9256.4208984375))
 
-for _,v in next, workspace.Boats.PirateBrigade:GetDescendants() do
+for _,v in next, workspace.Boats["PirateBrigade"]:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -10175,7 +10355,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BjirAnchorCuy then
-                for _, v in next, workspace.Boats[_G.selectedBoat]:GetDescendants() do
+                for _, v in next, workspace.Boats["PirateBrigade"]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         wait(2) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
@@ -10188,7 +10368,7 @@ spawn(function()
                     {name = "Terrorshark", variable = "bjirTerrorshark"},
                 }
 
-                for _, v in next, workspace.Boats[_G.selectedBoat]:GetDescendants() do
+                for _, v in next, workspace.Boats["PirateBrigade"]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         vehicleSeat = v
                         wait(0.2) 
@@ -10243,7 +10423,7 @@ spawn(function()
         pcall(function()
             if _G.BjirAnchorCuy then
                 wait(4)
-                local model = workspace.Boats[_G.selectedBoat]
+                local model = workspace.Boats["PirateBrigade"]
                 if model then
                     local height = _G.HightBoatNow -- Atur ketinggian yang diinginkan
 
@@ -10268,7 +10448,7 @@ spawn(function()
         pcall(function()
             if _G.BjirAnchorCuy then
                 wait(4)
-                local model = workspace.Boats[_G.selectedBoat]
+                local model = workspace.Boats["PirateBrigade"]
                 if model then
                     local moveDirection
                     local isTurningRight = false  -- Ganti ke false untuk berputar ke kiri
@@ -10296,7 +10476,7 @@ spawn(function()
     while wait(2.5) do
         pcall(function()
             if _G.BjirAnchorCuy then
-                local boat = workspace.Boats[_G.selectedBoat]
+                local boat = workspace.Boats["PirateBrigade"]
                 for _, v in pairs(boat:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -10310,60 +10490,7 @@ end)
 
 SE:AddSeperator(" Auto Sail + Auto Kill Sea Monster ") 
 
-BoatListSis = {
-    "=== SEA EVENT HUNT ===",
-    "Beast Hunter", 
-    "=== MARINE ===",
-    "MarineSloop",
-    "MarineBrigade",
-    "MarineGrandBrigade",
-    "=== PIRATE ===",
-    "PirateSloop",
-    "PirateBrigade",
-    "PirateGrandBrigade",
-    "=== GAMEPASS & QUEST BOAT ===",
-    "Miracle", 
-    "The Sentinel", 
-    "Guardian", 
-    "Lantern", 
-}
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if SelectBoat == "Beast Hunter" then
-                _G.selectedBoat = "Beast Hunter"
-            elseif SelectBoat == "MarineSloop" then
-                _G.selectedBoat = "MarineSloop"
-            elseif SelectBoat == "MarineBrigade" then
-                _G.selectedBoat = "MarineBrigade"
-            elseif SelectBoat == "MarineGrandBrigade" then
-                _G.selectedBoat = "MarineGrandBrigade"
-            elseif SelectBoat == "PirateSloop" then
-                _G.selectedBoat = "PirateSloop"
-            elseif SelectBoat == "PirateBrigade" then
-                _G.selectedBoat = "PirateBrigade"
-            elseif SelectBoat == "PirateGrandBrigade" then
-                _G.selectedBoat = "PirateGrandBrigade"
-            elseif SelectBoat == "Miracle" then
-                _G.selectedBoat = "Miracle"
-            elseif SelectBoat == "The Sentinel" then
-                _G.selectedBoat = "The Sentinel"
-            elseif SelectBoat == "Guardian" then
-                _G.selectedBoat = "Guardian"
-            elseif SelectBoat == "Lantern" then
-                _G.selectedBoat = "Lantern"
-            end
-        end)
-    end
-end)
-
-
-SE:AddDropdown("Select Boats For Buy The Boat",BoatListSis,function(value)
-    _G.selectedBoat = value
-end)
-
-SE:AddToggle("Auto Sail + Auto Buy Boat",_G.bjirTrax,function(state)
+SE:AddToggle("Auto Sail [ Buy Boat ]",_G.bjirTrax,function(state)
     if state then
         _G.bjirTrax = true
     else
@@ -10399,23 +10526,18 @@ if _G.bjirTrax then
 end
 if _G.BiirTrax then
 
-if workspace:FindFirstChild(_G.selectedBoat) then
-workspace.Boats[_G.selectedBoat]:Destroy()
-notif("System", "Some Boat Has Ben Destroy") 
-end
-
 wait(1) 
 
 local args = {
     [1] = "BuyBoat",
-    [2] = _G.selectedBoat
+    [2] = _G.selectedBoatBuy
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 
 wait(0.5) 
 
-for _,v in next, workspace.Boats[_G.selectedBoat]:GetDescendants() do
+for _,v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -10427,8 +10549,13 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.BiirTrax then
-                for _, v in next, workspace.Boats[_G.selectedBoat]:GetDescendants() do
+                for _, v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
+                        if workspace.Boats:FindFirstChild(_G.selectedBoatSail) then
+                           workspace.Boats[_G.selectedBoatSail]:Destroy()
+                           notif("System", "Some Boat Has Ben Destroy") 
+                        end
+                        
                         wait(1) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         break
@@ -10447,7 +10574,7 @@ spawn(function()
                     {name = "PirateBrigade", variable = "KillGhostShip"},
                 }
 
-                for _, v in next, workspace.Boats[_G.selectedBoat]:GetDescendants() do
+                for _, v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         vehicleSeat = v
                         wait(0.2) 
@@ -10457,47 +10584,61 @@ spawn(function()
                             local enemyVariable = enemyType.variable
 
                             if game:GetService("Workspace").Enemies:FindFirstChild(enemyName) then
-                                game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                                wait(0.1) 
-                                _G[enemyVariable] = true
-
-                                -- Menunggu musuh mati
-                                while game:GetService("Workspace").Enemies:FindFirstChild(enemyName) do
-                                    print("Wait Until " .. enemyName .. " Death")
+                                if _G[enemyVariable] then
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    wait(0.1) 
                                     _G[enemyVariable] = true
-                                    wait(0.2) 
-                                end
 
-                                _G[enemyVariable] = false
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vehicleSeat.CFrame
-                                
+                                    -- Wait for the enemy to die
+                                    while game:GetService("Workspace").Enemies:FindFirstChild(enemyName) do
+                                        _G[enemyVariable] = true
+                                        wait(0.2) 
+                                    end
+
+                                    _G[enemyVariable] = false
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vehicleSeat.CFrame
+                                end
                             elseif game:GetService("Workspace").SeaBeasts:GetChildren() then
                                 for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
                                     if v:FindFirstChild("HumanoidRootPart") then
-                                        game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                                        wait(0.2) 
-                                        _G.AutoSeaBest = true                                        
-                                        
-                                        while true do
-                                            if #game:GetService("Workspace").SeaBeasts:GetChildren() == 0 then
-                                                print("SeaBeasts folder is empty. Proceeding...")
-                                                break
-                                            else
-                                                print("Wait until SeaBeast Death")
-                                                wait(0.2)
+                                        if _G.AutoSeaBest then
+                                            game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                            wait(0.2) 
+                                            _G.AutoSeaBest = true                                        
+                                            
+                                            while true do
+                                                if #game:GetService("Workspace").SeaBeasts:GetChildren() == 0 then
+                                                    break
+                                                else
+                                                    wait(0.2)
+                                                end
                                             end
-                                        end
 
-                                        _G.AutoSeaBest = false
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vehicleSeat.CFrame
+                                            _G.AutoSeaBest = false
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vehicleSeat.CFrame
+                                        end
                                     end
                                 end
-                            elseif game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-                            _G.BiirTrax = false
-                            wait(0.5)
-                            game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                            wait(0.5)
-                            _G.BjirFrozenCuy = true
+                            else
+                                if Frozen then
+                                    _G.BiirTrax = false
+                                    wait(0.5)
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    wait(0.5)
+                                    Frozen = true
+                                elseif Mirrage then
+                                    _G.BiirTrax = false
+                                    wait(0.5)
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    wait(0.5)
+                                    Mirrage = true
+                                elseif Kitsune then
+                                    _G.BiirTrax = false
+                                    wait(0.5)
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    wait(0.5)
+                                    Kitsune = true
+                                end
                             end
                         end
                     end
@@ -10533,7 +10674,7 @@ spawn(function()
         pcall(function()
             if _G.BiirTrax then
                 wait(3)
-                local model = workspace.Boats[_G.selectedBoat]
+                local model = workspace.Boats[_G.selectedBoatSail]
                 if model then
                     local height = _G.HightBoatNow -- Atur ketinggian yang diinginkan
 
@@ -10558,7 +10699,7 @@ spawn(function()
         pcall(function()
             if _G.BiirTrax then
                 wait(3)
-                local model = workspace.Boats[_G.selectedBoat]
+                local model = workspace.Boats[_G.selectedBoatSail]
                 if model then
                     local moveDirection
                     local isTurningRight = false  -- Ganti ke false untuk berputar ke kiri
@@ -10586,7 +10727,7 @@ spawn(function()
     while wait(2.5) do
         pcall(function()
             if _G.BiirTrax then
-                local boat = workspace.Boats[_G.selectedBoat]
+                local boat = workspace.Boats[_G.selectedBoatSail]
                 for _, v in pairs(boat:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -10595,62 +10736,6 @@ spawn(function()
             end
         end)
     end
-end)
-
-
-
-
-BoatList = {
-    "=== SEA EVENT HUNT ===",
-    "Beast Hunter", 
-    "=== MARINE ===",
-    "MarineSloop",
-    "MarineBrigade",
-    "MarineGrandBrigade",
-    "=== PIRATE ===",
-    "PirateSloop",
-    "PirateBrigade",
-    "PirateGrandBrigade",
-    "=== GAMEPASS & QUEST BOAT ===",
-    "Miracle", 
-    "The Sentinel", 
-    "Guardian", 
-    "Lantern"
-}
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if SelectBoat == "Beast Hunter" then
-                _G.selectedBoatOnly = "Beast Hunter"
-            elseif SelectBoat == "MarineSloop" then
-                _G.selectedBoatOnly = "MarineSloop"
-            elseif SelectBoat == "MarineBrigade" then
-                _G.selectedBoatOnly = "MarineBrigade"
-            elseif SelectBoat == "MarineGrandBrigade" then
-                _G.selectedBoatOnly = "MarineGrandBrigade"
-            elseif SelectBoat == "PirateSloop" then
-                _G.selectedBoatOnly = "PirateSloop"
-            elseif SelectBoat == "PirateBrigade" then
-                _G.selectedBoatOnly = "PirateBrigade"
-            elseif SelectBoat == "PirateGrandBrigade" then
-                _G.selectedBoatOnly = "PirateGrandBrigade"
-            elseif SelectBoat == "Miracle" then
-                _G.selectedBoatOnly = "Miracle"
-            elseif SelectBoat == "The Sentinel" then
-                _G.selectedBoatOnly = "The Sentinel"
-            elseif SelectBoat == "Guardian" then
-                _G.selectedBoatOnly = "Guardian"
-            elseif SelectBoat == "Lantern" then
-                _G.selectedBoatOnly = "Lantern"
-            end
-        end)
-    end
-end)
-
-
-SE:AddDropdown("Select Boats For Auto Sail  Only",BoatList,function(value)
-    _G.selectedBoatOnly = value
 end)
 
 SE:AddToggle("Auto Sail Only",_G.sailOnly,function(state)
@@ -10664,7 +10749,7 @@ SE:AddToggle("Auto Sail Only",_G.sailOnly,function(state)
 
 if _G.sailOnly then
 
-for _,v in next, workspace.Boats[_G.selectedBoatOnly]:GetDescendants() do
+for _,v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -10677,9 +10762,14 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.sailOnly then
-                for _, v in next, workspace.Boats[_G.selectedBoat]:GetDescendants() do
+                for _, v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
-                        wait(2) 
+                        if workspace.Boats:FindFirstChild(_G.selectedBoatSail) then
+                           workspace.Boats[_G.selectedBoatSail]:Destroy()
+                           notif("System", "Some Boat Has Ben Destroy") 
+                        end
+                        
+                        wait(1) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
                         break
                     end
@@ -10697,7 +10787,7 @@ spawn(function()
                     {name = "PirateBrigade", variable = "KillGhostShip"},
                 }
 
-                for _, v in next, workspace.Boats[_G.selectedBoat]:GetDescendants() do
+                for _, v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         vehicleSeat = v
                         wait(0.2) 
@@ -10707,48 +10797,61 @@ spawn(function()
                             local enemyVariable = enemyType.variable
 
                             if game:GetService("Workspace").Enemies:FindFirstChild(enemyName) then
-                                game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                                wait(0.1) 
-                                _G[enemyVariable] = true
-
-                                -- Menunggu musuh mati
-                                while game:GetService("Workspace").Enemies:FindFirstChild(enemyName) do
-                                    print("Wait Until " .. enemyName .. " Death")
+                                if _G[enemyVariable] then
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    wait(0.1) 
                                     _G[enemyVariable] = true
-                                    wait(0.2) 
-                                end
 
-                                _G[enemyVariable] = false
-                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vehicleSeat.CFrame
-                                
+                                    -- Wait for the enemy to die
+                                    while game:GetService("Workspace").Enemies:FindFirstChild(enemyName) do
+                                        _G[enemyVariable] = true
+                                        wait(0.2) 
+                                    end
+
+                                    _G[enemyVariable] = false
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vehicleSeat.CFrame
+                                end
                             elseif game:GetService("Workspace").SeaBeasts:GetChildren() then
                                 for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
                                     if v:FindFirstChild("HumanoidRootPart") then
-                                        game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                                        wait(0.2) 
-                                        _G.AutoSeaBest = true
-                                        
-                                        while true do
-                                            if #game:GetService("Workspace").SeaBeasts:GetChildren() == 0 then
-                                                print("SeaBeasts folder is empty. Proceeding...")
-                                                break
-                                            else
-                                                print("Wait until SeaBeast Death")
-                                                wait(0.2)
+                                        if _G.AutoSeaBest then
+                                            game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                            wait(0.2) 
+                                            _G.AutoSeaBest = true                                        
+                                            
+                                            while true do
+                                                if #game:GetService("Workspace").SeaBeasts:GetChildren() == 0 then
+                                                    break
+                                                else
+                                                    wait(0.2)
+                                                end
                                             end
-                                        end
 
-                                        _G.AutoSeaBest = false
-                                        wait(0.1) 
-                                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vehicleSeat.CFrame
+                                            _G.AutoSeaBest = false
+                                            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = vehicleSeat.CFrame
+                                        end
                                     end
                                 end
-                            elseif game.Workspace._WorldOrigin.Locations:FindFirstChild('Frozen Dimension') then
-                            _G.sailOnly = false
-                            wait(0.5)
-                            game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                            wait(0.5)
-                            _G.BjirFrozenCuy = true
+                            else
+                                if Frozen then
+                                    _G.sailOnly = false
+                                    wait(0.5)
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    wait(0.5)
+                                    Frozen = true
+                                elseif Mirrage then
+                                    _G.sailOnly = false
+                                    wait(0.5)
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    wait(0.5)
+                                    Mirrage = true
+                                elseif Kitsune then
+                                    _G.sailOnly = false
+                                    wait(0.5)
+                                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                                    wait(0.5)
+                                    Kitsune = true
+                                end
                             end
                         end
                     end
@@ -10783,7 +10886,7 @@ spawn(function()
         pcall(function()
             if _G.sailOnly then
                 wait(4)
-                local model = workspace.Boats[_G.selectedBoatOnly]
+                local model = workspace.Boats[_G.selectedBoatSail]
                 if model then
                     local height = _G.HightBoatNow -- Atur ketinggian yang diinginkan
 
@@ -10808,7 +10911,7 @@ spawn(function()
         pcall(function()
             if _G.sailOnly then
                 wait(4)
-                local model = workspace.Boats[_G.selectedBoat]
+                local model = workspace.Boats[_G.selectedBoatSail]
                 if model then
                     local moveDirection
                     local isTurningRight = false  -- Ganti ke false untuk berputar ke kiri
@@ -10836,7 +10939,7 @@ spawn(function()
     while wait(2.5) do
         pcall(function()
             if _G.sailOnly then
-                local boat = workspace.Boats[_G.selectedBoat]
+                local boat = workspace.Boats[_G.selectedBoatSail]
                 for _, v in pairs(boat:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -10846,6 +10949,16 @@ spawn(function()
         end)
     end
 end)
+
+    SE:AddToggle("Sea Event With Friend",false,function(value)
+        _G.TeleportPlyFriend = value
+        pcall(function()
+            if _G.TeleportPlyFriend then
+                repeat HyperCahaya(game:GetService("Players")[_G.SelectPlyJir].Character.HumanoidRootPart.CFrame) wait() until _G.TeleportPlyFriend == false
+            end
+            StopTween(_G.TeleportPlyFriend)
+        end)
+    end)
 
 SE:AddSeperator(" Leviathan + Leviathan Heart ") 
 
@@ -10859,7 +10972,7 @@ SE:AddToggle("Auto Find Leviathan",_G.leviOnly,function(state)
 
 if _G.leviOnly then
 
-for _,v in next, workspace.Boats["Beast Hunter"]:GetDescendants() do
+for _,v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -10871,7 +10984,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.leviOnly then
-                for _, v in next, workspace.Boats["Beast Hunter"]:GetDescendants() do
+                for _, v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         wait(2) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
@@ -10918,7 +11031,7 @@ spawn(function()
         pcall(function()
             if _G.leviOnly then
                 wait(4)
-                local model = workspace.Boats["Beast Hunter"]
+                local model = workspace.Boats[_G.selectedBoatSail]
                 if model then
                     local height = _G.HightBoatNow -- Atur ketinggian yang diinginkan
 
@@ -10943,7 +11056,7 @@ spawn(function()
         pcall(function()
             if _G.leviOnly then
                 wait(4)
-                local model = workspace.Boats["Beast Hunter"]
+                local model = workspace.Boats[_G.selectedBoatSail]
                 if model then
                     local moveDirection
                     local isTurningRight = false  -- Ganti ke false untuk berputar ke kiri
@@ -10971,7 +11084,7 @@ spawn(function()
     while wait(2.5) do
         pcall(function()
             if _G.leviOnly then
-                local boat = workspace.Boats[_G.selectedBoat]
+                local boat = workspace.Boats[_G.selectedBoatSail]
                 for _, v in pairs(boat:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -10992,7 +11105,7 @@ end
 
 if _G.PutFrozen then
 
-for _,v in next, workspace.Boats[_G.PutFrozen]:GetDescendants() do
+for _,v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -11025,9 +11138,9 @@ spawn(function()
         pcall(function()
             if _G.PutFrozen then
                 wait(3) 
-                local model = workspace.Boats["Beast Hunter"]
+                local model = workspace.Boats[_G.selectedBoatSail]
                 if model then
-                    local height = _G.HightBoatNow -- Atur ketinggian yang diinginkan
+                    local height = 100 -- Atur ketinggian yang diinginkan
 
                     local initialPosition = model.PrimaryPart.Position
                     local targetPosition = model.PrimaryPart.Position + Vector3.new(0, height, 0)
@@ -11049,17 +11162,19 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.PutFrozen then
-                wait(4)
-                local model = workspace.Boats["Beast Hunter"]
-                if model and model.PrimaryPart then
-                    local targetCoordinate = Vector3.new(-15930.0996, 0.500014007, 432.600006)
-                    local speedFactor = _G.SpeedBoatNow  -- Faktor kecepatan (semakin besar semakin cepat)
-                    local speed = 1 / speedFactor
-
-                    while _G.PutFrozen and (model.PrimaryPart.Position - targetCoordinate).Magnitude > 0.1 do
-                        local moveDirection = (targetCoordinate - model.PrimaryPart.Position).unit
-                        model:SetPrimaryPartCFrame(CFrame.new(model.PrimaryPart.Position + moveDirection * speed))
-                        wait()
+                wait(0.5) 
+                local model = workspace.Boats[_G.selectedBoatSail]
+                if model then
+                    local speed = 10
+                    local targetPosition = Vector3.new(-15930.0996, 0.500014007, 432.600006)
+                    local direction = (targetPosition - model.PrimaryPart.Position).unit
+                    while (model.PrimaryPart.Position - targetPosition).Magnitude > 0.1 do
+                        local BijiJahe = (model.PrimaryPart.Position - targetPosition).Magnitude
+                        model:SetPrimaryPartCFrame(CFrame.new(model.PrimaryPart.Position + direction * speed))
+                        task.wait()
+                        if not _G.PutFrozen or BijiJahe <= 101 then
+                            break
+                        end
                     end
                 end
             end
@@ -11070,7 +11185,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.PutFrozen then
-                local boat = workspace.Boats["Beast Hunter"]
+                local boat = workspace.Boats[_G.selectedBoatSail]
                 for _, v in pairs(boat:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -11115,60 +11230,7 @@ spawn(function()
     end)
 end)
 
-
-BoatListNoCD = {
-    "=== SEA EVENT HUNT ===",
-    "Beast Hunter", 
-    "=== MARINE ===",
-    "MarineSloop",
-    "MarineBrigade",
-    "MarineGrandBrigade",
-    "=== PIRATE ===",
-    "PirateSloop",
-    "PirateBrigade",
-    "PirateGrandBrigade",
-    "=== GAMEPASS & QUEST BOAT ===",
-    "Miracle", 
-    "The Sentinel", 
-    "Guardian", 
-    "Lantern", 
-}
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if SelectBoat == "Beast Hunter" then
-                _G.selectBoatClearCD = "Beast Hunter"
-            elseif SelectBoat == "MarineSloop" then
-                _G.selectBoatClearCD = "MarineSloop"
-            elseif SelectBoat == "MarineBrigade" then
-                _G.selectBoatClearCD = "MarineBrigade"
-            elseif SelectBoat == "MarineGrandBrigade" then
-                _G.selectBoatClearCD = "MarineGrandBrigade"
-            elseif SelectBoat == "PirateSloop" then
-                _G.selectBoatClearCD = "PirateSloop"
-            elseif SelectBoat == "PirateBrigade" then
-                _G.selectBoatClearCD = "PirateBrigade"
-            elseif SelectBoat == "PirateGrandBrigade" then
-                _G.selectBoatClearCD = "PirateGrandBrigade"
-            elseif SelectBoat == "Miracle" then
-                _G.selectBoatClearCD = "Miracle"
-            elseif SelectBoat == "The Sentinel" then
-                _G.selectBoatClearCD = "The Sentinel"
-            elseif SelectBoat == "Guardian" then
-                _G.selectBoatClearCD = "Guardian"
-            elseif SelectBoat == "Lantern" then
-                _G.selectBoatClearCD = "Lantern"
-            end
-        end)
-    end
-end)
-
-SE:AddDropdown("Select Boats For Clear Cooldown",BoatListNoCD,function(value)
-    SelectBoat = value
-end)
-
-SE:AddToggle("Auto Clear Cooldown",_G.clearCD,function(state)
+SE:AddToggle("Auto Clear Cooldown [ Buy Boat ]",_G.clearCD,function(state)
     if state then
         _G.ClearCdffr = true
     else
@@ -11202,24 +11264,24 @@ if _G.ClearCdffr then
     _G.clearCD = true
 end
 if _G.clearCD then
-
-if workspace:FindFirstChild(_G.selectedBoat) then
-workspace.Boats[_G.selectedBoat]:Destroy()
+if workspace.Boats:FindFirstChild(_G.selectBoatClearCD) then
+workspace.Boats[_G.selectBoatClearCD]:Destroy()
 notif("System", "Some Boat Has Ben Destroy") 
+wait(1)
 end
 
 wait(0.5) 
 
 local args = {
     [1] = "BuyBoat",
-    [2] = _G.selectBoatClearCD
+    [2] = _G.selectedBoatBuy
 }
 
 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
 
 wait(0.5) 
 
-for _,v in next, workspace.Boats[_G.selectBoatClearCD]:GetDescendants() do
+for _,v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
     if v.Name:find("VehicleSeat") then
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
     end
@@ -11231,7 +11293,7 @@ spawn(function()
     while wait() do
         pcall(function()
             if _G.clearCD then
-                for _, v in next, workspace.Boats[_G.selectBoatClearCD]:GetDescendants() do
+                for _, v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         wait(2) 
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
@@ -11251,7 +11313,7 @@ spawn(function()
                     {name = "PirateBrigade", variable = "KillGhostShip"},
                 }
 
-                for _, v in next, workspace.Boats[_G.selectBoatClearCD]:GetDescendants() do
+                for _, v in next, workspace.Boats[_G.selectedBoatSail]:GetDescendants() do
                     if v.Name:find("VehicleSeat") then
                         vehicleSeat = v
                         wait(0.2) 
@@ -11339,7 +11401,7 @@ spawn(function()
         pcall(function()
             if _G.clearCD then
                 wait(3)
-                local model = workspace.Boats[_G.selectBoatClearCD]
+                local model = workspace.Boats[_G.selectedBoatSail]
                 if model then
                     local height = _G.HightBoatNow -- Atur ketinggian yang diinginkan
 
@@ -11364,7 +11426,7 @@ spawn(function()
         pcall(function()
             if _G.clearCD then
                 wait(3)
-                local model = workspace.Boats[_G.selectBoatClearCD]
+                local model = workspace.Boats[_G.selectedBoatSail]
                 if model then
                     local moveDirection
                     local isTurningRight = false  -- Ganti ke false untuk berputar ke kiri
@@ -11392,7 +11454,7 @@ spawn(function()
     while wait(2.5) do
         pcall(function()
             if _G.clearCD then
-                local boat = workspace.Boats[_G.selectBoatClearCD]
+                local boat = workspace.Boats[_G.selectedBoatSail]
                 for _, v in pairs(boat:GetDescendants()) do
                     if v:IsA("BasePart") then
                         v.CanCollide = false
@@ -12100,8 +12162,6 @@ end
 
 	
     local plyserv = P:AddLabel("Players")
-
-    
 
     spawn(function()
         while wait() do
@@ -13842,7 +13902,8 @@ end)
         "Control-Control",
         "Soul-Soul",
         "Dragon-Dragon",
-        "Leopard-Leopard"
+        "Leopard-Leopard", 
+        "Kitsune-Kitsune"
     }
     
     local Remote_GetFruits = game.ReplicatedStorage:FindFirstChild("Remotes").CommF_:InvokeServer("GetFruits");
@@ -13860,10 +13921,62 @@ end)
         _G.SelectFruit = value
     end)
     
-    _G.AdvancedDlr = ""
-    D:AddDropdown("Select Fruits Sniper [ Advanced ]",Table_DevilFruitSniper,function(value)
-        _G.AdvancedDlr = value
-    end)
+    AdvancedList = {
+        "Rocket-Rocket",
+        "Spike-Spike",
+        "Chop-Chop",
+        "Spring-Spring",
+        "Kilo-Kilo",
+        "Spin-Spin",
+        "Bird: Falcon",
+        "Smoke-Smoke",
+        "Flame-Flame",
+        "Ice-Ice",
+        "Sand-Sand",
+        "Dark-Dark",
+        "Revive-Revive",
+        "Diamond-Diamond",
+        "Light-Light",
+        "Love-Love",
+        "Rubber-Rubber",
+        "Barrier-Barrier",
+        "Magma-Magma",
+        "Door-Door",
+        "Quake-Quake",
+        "Human-Human: Buddha",
+        "String-String",
+        "Bird-Bird: Phoenix",
+        "Rumble-Rumble",
+        "Sound-Sound", 
+        "Pain-Pain", 
+        "Gravity-Gravity",
+        "Mammoth-Mammoth", 
+        "Dough-Dough",
+        "Venom-Venom",
+        "Shadow-Shadow",
+        "Control-Control",
+        "Soul-Soul",
+        "Dragon-Dragon",
+        "Leopard-Leopard", 
+        "Kitsune-Kitsune"
+}
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            for _, fruit in ipairs(AdvancedList) do
+                if SepectFruitSs == fruit then
+                    _G.FruitAdvanced = fruit
+                end
+            end
+        end)
+    end
+end)
+
+D:AddDropdown("Select Fruit Sniper [ Advanced ]",AdvancedList,function(value)
+    SepectFruitSs = value
+end)
+    
     
     D:AddToggle("Auto Buy Fruit Sniper",_G.AutoBuyFruitSniper,function(value)
         _G.AutoBuyFruitSniper = value
@@ -13871,6 +13984,20 @@ end)
     
     D:AddToggle("Auto Buy Fruit Sniper [ Advanced ]",_G.AutoBuyAdvanced,function(value)
         _G.AutoBuyAdvanced = value
+    end)
+    
+    spawn(function()
+        pcall(function()
+            while wait(.1) do
+                if _G.AutoBuyAdvanced then                  
+                    local A_1 = "PurchaseRawFruit"
+                    local A_2 = _G.FruitAdvanced
+                    local A_3 = true
+                    local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+                    Event:InvokeServer(A_1, A_2, A_3)
+                end 
+            end
+        end)
     end)
     
         D:AddButton("Check Stock Advanced Dealer",function()
@@ -14095,20 +14222,7 @@ closeButton.MouseButton1Click:Connect(closeGUI)
         end)
     end)
     
-    spawn(function()
-        pcall(function()
-            while wait(.1) do
-                if _G.AutoBuyAdvanced then                  
-                    local A_1 = "PurchaseRawFruit"
-                    local A_2 = "_G.AdvancedDlr"
-                    local A_3 = true
-                    local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                    Event:InvokeServer(A_1, A_2, A_3)
-                end 
-            end
-        end)
-    end)
-    
+   
     D:AddToggle("Auto Random Fruit",_G.Random_Auto,function(value)
         _G.Random_Auto = value
     end)
