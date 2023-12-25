@@ -15858,8 +15858,12 @@ spawn(function()
     while wait() do
         pcall(function()
             if TpMenit then
-                if Workspace.Countdown.SurfaceGui.TextLabel.Text <= "0:05:00" then
+                if World3 and Workspace.Countdown.SurfaceGui.TextLabel.Text <= "0:05:00" then
                     HyperCahaya(CFrame.new(-1060.96923828125, 14.1738862991333, -14437.7294921875))
+                elseif World2 and Workspace.Countdown.SurfaceGui.TextLabel.Text <= "0:05:00" then
+                    HyperCahaya(CFrame.new(-5240.677734375, 14.68299388885498, 1509.819580078125))                
+                elseif World1 and Workspace.Countdown.SurfaceGui.TextLabel.Text <= "0:05:00" then
+                    HyperCahaya(CFrame.new(1018.90283203125, 14.68299388885498, -3734.6298828125))
                 end
             end
         end)
@@ -15930,6 +15934,27 @@ chrs:AddDropdown("Crishmast Item [ 1 ]",Santalist,function(value)
 Budi = value
 end)
 
+Santalisttwi = {
+    "200 Fragment",
+    "500 Fragment"
+}
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if Joki == "200 Fragment" then
+                Joko = "Budi 200"
+            elseif Joki == "500 Fragment" then
+                Joko = "Budi 500"
+            end
+        end)
+    end
+end)
+
+chrs:AddDropdown("Crishmast Item [ 2 ]",Santalisttwi,function(value)
+Joki = value
+end)
+
 chrs:AddToggle("Buy Item Select",false,function(value)
 BeliBudi = value
 end)
@@ -15958,11 +15983,24 @@ spawn(function()
                 local A_4 = 1
                 local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
                 Event:InvokeServer(A_1, A_2, A_3, A_4)
+            elseif Joko == "Budi 200" then
+                local A_1 = "Candies"
+                local A_2 = "Buy"
+                local A_3 = 2
+                local A_4 = 1
+                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+                Event:InvokeServer(A_1, A_2, A_3, A_4)
+            elseif Joko == "Budi 500" then
+                local A_1 = "Candies"
+                local A_2 = "Buy"
+                local A_3 = 2
+                local A_4 = 2
+                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+                Event:InvokeServer(A_1, A_2, A_3, A_4)
             end       
         end
     end
 end)
-
 
 
 spawn(function()
