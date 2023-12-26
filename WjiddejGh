@@ -20,7 +20,7 @@ local pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Pla
 
 
 
-local newLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/VanciSonic/Lgtihb/main/testilib"))()
+local newLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/VanciSonic/Lgtihb/main/Lgantihub"))()
 
 -- window
 function Update:Window(title, icon,...)
