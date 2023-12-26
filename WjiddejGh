@@ -13835,36 +13835,22 @@ closeButton.MouseButton1Click:Connect(closeGUI)
         _G.DropFruit = value
     end)
         
-    spawn(function()
-        while wait() do
-            if _G.DropFruit then
-                pcall(function()
-                    for i,v in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                        if string.find(v.Name, "Fruit") then
-                            EquipWeapon(v.Name)
-                            wait(.1)
-                            if game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible == true then
-                                game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible = false
-                            end
-                            EquipWeapon(v.Name)
-                            game:GetService("Players").LocalPlayer.Character:FindFirstChild(SelectFruit).EatRemote:InvokeServer("Drop")
-                        end
-                    end
-                for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
-                        if string.find(v.Name, "Fruit") then
-                            EquipWeapon(v.Name)
-                            wait(.1)
-                            if game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible == true then
-                                game:GetService("Players").LocalPlayer.PlayerGui.Main.Dialogue.Visible = false
-                            end
-                            EquipWeapon(v.Name)
-                            game:GetService("Players").LocalPlayer.Character:FindFirstChild(SelectFruit).EatRemote:InvokeServer("Drop")
-                        end
-                    end
-                end)
-            end
-        end
-    end)
+spawn(function()
+	while wait() do
+		if _G.DropFruit then
+			pcall(function()
+				local plr = game.Players.LocalPlayer
+				local chr = plr.Character
+
+				for _, fr in pairs(plr.Backpack:GetChildren()) do
+					if fr:IsA("Tool") and fr.Name:find("Fruit") then
+						game:GetService("Players").LocalPlayer.Character:FindFirstChild(fr).EatRemote:InvokeServer("Drop")
+					end
+				end
+			end)
+		end
+	end
+end)
     
     D:AddToggle("Auto Store Fruit",_G.AutoStoreFruit,function(value)
         _G.AutoStoreFruit = value
@@ -13933,7 +13919,7 @@ end)
     end
     end)
     
-        D:AddToggle("Bring All Fruit 75% Kick System",_G.BringFruitBF,function(value)
+        D:AddToggle("Bring All Fruit [ Can Get Kick ]",_G.BringFruitBF,function(value)
         _G.BringFruitBF = value
     end)
     
@@ -15965,6 +15951,30 @@ chrs:AddDropdown("Crishmast Item [ 2 ]",Santalisttwi,function(value)
 Joki = value
 end)
 
+Santalisttiga = {
+    "2x Exp [ 15 Mins ]",
+    "Stats Refound", 
+    "Race Reroll"
+}
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if Joti == "2x Exp [ 15 Mins ]" then
+                Jonti = "1"
+            elseif Joti == "Stats Refound" then
+                Jonti = "2"
+            elseif Joti == "Race Reroll" then
+                Jonti = "3"
+            end
+        end)
+    end
+end)
+
+chrs:AddDropdown("Crishmast Item [ 3 ]",Santalisttiga,function(value)
+Joti = value
+end)
+
 chrs:AddToggle("Buy Item Select",false,function(value)
 BeliBudi = value
 end)
@@ -16005,6 +16015,27 @@ spawn(function()
                 local A_2 = "Buy"
                 local A_3 = 2
                 local A_4 = 2
+                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+                Event:InvokeServer(A_1, A_2, A_3, A_4)
+            elseif Jonti == "1" then
+                local A_1 = "Candies"
+                local A_2 = "Buy"
+                local A_3 = 1
+                local A_4 = 1
+                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+                Event:InvokeServer(A_1, A_2, A_3, A_4)
+            elseif Jonti == "2" then
+                local A_1 = "Candies"
+                local A_2 = "Buy"
+                local A_3 = 1
+                local A_4 = 2
+                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+                Event:InvokeServer(A_1, A_2, A_3, A_4)
+            elseif Jonti == "3" then
+                local A_1 = "Candies"
+                local A_2 = "Buy"
+                local A_3 = 1
+                local A_4 = 3
                 local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
                 Event:InvokeServer(A_1, A_2, A_3, A_4)
             end       
