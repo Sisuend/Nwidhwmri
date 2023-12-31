@@ -9960,27 +9960,26 @@ StopTween(_G.AzureFlame)
 end) 
 
 spawn(function()
-    while wait() do
+    game:GetService("RunService").RenderStepped:Connect(function()
         pcall(function()
             if _G.AzureFlame then
+                local TweenService = game:GetService("TweenService")
                 local workspace = game:GetService("Workspace")
                 local EmberTemplate = workspace:FindFirstChild("EmberTemplate")
 
                 if EmberTemplate then
-                    local playerPosition = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-                    if playerPosition then
-                        for _, child in ipairs(EmberTemplate:GetChildren()) do
-                            if child:IsA("BasePart") then
-                                child.CFrame = CFrame.new(playerPosition)
-                            end
+                    for _, child in ipairs(EmberTemplate:GetChildren()) do
+                        if child:IsA("BasePart") then
+                            local destinationCFrame = CFrame.new(child.Position)
+                            HyperCahaya(destinationCFrame)
                         end
                     end
                 else
-                    HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Kitsune Island").CFrame * CFrame.new(0, -25, 0))
+                    HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Kitsune Island").CFrame * CFrame.new(0,-15,0))
                 end
             end
         end)
-    end
+    end)
 end)
 
 SE:AddToggle('Start Event Kitsune Island', false, function(value)
