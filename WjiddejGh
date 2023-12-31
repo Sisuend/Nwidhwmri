@@ -12496,60 +12496,61 @@ end)
         end
     end)
     
-    elseif World3 then
+elseif World3 then
     spawn(function()
         pcall(function()
             while wait() do
-    if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
-    Mirragecheck:Set('🏝️: Mystic Island Spawning')
-    else
-      Mirragecheck:Set('❌: Mystic Island Not Found ' )end
+                if game.Workspace._WorldOrigin.Locations:FindFirstChild('Mirage Island') then
+                    Mirragecheck:Set('🏝️: Mystic Island Spawning')
+                else
+                    Mirragecheck:Set('❌: Mystic Island Not Found')
+                end
             end
         end)
-end)
+    end)
 
-Mirragecheck = SerS:AddLabel("")
-SerS:AddToggle("Tween Mystic Island",_G.AutoMysticIsland,function(value)
+    Mirragecheck = SerS:AddLabel("")
+    SerS:AddToggle("Tween Mystic Island", _G.AutoMysticIsland, function(value)
         _G.AutoMysticIsland = value
         StopTween(_G.AutoMysticIsland)
-        end)
-    
-        spawn(function()
-            pcall(function()
-                while wait() do
-                    if _G.AutoMysticIsland then
-                        for i,v in pairs(game.Workspace.Map.MysticIsland:GetChildren()) do
-                            if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
-                                    HyperCahaya(CFrame.new(game.Workspace.Map.MysticIsland.BiggTree.Part.Position))
-                                    end
-                                end
-                            end
-                        end
-                    end)
-                end)
-            end
+    end)
 
-            SerS:AddButton("Teleport Advanced Fruit Dealer", function()
-                TweenNpc()
-                end)
-
-                function TweenNpc()
-                    repeat
-                        wait()
-                    until game:GetService("Workspace").Map:FindFirstChild("MysticIsland")
-                    if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
-                        AllNPCS = getnilinstances()
-                        for r, v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
-                            table.insert(AllNPCS, v)
-                        end
-                        for r, v in pairs(AllNPCS) do
-                            if v.Name == "Advanced Fruit Dealer" then
-                                HyperCahaya(v.HumanoidRootPart.CFrame)
-                                end
-                            end
+    spawn(function()
+        pcall(function()
+            while wait() do
+                if _G.AutoMysticIsland then
+                    for i, v in pairs(game.Workspace.Map.MysticIsland:GetChildren()) do
+                        if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+                            HyperCahaya(CFrame.new(game.Workspace.Map.MysticIsland.BiggTree.Part.Position))
                         end
                     end
+                end
+            end
+        end)
+    end)
 
+    SerS:AddButton("Teleport Advanced Fruit Dealer", function()
+        TweenNpc()
+    end)
+
+    function TweenNpc()
+        repeat
+            wait()
+        until game:GetService("Workspace").Map:FindFirstChild("MysticIsland")
+        if game:GetService("Workspace").Map:FindFirstChild("MysticIsland") then
+            AllNPCS = getnilinstances()
+            for r, v in pairs(game:GetService("Workspace").NPCs:GetChildren()) do
+                table.insert(AllNPCS, v)
+            end
+            for r, v in pairs(AllNPCS) do
+                if v.Name == "Advanced Fruit Dealer" then
+                    HyperCahaya(v.HumanoidRootPart.CFrame)
+                end
+            end
+        end
+    end
+    
+    
 end
     
         Ss:AddSeperator("Stats")
