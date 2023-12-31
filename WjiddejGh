@@ -12326,8 +12326,8 @@ SerS:AddSeperator("Moon Check")
 local moon_finder = SerS:AddLabel("Moon Phase : 0% ")
 
 spawn(function()
-    pcall(function()
-        while wait() do
+    while wait() do
+        pcall(function()
             local moonTextureId = game:GetService("Lighting").Sky.MoonTextureId
 
             if moonTextureId == "http://www.roblox.com/asset/?id=9709149431" then
@@ -12341,8 +12341,8 @@ spawn(function()
             elseif moonTextureId == "http://www.roblox.com/asset/?id=9709149680" then
                 moon_finder:Set("Moon Phase : (🌖) : 15%")
             end
-        end
-    end)
+        end) 
+    end
 end)
 
 SerS:AddSeperator("Haki Check")
@@ -12353,8 +12353,8 @@ local haki_type = SerS:AddLabel("Type : Not Spawn")
 local haki_price = SerS:AddLabel("Price : Not Spawn") 
 
 spawn(function()
-    pcall(function()
-        while wait() do
+    while wait() do
+        pcall(function()
         local checkColor = game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("ColorsDealer","1")
           if checkColor == "Orange Soda" then
             haki_finder:Set("Haki : Orange Soda")
@@ -12422,8 +12422,8 @@ spawn(function()
             haki_type:Set("Type : Legendary") 
             haki_price:Set("Price : 7,500 [ FRAGMENT ] ") 
           end
-        end
-    end)
+        end) 
+    end
 end)
 
 SerS:AddToggle("Buy Haki Color", false,function(value)
