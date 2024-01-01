@@ -11376,9 +11376,9 @@ SE:AddToggle("Auto Sail [ Buy Boat ]",_G.bjirTrax,function(state)
     if state then
         _G.bjirTrax = true
     else
+        _G.bjirTrax = false
         _G.BiirTrax = false
-        _G.BiirTrax = false
-        StopTween(_G.BiirTrax)
+        StopTween(_G.bjirTrax)
         StopTween(_G.BiirTrax)
     end
 
@@ -12514,6 +12514,9 @@ end)
     end)
     
 elseif World3 then
+
+SerS:AddSeperator("Mirrage Check")
+
     spawn(function()
         pcall(function()
             while wait() do
