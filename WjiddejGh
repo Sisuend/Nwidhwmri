@@ -10371,7 +10371,7 @@ SE:AddSeperator(" Optional Feature ")
 					for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
 						if v:FindFirstChild("HumanoidRootPart") then
 						    local player = game.Players.LocalPlayer
-						    local Baji = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
+						    local distance = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
 						    AutoHaki()
 						    local player = game.Players.LocalPlayer
 						    local character = player.Character or player.CharacterAdded:Wait()
@@ -10383,7 +10383,8 @@ SE:AddSeperator(" Optional Feature ")
 							end
 							game:GetService("VirtualUser"):CaptureController()
 							game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-							if Baji <= 456 then
+							if distance <= 456 then
+							print("Step Kill")
 								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 									if v:IsA("Tool") then
 										if v.ToolTip == "Melee" and SeaMelee then
@@ -10477,61 +10478,72 @@ spawn(function()
     end
 end)
 
-    spawn(function()
-         while wait() do
-              if _G.KillGhostShip then
-                   pcall(function()
-						if CheckPirateBoatJir() then
-						    local player = game.Players.LocalPlayer
-						    local Baji = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
-						    AutoHaki()
-							game:GetService("VirtualUser"):CaptureController()
-							game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-							if Baji <= 65 then
-								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-									if v:IsA("Tool") then
-										if v.ToolTip == "Melee" and SeaMelee then
-											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+spawn(function()
+    while wait() do
+        if _G.KillGhostShip then
+            pcall(function()
+                if CheckPirateBoatJir() then
+                    local player = game.Players.LocalPlayer
+                    local checkmmpb = {"PirateGrandBrigade", "PirateBrigade"}
+                    
+                    for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if table.find(checkmmpb, enemy.Name) then
+                            local engine = enemy:FindFirstChild("Engine")
+                            if engine then
+                                local distance = (player.Character.HumanoidRootPart.Position - engine.Position).Magnitude
+                                AutoHaki()
+                                game:GetService("VirtualUser"):CaptureController()
+                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                if distance <= 65 then
+                                    print("Step Kill")
+									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										if v:IsA("Tool") then
+											if v.ToolTip == "Melee" and SeaMelee then
+												game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+											end
 										end
 									end
-								end
-								UseKillSea = true
-								wait(0.8) 
-								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-									if v:IsA("Tool") then
-										if v.ToolTip == "Blox Fruit" and SeaFruit then
-											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									UseKillSea = true
+									wait(0.8) 
+									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										if v:IsA("Tool") then
+											if v.ToolTip == "Blox Fruit" and SeaFruit then
+												game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+											end
 										end
 									end
-								end
-								UseKillSea = true
-								wait(0.8) 
-								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-									if v:IsA("Tool") then
-										if v.ToolTip == "Sword" and SeaSword then
-											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									UseKillSea = true
+									wait(0.8) 
+									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										if v:IsA("Tool") then
+											if v.ToolTip == "Sword" and SeaSword then
+												game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+											end
 										end
 									end
-								end
-								UseKillSea = true
-								wait(0.8) 
-								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-									if v:IsA("Tool") then
-										if v.ToolTip == "Gun" and SeaGun then 
-											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									UseKillSea = true
+									wait(0.8) 
+									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										if v:IsA("Tool") then
+											if v.ToolTip == "Gun" and SeaGun then 
+												game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+											end
 										end
 									end
-								end
-								UseKillSea = true
-								wait(0.8) 
-						    end
-				        else
-				        UseKillSea = false
-						end
-                   end)
-              end
-         end
-    end)
+									UseKillSea = true
+									wait(0.8) 
+                                end
+                            end
+                        end
+                    end
+                else
+                    UseKillSea = false
+                end
+            end)
+        end
+    end
+end)
+
     
 SE:AddToggle("Auto Kill Terrorshark",_G.bjirTerrorshark,function(value)
 _G.bjirTerrorshark = value
@@ -10796,61 +10808,71 @@ spawn(function()
     end
 end)
 
-       spawn(function()
-            while wait() do
-                if _G.bjirFishBoat then
-                    pcall(function()
-						if CheckPirateBoat() then
-						    local player = game.Players.LocalPlayer
-						    local Baji = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
-						    AutoHaki()
-							game:GetService("VirtualUser"):CaptureController()
-							game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-							if Baji <= 65 then
-								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-									if v:IsA("Tool") then
-										if v.ToolTip == "Melee" and SeaMelee then
-											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+spawn(function()
+    while wait() do
+        if _G.bjirFishBoat then
+            pcall(function()
+                if CheckPirateBoat() then
+                    local player = game.Players.LocalPlayer
+                    local checkmmpb = {"FishBoat"}
+                    
+                    for _, enemy in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                        if table.find(checkmmpb, enemy.Name) then
+                            local engine = enemy:FindFirstChild("Engine")
+                            if engine then
+                                local distance = (player.Character.HumanoidRootPart.Position - engine.Position).Magnitude
+                                AutoHaki()
+                                game:GetService("VirtualUser"):CaptureController()
+                                game:GetService("VirtualUser"):Button1Down(Vector2.new(1280, 672))
+                                if distance <= 65 then
+                                    print("Step Kill")
+									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										if v:IsA("Tool") then
+											if v.ToolTip == "Melee" and SeaMelee then
+												game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+											end
 										end
 									end
-								end
-								UseKillSea = true
-								wait(0.8) 
-								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-									if v:IsA("Tool") then
-										if v.ToolTip == "Blox Fruit" and SeaFruit then
-											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									UseKillSea = true
+									wait(0.8) 
+									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										if v:IsA("Tool") then
+											if v.ToolTip == "Blox Fruit" and SeaFruit then
+												game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+											end
 										end
 									end
-								end
-								UseKillSea = true
-								wait(0.8) 
-								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-									if v:IsA("Tool") then
-										if v.ToolTip == "Sword" and SeaSword then
-											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									UseKillSea = true
+									wait(0.8) 
+									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										if v:IsA("Tool") then
+											if v.ToolTip == "Sword" and SeaSword then
+												game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+											end
 										end
 									end
-								end
-								UseKillSea = true
-								wait(0.8) 
-								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-									if v:IsA("Tool") then
-										if v.ToolTip == "Gun" and SeaGun then 
-											game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+									UseKillSea = true
+									wait(0.8) 
+									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+										if v:IsA("Tool") then
+											if v.ToolTip == "Gun" and SeaGun then 
+												game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+											end
 										end
 									end
-								end
-								UseKillSea = true
-								wait(0.8) 
-						    end
-				        else
-				        UseKillSea = false
-						end
-                    end)
+									UseKillSea = true
+									wait(0.8) 
+                                end
+                            end
+                        end
+                    end
+                else
+                    UseKillSea = false
                 end
-            end
-       end)
+            end)
+        end
+    end
+end)
           
     SE:AddToggle('Auto Kill Leviathan', _G.KillLevi, function(value)
     _G.KillLevi = value
@@ -10864,7 +10886,7 @@ end)
 					for i,v in pairs(game:GetService("Workspace").SeaBeasts:GetChildren()) do
 						if v:FindFirstChild("Leviathan Segment") and v:FindFirstChild("HumanoidRootPart") then
 						    local player = game.Players.LocalPlayer
-						    local Baji = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
+						    local distance = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
 						    AutoHaki()
 						    local player = game.Players.LocalPlayer
 						    local character = player.Character or player.CharacterAdded:Wait()
@@ -10876,7 +10898,7 @@ end)
 							end
 							game:GetService("VirtualUser"):CaptureController()
 							game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-							if Baji <= 460 then
+							if distance <= 460 then
 								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 									if v:IsA("Tool") then
 										if v.ToolTip == "Melee" and SeaMelee then
@@ -10916,7 +10938,7 @@ end)
 							end
 						elseif v:FindFirstChild("Leviathan Tail") and v:FindFirstChild("HumanoidRootPart") then
 						    local player = game.Players.LocalPlayer
-						    local Baji = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
+						    local distance = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
 						    AutoHaki()
 						    local player = game.Players.LocalPlayer
 						    local character = player.Character or player.CharacterAdded:Wait()
@@ -10928,7 +10950,7 @@ end)
 							end
 							game:GetService("VirtualUser"):CaptureController()
 							game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-							if Baji <= 460 then
+							if distance <= 460 then
 								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 									if v:IsA("Tool") then
 										if v.ToolTip == "Melee" and SeaMelee then
@@ -10968,7 +10990,7 @@ end)
 						    end
 						elseif v:FindFirstChild("Leviathan") and v:FindFirstChild("HumanoidRootPart") then
 						    local player = game.Players.LocalPlayer
-						    local Baji = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
+						    local distance = (player.Character.HumanoidRootPart.Position - v.HumanoidRootPart.Position).Magnitude
 						    AutoHaki()
 						    local player = game.Players.LocalPlayer
 						    local character = player.Character or player.CharacterAdded:Wait()
@@ -10980,7 +11002,7 @@ end)
 							end
 							game:GetService("VirtualUser"):CaptureController()
 							game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-							if Baji <= 460 then
+							if distance <= 460 then
 								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 									if v:IsA("Tool") then
 										if v.ToolTip == "Melee" and SeaMelee then
@@ -11035,25 +11057,21 @@ spawn(function()
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
                 end
-                
                 if _G.SkillX then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
                 end
-                
                 if _G.SkillC then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
                 end
-                
                 if _G.SkillV then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
                 end
-                
                 if _G.SkillF then
                 game:GetService("VirtualInputManager"):SendKeyEvent(true,"F",false,game)
 				wait(0.1)
@@ -17266,7 +17284,6 @@ spawn(function()
         pcall(function()
             if praybox then
                 if game:GetService("Workspace")["_WorldOrigin"].Present then
-                    wait(4) 
                     game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
                     wait(0.2) 
                     game:GetService("VirtualInputManager"):SendKeyEvent(false,"E",false,game)
