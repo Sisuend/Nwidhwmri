@@ -1,3 +1,439 @@
+if not getgenv().Setting or not getgenv().Setting.AutoFarmChest or not getgenv().Setting.AutoFarmChest then
+    print("Start GantengHub") 
+    autofarmbfGh = true
+elseif getgenv().Setting or getgenv().Setting.AutoFarmChest or getgenv().Setting.AutoFarmChest then
+    autofarmbfGh = false
+end
+
+spawn(function()
+    pcall(function()
+        if getgenv().Setting.AutoFarmChest == true then
+            --// whitescreen
+            if getgenv().Setting.WhiteScreen == true then
+                game:GetService("RunService"):Set3dRenderingEnabled(false)
+            elseif getgenv().Setting.WhiteScreen == false then
+                game:GetService("RunService"):Set3dRenderingEnabled(true)
+            end
+
+            --// Team
+            repeat task.wait() until game:IsLoaded()
+
+            local player = game.Players.LocalPlayer
+            repeat task.wait() until player and player:FindFirstChild("PlayerGui") and player.PlayerGui:FindFirstChild("Main")
+
+            local chooseTeam = player.PlayerGui.Main.ChooseTeam
+            local teamContainer = chooseTeam.Container
+
+            local function activateTeamButton(team)
+                for _, connection in pairs(getconnections(team.Frame.TextButton.Activated)) do
+                    connection.Function()
+                end
+            end
+
+            repeat
+                local v2 = "Pirates"
+                local teamName = string.find(v2, "Marine") and "Marines" or "Pirates"
+
+                activateTeamButton(teamContainer[teamName])
+
+                task.wait()
+            until player.Team ~= nil and game:IsLoaded()
+
+            --// rejoin
+            _G.Rejoin = true
+            spawn(function()
+                while wait() do
+                    if _G.Rejoin then
+                        getgenv().rejoin = game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ChildAdded:Connect(function(child)
+                            if child.Name == 'ErrorPrompt' and child:FindFirstChild('MessageArea') and child.MessageArea:FindFirstChild("ErrorFrame") then
+                                game:GetService("TeleportService"):Teleport(game.PlaceId)
+                            end
+                        end)
+                    end
+                end
+            end)
+
+            --// Tween
+            function topos(Pos)
+                Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+                if Distance < 25 then
+                    Speed = 5000
+                elseif Distance < 50 then
+                    Speed = 2000
+                elseif Distance < 150 then
+                    Speed = 800
+                elseif Distance < 250 then
+                    Speed = 600
+                elseif Distance < 500 then
+                    Speed = 300
+                elseif Distance < 750 then
+                    Speed = 250
+                elseif Distance >= 1000 then
+                    Speed = 200
+                end
+                game:GetService("TweenService"):Create(
+                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart,
+                    TweenInfo.new(Distance / Speed, Enum.EasingStyle.Linear),
+                    { CFrame = Pos }
+                ):Play()
+            end
+
+            --// Somethings
+            spawn(function()
+                while true do
+                    if getgenv().Setting.AutoFarmChest == true then
+                        for i, v in pairs(game:GetService("Workspace"):GetChildren()) do
+                            if v.Name:find("Chest") then
+                                if (game:GetService("Workspace"):FindFirstChild(v.Name)) then
+                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame
+                                    if string.find(v.Name, "Chest") and v:IsA("TouchTransmitter") then
+                                        firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, v.Parent, 0)
+                                    end
+                                end
+                            end
+                            if not (game:GetService("Workspace"):FindFirstChild("Chest1") or game:GetService("Workspace"):FindFirstChild("Chest2") or game:GetService("Workspace"):FindFirstChild("Chest3")) then
+                                starthop = true
+                            end
+                        end
+                    end
+                    task.wait()
+                end
+            end)
+
+            spawn(function()
+                while true do
+                    if getgenv().Setting.AutoFarmChest and game:GetService("Players").LocalPlayer.Character:FindFirstChild("Head") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Pirates")
+                        wait(.1)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetTeam", "Marines")
+                        wait(4)
+                    end
+                    task.wait()
+                end
+            end)
+
+            spawn(function()
+                while true do
+                    if starthop then
+                        HopServer()
+                    end
+                    wait()
+                end
+            end)
+
+            function HopServer(bO)
+                if not bO then
+                    bO = 10
+                end
+                ticklon = tick()
+                repeat
+                    task.wait()
+                until tick() - ticklon >= 1
+                local function Hop()
+                    for r = 1, math.huge do
+                        if ChooseRegion == nil or ChooseRegion == "" then
+                            ChooseRegion = "Singapore"
+                        else
+                            game:GetService("Players").LocalPlayer.PlayerGui.ServerBrowser.Frame.Filters.SearchRegion.TextBox.Text =
+                                ChooseRegion
+                        end
+                        local bP = game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer(r)
+                        for k, v in pairs(bP) do
+                            if k ~= game.JobId and v["Count"] < bO then
+                                game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport", k)
+                            end
+                        end
+                    end
+                    return false
+                end
+                if not getgenv().Loaded then
+                    local function bQ(v)
+                        if v.Name == "ErrorPrompt" then
+                            if v.Visible then
+                                if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                                    HopServer()
+                                    v.Visible = false
+                                end
+                            end
+                            v:GetPropertyChangedSignal("Visible"):Connect(
+                                function()
+                                    if v.Visible then
+                                        if v.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                                            HopServer()
+                                            v.Visible = false
+                                        end
+                                    end
+                                end
+                            )
+                        end
+                    end
+                    for k, v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
+                        bQ(v)
+                    end
+                    game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(bQ)
+                    getgenv().Loaded = true
+                end
+                while not Hop() do
+                    wait()
+                end
+            end
+
+            --// equipToolByToolTip
+            local function equipToolByToolTip(toolToolTip)
+                for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                    if v:IsA("Tool") and v.ToolTip == toolToolTip then
+                        game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+                        break
+                    end
+                end
+            end
+
+            --// Summon RaidBoss
+            spawn(function()
+                if getgenv().Setting.AutoSummonRaidBoss == true then
+                    while wait() do
+                        local g = game.Player.LocalPlayer
+                        if g.Backpack:FindFirstChild("Fist of Darkness") or g.Character:FindFirstChild("Fist of Darkness") then
+                            EquipWeapon("Fist of Darkness")
+                            topos(CFrame.new(3777.58618, 14.8764334, -3498.81909, 0.13158533, 1.16175372e-08, -0.991304874, -9.53944035e-10, 1, 1.15928129e-08, 0.991304874, -5.79794768e-10, 0.13158533))
+                            for i, v in pairs(game.Workspace.Enemies:GetChildren()) do
+                                if v.Name == "Darkbeard" then
+                                    repeat wait()
+                                        if not game:GetService("Players").LocalPlayer.Character:FindFirstChild("HasBuso") then
+                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+                                        end
+                                        equipToolByToolTip("Melee")
+                                        v.HumanoidRootPart.CanCollide = false
+                                        v.Head.CanCollide = false
+                                        v.WalkSpeed = 0
+                                        topos(v.HumanoidRootPart.CFrame * CFrame.new(0, 10, 0))
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    until not v.Name == "Darkbeard" and not v.Parent
+                                end
+                            end
+                        end
+                    end
+                end
+            end)
+
+            spawn(function()
+                while true do
+                    if getgenv().Setting.StopWhenFoundStrangeItem == true then
+                        repeat
+                            if game.Players.LocalPlayer.Character:FindFirstChild("Fist of Darkness") or game.Players.LocalPlayer.Backpack:FindFirstChild("Fist of Darkness") then
+                                getgenv().Setting.AutoFarmChest = false
+                            elseif game.Players.LocalPlayer.Character:FindFirstChild("God's Chalice") or game.Players.LocalPlayer.Backpack:FindFirstChild("God's Chalice") then
+                                getgenv().Setting.AutoFarmChest = false
+                            elseif game.Workspace.Enemies:FindFirstChild("rip_indra True Form") or game.Workspace.Enemies:FindFirstChild("Darkbeard") then
+                                getgenv().Setting.AutoFarmChest = false
+                            end
+                            wait(0.5)
+                        until getgenv().Setting.AutoFarmChest == false
+                    end
+                end
+            end)
+                
+            local ScreenGui = Instance.new("ScreenGui")
+            local main = Instance.new("Frame")
+            local UICorner = Instance.new("UICorner")
+            local Frame = Instance.new("Frame")
+            local UICorner_2 = Instance.new("UICorner")
+            local earn = Instance.new("TextLabel")
+            local ImageLabel = Instance.new("ImageLabel")
+            local time = Instance.new("TextLabel")
+            local On = Instance.new("TextButton")
+            local Off = Instance.new("TextButton")
+
+            --Properties:
+            
+            ScreenGui.Parent = game.CoreGui
+            ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+            
+            main.Name = "main"
+            main.Parent = ScreenGui
+            main.AnchorPoint = Vector2.new(0.5, 0.5)
+            main.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            main.BorderSizePixel = 0
+            main.Position = UDim2.new(0.499553978, 0, 0.497991979, 0)
+            main.Size = UDim2.new(0, 228, 0, 367)
+            main.Draggable = true
+            main.Active = true  -- Ini sangat penting untuk mengaktifkan interaksi pengguna
+            
+            local mouse = game.Players.LocalPlayer:GetMouse()
+            local isDragging = false
+            local offset = Vector2.new()
+            
+            main.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    offset = main.Position - UDim2.new(0, mouse.X, 0, mouse.Y)
+                    isDragging = true
+                end
+            end)
+
+            main.InputChanged:Connect(function(input)
+                if isDragging and input.UserInputType == Enum.UserInputType.MouseMovement then
+                    local newPosition = UDim2.new(0, mouse.X, 0, mouse.Y) + offset
+                    main.Position = newPosition
+                end
+            end)
+            
+            main.InputEnded:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    isDragging = false
+                end
+            end)
+            
+            UICorner.Parent = main
+            
+            Frame.Parent = main
+            Frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+            Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            Frame.BorderSizePixel = 0
+            Frame.Size = UDim2.new(0, 223, 0, 363)
+            
+            UICorner_2.Parent = Frame
+            
+            earn.Name = "earn"
+            earn.Parent = Frame
+            earn.AnchorPoint = Vector2.new(0.5, 0.5)
+            earn.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            earn.BackgroundTransparency = 1.000
+            earn.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            earn.BorderSizePixel = 0
+            earn.Position = UDim2.new(0.478738964, 0, 0.426749527, 0)
+            earn.Size = UDim2.new(0, 200, 0, 50)
+            earn.Font = Enum.Font.DenkOne
+            earn.Text = "Earn :"
+            earn.TextColor3 = Color3.fromRGB(255, 255, 255)
+            earn.TextSize = 25.000
+            local old = game:GetService("Players").LocalPlayer.Data.Beli.Value
+            spawn(function()
+            	while wait() do
+            		earn.Text = "Earn Beli: "..game:GetService("Players").LocalPlayer.Data.Beli.Value - old	
+                    writefile("BerkasChestFarm.txt", earn.Text)
+            	end
+            end)
+            
+            ImageLabel.Parent = Frame
+            ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            ImageLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            ImageLabel.BorderSizePixel = 0
+            ImageLabel.Position = UDim2.new(0.279475987, 0, 0.0433604345, 0)
+            ImageLabel.Size = UDim2.new(0, 100, 0, 100)
+            ImageLabel.Image = "http://www.roblox.com/asset/?id=15006559003"
+            
+            time.Name = "time"
+            time.Parent = Frame
+            time.AnchorPoint = Vector2.new(0.5, 0.5)
+            time.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            time.BackgroundTransparency = 1.000
+            time.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            time.BorderSizePixel = 0
+            time.Position = UDim2.new(0.447348833, 0, 0.523168266, 0)
+            time.Size = UDim2.new(0, 200, 0, 50)
+            time.Font = Enum.Font.DenkOne
+            time.Text = "Time Elasped :"
+            time.TextColor3 = Color3.fromRGB(255, 255, 255)
+            time.TextSize = 25.000
+            local startTime = os.time() -- Get the start time
+            
+            local function updateElapsedTime()
+                local elapsedTime = os.time() - startTime -- Calculate the elapsed time
+                local hours = math.floor(elapsedTime / 3600)
+                local minutes = math.floor((elapsedTime % 3600) / 60)
+                local seconds = elapsedTime % 60
+
+                time.Text = string.format("Time Elapsed: %d: %d: %s", hours, minutes, seconds)
+            end
+
+            spawn(function()
+                while true do
+                    updateElapsedTime()
+                    wait(1)
+                end
+            end)
+            
+            
+            On.Name = "On"
+            On.Parent = Frame
+            On.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            On.BackgroundTransparency = 1.000
+            On.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            On.BorderSizePixel = 0
+            On.Position = UDim2.new(0.0313901342, 0, 0.727272749, 0)
+            On.Size = UDim2.new(0, 89, 0, 51)
+            On.Font = Enum.Font.DenkOne
+            On.Text = "On"
+            On.TextColor3 = Color3.fromRGB(255, 255, 255)
+            On.TextSize = 25.000
+
+            On.MouseButton1Down:Connect(function ()
+            	getgenv().Setting.AutoFarmChest = true
+            end)
+
+
+            local MainStroke = Instance.new("UIStroke")
+            MainStroke.Name = "BtnStroke"
+            MainStroke.Parent = On
+            MainStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+            MainStroke.Color = Color3.fromRGB(255, 255, 255)
+            MainStroke.LineJoinMode = Enum.LineJoinMode.Round
+            MainStroke.Thickness = 1
+            MainStroke.Transparency = 0
+            MainStroke.Enabled = true
+            MainStroke.Archivable = true
+
+            Off.Name = "Off"
+            Off.Parent = Frame
+            Off.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+            Off.BackgroundTransparency = 1.000
+            Off.BorderColor3 = Color3.fromRGB(0, 0, 0)
+            Off.BorderSizePixel = 0
+            Off.Position = UDim2.new(0.587443948, 0, 0.727272749, 0)
+            Off.Size = UDim2.new(0, 85, 0, 51)
+            Off.Font = Enum.Font.DenkOne
+            Off.Text = "Off"
+            Off.TextColor3 = Color3.fromRGB(255, 255, 255)
+            Off.TextSize = 25.000
+            
+            Off.MouseButton1Click:Connect(function()
+            	getgenv().Setting.AutoFarmChest = false
+            end)
+            
+            local CloseButton = Instance.new("TextButton")
+            CloseButton.Name = "CloseButton"
+            CloseButton.Parent = main
+            CloseButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+            CloseButton.BorderSizePixel = 0
+            CloseButton.Position = UDim2.new(0, 0, 0, 0)
+            CloseButton.Size = UDim2.new(0, 30, 0, 30)
+            CloseButton.Font = Enum.Font.DenkOne
+            CloseButton.Text = "X"
+            CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+            CloseButton.TextSize = 20
+            
+            CloseButton.MouseButton1Click:Connect(function()
+                ScreenGui:Destroy()
+            end)
+
+            local MainStroke = Instance.new("UIStroke")
+            MainStroke.Name = "BtnStroke"
+            MainStroke.Parent = Off
+            MainStroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+            MainStroke.Color = Color3.fromRGB(255, 255, 255)
+            MainStroke.LineJoinMode = Enum.LineJoinMode.Round
+            MainStroke.Thickness = 1
+            MainStroke.Transparency = 0
+            MainStroke.Enabled = true
+            MainStroke.Archivable = true
+        end
+    end)
+end)
+
+if autofarmbfGh then
+
 local thread
 
 _G.antiscan = true
@@ -13,6 +449,8 @@ spawn(function()
         end
     end
 end)
+
+print("Start GantengHub Premium") 
 
 local Update = {}
 local pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
@@ -2507,13 +2945,17 @@ spawn(function()
                 end
 
                 if AutoFarmChest and chestTerdekat then
-                    local bajigurAj = chestTerdekat.CFrame
-                    HyperCahaya(bajigurAj)               
+                    if AutoFarmChest == true then
+                       local bajigurAj = chestTerdekat.CFrame
+                       HyperCahaya(bajigurAj)
+                       firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart, chestTerdekat, 0)
+                    end
                 end
             end
         end)
     end
 end)
+
 
 Main:AddButton("Farm Chest [Mirage Island]",function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/devidangelcl3/ange/main/fastmystic'))()
@@ -17445,7 +17887,6 @@ spawn(function()
     end
 end)
 
-
 spawn(function()
     pcall(function()
     while wait() do
@@ -17465,3 +17906,5 @@ end)
 notif("#stay ganteng", " subscribe YT isnahamzah")
 wait(1) 
 notif("isnahamzah", "discord.gg/isnahamzah") 
+
+end
