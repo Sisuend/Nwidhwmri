@@ -10574,7 +10574,21 @@ end
 if World2 or World1 then
 
 SE:AddLabel("Temporary Sea Event Only In Third Sea") 
-SE:AddLabel("Sea Event Sementara Hanya Di Third Sea") 
+SE:AddLabel("Sea Event Sementara Hanya Di Third Sea")
+
+SE:AddSeperator(" Setting Speed Boat ")
+
+SE:AddButton("Boost Speed Boat For Manual Control",function() 
+for _, BoatFolder in pairs(workspace.Boats:GetChildren()) do
+    if BoatFolder:IsA("Model") then
+        local BoatsLec = BoatFolder.Name
+        local boatOwner = BoatFolder:FindFirstChild("Owner")
+        if boatOwner and boatOwner:IsA("ObjectValue") and boatOwner.Value == game.Players.LocalPlayer then
+            BoatFolder.VehicleSeat.MaxSpeed = 355
+        end
+    end
+end
+end)  
 
 elseif World3 then   
 SE:AddSeperator(" Sea Event ")
@@ -11040,6 +11054,18 @@ if value then
 notif("Sea Event", "Anti Die Aktif, So U Cant Die By Sea Event") 
 else
 notif("Sea Event", "Anti Die Deactive, So U Can Die By Sea Event")
+end
+end) 
+
+SE:AddButton("Boost Speed Boat For Manual Control",function() 
+for _, BoatFolder in pairs(workspace.Boats:GetChildren()) do
+    if BoatFolder:IsA("Model") then
+        local BoatsLec = BoatFolder.Name
+        local boatOwner = BoatFolder:FindFirstChild("Owner")
+        if boatOwner and boatOwner:IsA("ObjectValue") and boatOwner.Value == game.Players.LocalPlayer then
+            BoatFolder.VehicleSeat.MaxSpeed = 355
+        end
+    end
 end
 end) 
 
