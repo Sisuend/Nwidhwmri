@@ -1,3 +1,5 @@
+local SAT
+
 if not getgenv().Setting or not getgenv().Setting.AutoFarmChest or not getgenv().Setting.AutoFarmChest then
     print("Start GantengHub") 
     autofarmbfGh = true
@@ -92,7 +94,9 @@ spawn(function()
                                 end
                             end
                             if not (game:GetService("Workspace"):FindFirstChild("Chest1") or game:GetService("Workspace"):FindFirstChild("Chest2") or game:GetService("Workspace"):FindFirstChild("Chest3")) then
-                                starthop = true
+                                if getgenv().Setting.HopServer then
+                                    starthop = true
+                                end
                             end
                         end
                     end
@@ -129,7 +133,7 @@ spawn(function()
                 repeat
                     task.wait()
                 until tick() - ticklon >= 1
-                local function Hop()
+                local function HopServer()
                     for r = 1, math.huge do
                         if ChooseRegion == nil or ChooseRegion == "" then
                             ChooseRegion = "Singapore"
@@ -173,7 +177,7 @@ spawn(function()
                     game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(bQ)
                     getgenv().Loaded = true
                 end
-                while not Hop() do
+                while not HopServer() do
                     wait()
                 end
             end
@@ -450,8 +454,6 @@ spawn(function()
     end
 end)
 
-print("Start GantengHub Premium") 
-
 local Update = {}
 local pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
 
@@ -476,9 +478,17 @@ function Update:Window(title, icon,...)
 	-- gw lupa add ini njir
 	function LIBRARY:AddChangelogs(list)
 		local self = setmetatable({}, LIBRARY)
-		return LIBRARY:AddChangelogs(list)
+		return newLib:AddChangelogs(list)
 	end
 	
+	
+	function LIBRARY:SetSAT(bool)
+            return newLib:SetSAT(bool)
+        end
+
+    function LIBRARY:SetFunctionSAT(func)
+        return newLib:SetFunctionSAT(func)
+    end
 	
 	-- addtab
 	function LIBRARY:AddTab(name, imgID)
@@ -518,13 +528,15 @@ function Update:Window(title, icon,...)
 		function TAB:AddSeperator(name)
 			local self = setmetatable({}, TAB)
 			return newTab:AddSeperator(name)
-		end
-		
+        end
+
 		function TAB:AddLine()
 			local self = setmetatable({}, TAB)
 			return newTab:AddLine()
 		end
-		
+
+        
+
 		
 		-- TEMPORARY FOR NEW NOTIFICATION LIB
 		function TAB:AddNotification(textdesc)
@@ -539,7 +551,7 @@ function Update:Window(title, icon,...)
 			return newTab:AddDropdown(name, "", {default = "None", list = options}, callback)
 		end
 		
-		function TAB: AddToggle(name, default, callback)
+		function TAB:AddToggle(name, default, callback)
 			local self = setmetatable({}, TAB)
 			return newTab: AddToggle(name, "", (default or false), callback)
 		end
@@ -549,6 +561,10 @@ function Update:Window(title, icon,...)
 			return newTab:AddKeybind(name, "", {triggerwhilebinding = false, defaultkey = default}, callback)
 		end
 		
+        function TAB:AddMultiDropdown(name, options, callback)
+			local self = setmetatable({}, TAB)
+			return newTab:AddMultiDropdown(name, "", {default = {}, list = options}, callback)
+		end
 		
 		return TAB
 	end
@@ -1189,67 +1205,79 @@ if game.PlaceId == 2753915549 then
         end
     end
 
-    function Hop()
-        local PlaceID = game.PlaceId
-        local AllIDs = {}
-        local foundAnything = ""
-        local actualHour = os.date("!*t").hour
-        local Deleted = false
-        function TPReturner()
-            local Site;
-            if foundAnything == "" then
-                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
-            else
-                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
-            end
-            local ID = ""
-            if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
-                foundAnything = Site.nextPageCursor
-            end
-            local num = 0;
-            for i,v in pairs(Site.data) do
-                local Possible = true
-                ID = tostring(v.id)
-                if tonumber(v.maxPlayers) > tonumber(v.playing) then
-                    for _,Existing in pairs(AllIDs) do
-                        if num ~= 0 then
-                            if ID == tostring(Existing) then
-                                Possible = false
-                            end
-                        else
-                            if tonumber(actualHour) ~= tonumber(Existing) then
-                                local delFile = pcall(function()
-                                    AllIDs = {}
-                                    table.insert(AllIDs, actualHour)
-                                end)
-                            end
-                        end
-                        num = num + 1
-                    end
-                    if Possible == true then
-                        table.insert(AllIDs, ID)
-                        wait()
-                        pcall(function()
-                            wait()
-                            game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
-                        end)
-                        wait(4)
-                    end
-                end
-            end
-        end
-        function Teleport() 
-            while wait() do
-                pcall(function()
-                    TPReturner()
-                    if foundAnything ~= "" then
-                        TPReturner()
-                    end
-                end)
-            end
-        end
-        Teleport()
-    end     
+local Settings = {}
+local HttpService = game:GetService("HttpService")
+local Workspace = game:GetService("Workspace")
+
+local Notification = require(game:GetService("ReplicatedStorage").Notification)
+
+local SaveFileName = "GantengHubHopServer.json"
+
+local function SaveSettings()
+ local HttpService = game:GetService("HttpService")
+ writefile(SaveFileName, HttpService:JSONEncode(Settings))
+end
+
+local function ReadSetting()
+ local s,e = pcall(function()
+     local HttpService = game:GetService("HttpService")
+     return HttpService:JSONDecode(readfile(SaveFileName))
+ end)
+ if s then return e
+ else
+     SaveSettings()
+     return ReadSetting()
+ end
+end
+Settings = ReadSetting()
+
+local function HopServer()
+ local function HopServer()
+     for i=1,200 do
+         local serverlist = game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer(i)
+         for k,v in pairs(serverlist) do
+             if k~=game.JobId and v.Count < 11 then
+                 if not Settings[k] or tick() - Settings[k].Time > 60*60  then
+                      Settings[k] = {
+                          Time = tick()
+                      }
+                      SaveSettings()
+                     game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport",k)
+                     return true
+                 elseif tick() - Settings[k].Time > 60*120 then
+                     Settings[k] = nil
+                 end
+             end
+         end
+     end
+     return false
+ end
+ if not getgenv().Loaded then
+     local function child(childinstance)
+         if childinstance.Name == "ErrorPrompt" then
+             if childinstance.Visible then
+                 if childinstance.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                     HopServer()
+                 end
+             end
+             childinstance:GetPropertyChangedSignal("Visible"):Connect(function()
+                 if childinstance.Visible then
+                     if childinstance.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
+                         HopServer()
+                     end
+                 end
+             end)
+         end
+     end
+     for k,v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
+         child(v)
+     end
+     game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(child)
+     getgenv().Loaded = true
+ end
+ while not HopServer() do wait() end
+ SaveSettings()
+end
     
     function UpdateIslandESP() 
         for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
@@ -2230,11 +2258,6 @@ function checkCount(name)
     return 0
 end
 
-
-function checkServer() 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxIDGubkuk/snjdjsndmdkdd/main/NwjejdnWbhook"))()
-end
-
     
     function GetDistance(target)
         return math.floor((target.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
@@ -2326,6 +2349,9 @@ end
 end
 
     function HyperCahaya(Pos)
+        if Pos ~= game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame then
+            SAT:SetSAT(true)
+        end
         Distance = (Pos.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
         if Distance < 10 then
             Speed = 4000
@@ -2477,7 +2503,7 @@ getgenv().HyperCahayas = function(p)
     spawn(function()
         pcall(function()
             while wait() do
-                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or FarmBoss or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.d or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix or _G.TeleportPlyFriend or Kitsune or Frozen or Mirrage or TpBoxes or TpMenit or _G.PinkCoats or _G.CoolShad or _G.BazokaWy or _G.AdmiralCoats or _G.Rmusket or _G.BlackSpik or _G.Lsword or _G.GravCane or _G.JitteS or _G.BlueSpikC or _G.TpWhiteDoor or _G.PilotHelm or _G.KiloLei or _G.SerptBow then
+                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or FarmBoss or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.d or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix or _G.TeleportPlyFriend or Kitsune or Frozen or Mirrage or TpBoxes or TpMenit or _G.PinkCoats or _G.CoolShad or _G.BazokaWy or _G.AdmiralCoats or _G.Rmusket or _G.BlackSpik or _G.Lsword or _G.GravCane or _G.JitteS or _G.BlueSpikC or _G.TpWhiteDoor or _G.PilotHelm or _G.KiloLei or _G.SerptBow or _G.ShipwrightNpc then
                     if not game:GetService("Players").LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyClip") then
                         local Noclip = Instance.new("BodyVelocity")
                         Noclip.Name = "BodyClip"
@@ -2493,7 +2519,7 @@ getgenv().HyperCahayas = function(p)
     spawn(function()
         pcall(function()
             game:GetService("RunService").Stepped:Connect(function()
-                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.AutoKai or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix or _G.TeleportPlyFriend or Kitsune or Frozen or Mirrage or TpBoxes or TpMenit or _G.PinkCoats or _G.CoolShad or _G.BazokaWy or _G.AdmiralCoats or _G.Rmusket or _G.BlackSpik or _G.Lsword or _G.GravCane or _G.JitteS or _G.BlueSpikC or _G.TpWhiteDoor or _G.PilotHelm or _G.KiloLei or _G.SerptBow then
+                if _G.AutoAdvanceDungeon or _G.AutoDoughtBoss or _G.Auto_DungeonMobAura or _G.AutoFarmChest or _G.AutoFarmBossHallow or _G.AutoFarmSwanGlasses or _G.AutoLongSword or _G.AutoBlackSpikeycoat or _G.AutoElectricClaw or _G.AutoFarmGunMastery or _G.AutoHolyTorch or _G.AutoLawRaid or _G.AutoFarmBoss or _G.AutoTwinHooks or _G.AutoOpenSwanDoor or _G.AutoDragon_Trident or _G.AutoSaber or _G.NOCLIP or _G.AutoFarmFruitMastery or _G.AutoFarmGunMastery or _G.TeleportIsland or _G.Auto_EvoRace or _G.AutoFarmAllMsBypassType or _G.AutoObservationv2 or _G.AutoMusketeerHat or _G.AutoEctoplasm or _G.AutoRengoku or _G.Auto_Rainbow_Haki or _G.AutoObservation or _G.AutoSpawnRip or _G.AutoDarkDagger or _G.Safe_Mode or _G.MasteryFruit or _G.AutoBudySword or _G.AutoOderSword or _G.AutoBounty or _G.AutoAllBoss or _G.Auto_Bounty or _G.AutoSharkman or _G.Auto_Mastery_Fruit or _G.Auto_Mastery_Gun or _G.Auto_Dungeon or _G.Auto_Cavender or _G.Auto_Pole or _G.Auto_Kill_Ply or _G.Auto_Factory or _G.AutoSecondSea or _G.TeleportPly or _G.AutoBartilo or _G.Auto_DarkBoss or _G.GrabChest or _G.AutoFarmBounty or _G.Holy_Torch or _G.AutoFarm or _G.Clip or _G.AutoElitehunter or _G.AutoThirdSea or _G.Auto_Bone or _G.Autoheart or _G.Autodoughking or _G.AutoFarmMaterial or _G.AutoNevaSoulGuitar or _G.Auto_Dragon_Trident or _G.Autotushita or _G.Autowaden or _G.Autogay or _G.Autopole or _G.Autosaw or _G.AutoObservationHakiV2 or _G.AutoFarmNearest or AutoFarmChest or _G.AutoCarvender or _G.AutoTwinHook or AutoMobAura or _G.Tweenfruit or _G.TeleportNPC or _G.AutoKai or _G.Leather or _G.Auto_Wing or _G.Umm or _G.bjirTerrorshark or _G.bjirPiranha or _G.bjirShark or _G.Makori_gay or Radioactive or Fish or Gunpowder or Dragon_Scale or Cocoafarm or Scrap or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.KillAfterTrials or _G.AutoSeaBest or _G.KillGhostShip or _G.AutoAlternatif or _G.dao or _G.bjirFishBoat or _G.bjirGhostShipRaidbruh or _G.BiirTrax or _G.BiirAnchor or _G.BjirAnchorCuy or _G.AutoFarm or Radioactive or BjirVampire or _G.AutoEctoplasm or _G.Makori_gay or _G.Umm or _G.Auto_Wing or _G.Leather or Scrap or Cocoafarm or Dragon_Scale or Gunpowder or Fish or MiniHee or _G.AutoFarmSeabaest or Auto_Cursed_Dual_Katana or _G.AutoFarmMob or _G.AutoMysticIsland or _G.AutoFarmDungeon or _G.AutoRaidPirate or _G.AutoQuestRace or _G.TweenMGear or getgenv().AutoFarm or _G.AutoPlayerHunter or _G.AutoFactory or Grab_Chest == true or _G.sailOnly or _G.leviOnly or _G.PutFrozen or _G.fishCrewMember or _G.HountedCrew or _G.EnchandGrade1 or _G.EnchandGrade2 or _G.EnchandGrade3 or _G.EnchandGrade4 or _G.KillLevi or _G.FarmFragmentTp or _G.bjirTrax or _G.ClearCdffr or _G.BjirKitsune or _G.AzureFlame or _G.TpDangerSix or _G.TeleportPlyFriend or Kitsune or Frozen or Mirrage or TpBoxes or TpMenit or _G.PinkCoats or _G.CoolShad or _G.BazokaWy or _G.AdmiralCoats or _G.Rmusket or _G.BlackSpik or _G.Lsword or _G.GravCane or _G.JitteS or _G.BlueSpikC or _G.TpWhiteDoor or _G.PilotHelm or _G.KiloLei or _G.SerptBow or _G.ShipwrightNpc then
                     for _, v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
                         if v:IsA("BasePart") then
                             v.CanCollide = false    
@@ -2562,8 +2588,9 @@ getgenv().HyperCahayas = function(p)
 
 
 local Library = Update:Window("Ganteng Hub","",Enum.KeyCode.RightControl);
-
+SAT = Library
 newLib:AddChangelog({
+    ["3.1.0"] = "Update New feature", 
     ["3.0.0"] = "Update Full Rilis", 
     ["2.5.0"] = "Update Christmas", 
     ["2.2.0"] = "Update Fix Bug", 
@@ -2573,8 +2600,15 @@ newLib:AddChangelog({
 })
 
 -- LOADING HERE
-Library:SetProgress(1) 
+Library:SetProgress(10) 
+Library:SetFunctionSAT(function()
+    HyperCahaya(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame)
+    _G.Clip = false
+    task.wait(.1)
+    SAT:SetSAT(false)
+end)
 Library:Finish()
+
 
 local H = Library:AddTab("Info","14602166612")
 local Main = Library:AddTab("Main","14614308263")
@@ -2582,7 +2616,7 @@ local Sett = Library:AddTab("Setting"," 15759774881")
 local SerS = Library:AddTab("Server Status","14764218351")
 local M = Library:AddTab("Item","14614311945")
 local Mate = Library:AddTab("Material","15759817907") 
-local chrs = Library:AddTab("Event","15759812997") 
+--local chrs = Library:AddTab("Event","15759812997") 
 local SE = Library:AddTab ("Sea Event","15412636044") 
 local RaceV4 = Library:AddTab("RaceV4","14614319243")
 local Ss = Library:AddTab("Stats","14614313605")
@@ -2596,7 +2630,6 @@ local D = Library:AddTab("Devil Fruit","14614447717")
 local Misc = Library:AddTab("Misc","11156061121")
 
 local Time = H:AddLabel("Executor Time");spawn(function() getgenv().Time = true;while wait() do wait(.1) UpdateTime() end end);function UpdateTime() local date = os.date("*t");local hour = (date.hour) % 24;local ampm = hour < 12 and "AM" or "PM";local timezone = string.format("%02i:%02i:%02i %s", ((hour -1) % 12) + 1, date.min, date.sec, ampm);local datetime = string.format("%02d/%02d/%04d", date.day, date.month, date.year);local LocalizationService = game:GetService("LocalizationService");local Players = game:GetService("Players");local player = Players.LocalPlayer;local name = player.Name;local result, code = pcall(function()   return LocalizationService:GetCountryRegionForPlayerAsync(player)  end);Time:Set(" : " .. timezone);Time:Set("Executor Time: " .. datetime .. " [ " .. code .. " ]");spawn(function() if getgenv().Time then pcall(function()  while wait() do  Time()  end end) end end) end
-
 
 H:AddLabel("[🌐] Website : isnahamzah.tech ")
 H:AddLabel("[💬] Discord : discord.gg/isnahamzah ")
@@ -2866,6 +2899,8 @@ task.spawn(function()
             end
         end
     end)
+   
+
 
    Main:AddToggle("Farm Nearest ",_G.AutoFarmNearest,function(value)
    _G.AutoFarmNearest = value
@@ -3130,7 +3165,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Dough King").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _G.AutodoughkingHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -3278,7 +3313,7 @@ spawn(function()
                         end
                     else
                         if _G.AutoAllBossHop then
-                            Hop()
+                            HopServer()
                         end
                     end
                 end
@@ -4043,7 +4078,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Factory Staff").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4087,7 +4122,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Vampire").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4174,7 +4209,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Water Fighter").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4226,7 +4261,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Military Spy").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4266,7 +4301,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Lava Pirate").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4310,7 +4345,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Royal Soldier").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4354,7 +4389,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Pirate").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4393,7 +4428,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Marine Captain").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4432,7 +4467,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Jungle Pirate").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4476,7 +4511,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Brute").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4515,7 +4550,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Mercenary").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4554,7 +4589,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Pirate Millionaire").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4598,7 +4633,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Chocolate Bar Battler").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4642,7 +4677,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Dragon Crew Warrior").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4686,7 +4721,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Pistol Billionaire").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4730,7 +4765,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Fishman Captain").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -4774,7 +4809,7 @@ spawn(function()
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Mythological Pirate").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _G.StardHop then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -5570,7 +5605,7 @@ end)
 					else
 
 						if _GHopItemSea and game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("EliteHunter") == "I don't have anything for you right now. Come back later." then
-							hop()
+							HopServer()
 						else
 							game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("EliteHunter")
 						end
@@ -5744,7 +5779,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cake Queen").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -5789,7 +5824,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Captain Elephant").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -5833,7 +5868,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Soul Reaper").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -5841,6 +5876,141 @@ end)
             end
         end
     end)
+    
+    M:AddSeperator(" Soul Guitar ")
+    
+    M:AddToggle("Taken Soul Guitar",_G.AutoNevaSoulGuitar,function(value)
+  _G.AutoNevaSoulGuitar = value    
+ StopTween(_G.AutoNevaSoulGuitar)
+ end)
+
+spawn(function()
+		while wait() do
+			pcall(function()
+				if _G.AutoNevaSoulGuitar then
+					if GetWeaponInventory("Soul Guitar") == false then
+						if (CFrame.new(-9681.458984375, 6.139880657196045, 6341.3720703125).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 5000 then
+							if game:GetService("Workspace").NPCs:FindFirstChild("Skeleton Machine") then
+								game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("soulGuitarBuy",true)
+							else
+								if game:GetService("Workspace").Map["Haunted Castle"].Candle1.Transparency == 0 then
+									if game:GetService("Workspace").Map["Haunted Castle"].Placard1.Left.Part.Transparency == 0 then
+										Quest2 = true
+										notif("Soul Guitar","Started Puzzle 2") 
+										repeat wait() HyperCahaya(CFrame.new(-8762.69140625, 176.84783935546875, 6171.3076171875)) until (CFrame.new(-8762.69140625, 176.84783935546875, 6171.3076171875).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or not _G.AutoNevaSoulGuitar
+										wait(1)
+										fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard7.Left.ClickDetector)
+										wait(1)
+										fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard6.Left.ClickDetector)
+										wait(1)
+										fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard5.Left.ClickDetector)
+										wait(1)
+										fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard4.Right.ClickDetector)
+										wait(1)
+										fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard3.Left.ClickDetector)
+										wait(1)
+										fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard2.Right.ClickDetector)
+										wait(1)
+										fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"].Placard1.Right.ClickDetector)
+										wait(1)
+									elseif game:GetService("Workspace").Map["Haunted Castle"].Tablet.Segment1:FindFirstChild("ClickDetector") then
+										if game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part1:FindFirstChild("ClickDetector") then
+											Quest4 = true
+											notif("Soul Guitar","Started Puzzle 4") 
+											repeat wait() HyperCahaya(CFrame.new(-9553.5986328125, 65.62338256835938, 6041.58837890625)) until (CFrame.new(-9553.5986328125, 65.62338256835938, 6041.58837890625).Position - game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or not _G.AutoNevaSoulGuitar
+											wait(1)
+											HyperCahaya(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.CFrame)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part3.ClickDetector)
+											wait(1)
+											HyperCahaya(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.CFrame)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part4.ClickDetector)
+											wait(1)
+											HyperCahaya(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.CFrame)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.ClickDetector)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part6.ClickDetector)
+											wait(1)
+											HyperCahaya(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part8.CFrame)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part8.ClickDetector)
+											wait(1)
+											HyperCahaya(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.CFrame)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector)
+											wait(1)
+											fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Lab Puzzle"].ColorFloor.Model.Part10.ClickDetector)
+										else
+											Quest3 = true	
+											notif("Soul Guitar","Started Puzzle 3")
+											for _, v in pairs(game:GetService("Workspace").Map["Haunted Castle"].Tablet:GetChildren()) do
+											    if v:FindFirstChild("ClickDetector") and v.Line.p.Y < -999 then
+											        fireclickdetector(v.ClickDetector)
+											        task.wait(0.2)
+											    end
+											end
+										end
+									else
+										if game:GetService("Workspace").NPCs:FindFirstChild("Ghost") then
+											local args = {
+												[1] = "GuitarPuzzleProgress",
+												[2] = "Ghost"
+											}
+
+											game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+										end
+										if game.Workspace.Enemies:FindFirstChild("Living Zombie") then
+											for i,v in pairs(game.Workspace.Enemies:GetChildren()) do
+												if v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+													if v.Name == "Living Zombie" then
+														EquipWeapon(_G.SelectWeapon)
+														v.HumanoidRootPart.Size = Vector3.new(60,60,60)
+														v.HumanoidRootPart.Transparency = 1
+														v.Humanoid.JumpPower = 0
+														v.Humanoid.WalkSpeed = 0
+														v.HumanoidRootPart.CanCollide = false
+														v.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,20,2)
+														HyperCahaya(CFrame.new(-10160.787109375, 138.6616973876953, 5955.03076171875))
+														game:GetService'VirtualUser':CaptureController()
+														game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+													end
+												end
+											end
+										else
+											HyperCahaya(CFrame.new(-10160.787109375, 138.6616973876953, 5955.03076171875))
+										end
+									end
+								else    
+									if string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent",2), "Error") then
+										print("Go to Grave")
+										HyperCahaya(CFrame.new(-8653.2060546875, 140.98487854003906, 6160.033203125))
+									elseif string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent",2), "Nothing") then
+										print("Wait Next Night")
+									else
+										game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("gravestoneEvent",2,true)
+									end
+								end
+							end
+						else
+							HyperCahaya(CFrame.new(-9681.458984375, 6.139880657196045, 6341.3720703125))
+	end
+	else
+if _GHopItemSea then
+HopServer()
+end
+						end
+					end
+			end)
+		end
+end)
     
  M:AddSeperator("Dual Curse Katana")
 
@@ -6301,7 +6471,7 @@ end
 							end
 						until Auto_Cursed_Dual_Katana == false or Auto_Quest_Tushita_3 == false or GetMaterial("Alucard Fragment") == 6
 					else
-						hop()
+						HopServer()
 					end
 				end)
 			end
@@ -6349,7 +6519,7 @@ end
         pcall(function()
             while wait() do
                 if (_GHopItemSea and _G.AutoDarkDagger) and World3 and not game:GetService("ReplicatedStorage"):FindFirstChild("rip_indra True Form") and not game:GetService("Workspace").Enemies:FindFirstChild("rip_indra True Form") then
-                    Hop()
+                    HopServer()
                 end
             end
         end)
@@ -6392,7 +6562,7 @@ end
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Beautiful Pirate").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -6591,7 +6761,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Island Empress").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -6637,7 +6807,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Kilo Admiral").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -6683,7 +6853,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Stone").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -6728,7 +6898,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Longma").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -6808,6 +6978,28 @@ spawn(function()
         end
     end
 end)
+
+    M:AddSeperator(" Haki Colour ")
+    
+    M:AddToggle("Buy Enchancement Colour",_G.AutoBuyEnchancementColour,function(value)
+        _G.AutoBuyEnchancementColour = value
+    end)
+    
+    spawn(function()
+        while wait() do
+            if _G.AutoBuyEnchancementColour then
+                local args = {
+                    [1] = "ColorsDealer",
+                    [2] = "2"
+                }
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                if _GHopItemSea and _G.AutoBuyEnchancementColour and not World1 then
+                    wait(10)
+                    HopServer()
+                end
+            end 
+        end
+    end)
     
     M:AddSeperator(" Musketer Hat ")
     
@@ -8227,7 +8419,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Order").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -8286,7 +8478,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Black Beard").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -8394,7 +8586,7 @@ end)
         pcall(function()
             while wait(.1) do
                 if (_G.AutoFarmSwanGlasses and _GHopItemSea) and World2 and not game:GetService("ReplicatedStorage"):FindFirstChild("Don Swan") and not game:GetService("Workspace").Enemies:FindFirstChild("Don Swan") then
-                    Hop()
+                    HopServer()
                 end
             end
         end)
@@ -8439,7 +8631,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Tide Keeper").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -8483,7 +8675,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Jeremy").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -8527,7 +8719,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Diamond").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -8571,7 +8763,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Fajita").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -8615,7 +8807,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Smoke Admiral").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -8659,7 +8851,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cursed Captain").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -8690,7 +8882,7 @@ end)
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                 if _GHopItemSea and _G.AutoBuyEnchancementColour and not World1 then
                     wait(10)
-                    Hop()
+                    HopServer()
                 end
             end 
         end
@@ -8723,7 +8915,7 @@ end)
                     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                     if _GHopItemSea and _G.AutoBuyLegendarySword and World2 then
                         wait(10)
-                        Hop()
+                        HopServer()
                     end
                 end)
             end 
@@ -9267,7 +9459,7 @@ end)
                                 end
                             else
                                 if _GHopItemSea then
-                                    Hop()
+                                    HopServer()
                                 end
                             end
                         elseif game.Players.LocalPlayer.Backpack:FindFirstChild("Relic") or game.Players.LocalPlayer.Character:FindFirstChild("Relic") and game.Players.localPlayer.Data.Level.Value >= 200 then
@@ -9471,7 +9663,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("The Saw").HumanoidRootPart.CFrame * CFrame.new(2,40,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -9515,7 +9707,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Chief Warden").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -9559,7 +9751,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Greybeard").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -9603,7 +9795,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Thunder God").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -9647,7 +9839,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Swan").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -9691,7 +9883,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Cyborg").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -9735,7 +9927,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Wysper").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -9779,7 +9971,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Vice Admiral").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -9823,7 +10015,7 @@ end)
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Magma Admiral").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
-                                Hop()
+                                HopServer()
                             end
                         end
                     end
@@ -10256,6 +10448,58 @@ local A_3 = _G.CraftTwoItems
 local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
 Event:InvokeServer(A_1, A_2, A_3)
 end)
+
+
+if World3 then
+UC:AddSeperator(" Shipwright ") 
+
+spawn(function()
+    pcall(function()
+        while wait() do
+            valorcheck:Set(" Your Valor : " .. game:GetService("Players").LocalPlayer.Data.Valor.Value)
+        end
+    end)
+end)
+
+valorcheck = UC:AddLabel("")
+
+UC:AddButton("Upgrade Plank Scavenger",function() 
+local A_1 = "Shipwright"
+local A_2 = "PlankScavenger"
+local Event = game:GetService("ReplicatedStorage").Remotes.SubclassNetwork.PurchasePassive
+Event:InvokeServer(A_1, A_2)
+end)
+
+UC:AddButton("Upgrade Blueprint Specialist",function() 
+local A_1 = "Shipwright"
+local A_2 = "ExpertRepair"
+local Event = game:GetService("ReplicatedStorage").Remotes.SubclassNetwork.PurchasePassive
+Event:InvokeServer(A_1, A_2)
+end)
+
+UC:AddButton("Upgrade Hull Mechanic",function() 
+local A_1 = "Shipwright"
+local A_2 = "MaxHp"
+local Event = game:GetService("ReplicatedStorage").Remotes.SubclassNetwork.PurchasePassive
+Event:InvokeServer(A_1, A_2)
+end) 
+
+UC:AddToggle("Teleport Npc Shipwright ", false, function(value)
+_G.ShipwrightNpc = value
+StopTween(_G.ShipwrightNpc) 
+end) 
+
+spawn(function()
+    while wait() do
+        pcall(function()
+            if _G.ShipwrightNpc then
+            HyperCahaya(CFrame.new(-16527.5703125, 75.93045043945312, 315.63739013671875))
+            end
+        end)
+    end
+end)
+
+end
 
 UC:AddSeperator(" Upgrade ")
     
@@ -10801,10 +11045,61 @@ end)
 
 SE:AddSeperator(" Optional Feature ") 
 
-    SE:AddToggle('Auto Kill Sea Beast', _G.AutoSeaBest, function(value)
-    _G.AutoSeaBest = value
-    StopTween(_G.AutoSeaBest)
-    end)
+SE:AddMultiDropdown("Select Sea Monster", {"Kill Sea Beast", "Kill PirateShips", "Kill Terrorshark", "Kill Shark", "Kill Piranha", "Kill Fish Crew Member", "Kill Haunted Crew Member", "Kill GhostShip"}, function(tbl)
+    for _, option in ipairs(tbl) do
+        if option == "Kill Sea Beast" then
+            _G.AutoSeaBest = true
+            print("SB")
+        elseif option == "Kill PirateShips" then
+            _G.KillGhostShip = true
+            print("PirateShips")
+        elseif option == "Kill Terrorshark" then
+            _G.bjirTerrorshark = true
+            print("TS")
+        elseif option == "Kill Shark" then
+            _G.bjirShark = true
+            print("Shark")
+        elseif option == "Kill Piranha" then
+            _G.bjirPiranha = true
+            print("Piranha")
+        elseif option == "Kill Fish Crew Member" then
+            _G.fishCrewMember = true
+            print("FSCM")
+        elseif option == "Kill Haunted Crew Member" then
+            _G.HountedCrew = true
+            print("HCM")
+        elseif option == "Kill GhostShip" then
+            _G.bjirFishBoat = true
+            print("GS")
+        end
+    end
+
+    if #tbl == 0 then
+        print(" False All + Stoptween All ") 
+        _G.AutoSeaBest = false
+        _G.KillGhostShip = false
+        _G.bjirTerrorshark = false
+        _G.bjirShark = false
+        _G.bjirPiranha = false
+        _G.fishCrewMember = false
+        _G.HountedCrew = false
+        _G.bjirFishBoat = false
+
+        StopTween(_G.AutoSeaBest)
+        StopTween(_G.KillGhostShip)
+        StopTween(_G.bjirTerrorshark)
+        StopTween(_G.bjirShark)
+        StopTween(_G.bjirPiranha)
+        StopTween(_G.fishCrewMember)
+        StopTween(_G.HountedCrew)
+        StopTween(_G.bjirFishBoat)
+    end
+end)
+
+
+
+
+
     
     spawn(function()
         while wait() do
@@ -10834,7 +11129,8 @@ SE:AddSeperator(" Optional Feature ")
 										end
 									end
 								end
-								UseKillSea = true
+								print("Step Skill")
+								_G.UseSkillSeaBeast = true
 								wait(0.8) 
 								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 									if v:IsA("Tool") then
@@ -10843,7 +11139,7 @@ SE:AddSeperator(" Optional Feature ")
 										end
 									end
 								end
-								UseKillSea = true
+								_G.UseSkillSeaBeast = true
 								wait(0.8) 
 								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 									if v:IsA("Tool") then
@@ -10852,7 +11148,7 @@ SE:AddSeperator(" Optional Feature ")
 										end
 									end
 								end
-								UseKillSea = true
+								_G.UseSkillSeaBeast = true
 								wait(0.8) 
 								for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 									if v:IsA("Tool") then
@@ -10861,22 +11157,69 @@ SE:AddSeperator(" Optional Feature ")
 										end
 									end
 								end
-								UseKillSea = true
+								_G.UseSkillSeaBeast = true
 								wait(0.8) 
 						    end
 				        else
-				        UseKillSea = false
+				        _G.UseSkillSeaBeast = false
+				        _G.AutoSeaBest = false
 						end
 					end
                 end)
             end
         end
     end)
-
-        SE:AddToggle('Auto Kill PirateShips', _G.KillGhostShip, function(value)
-            _G.KillGhostShip = value
-            StopTween(_G.KillGhostShip) 
+    
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+		pcall(function()
+			if _G.UseSkillSeaBeast then
+			    if _G.SkillZ then
+				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+                end
+                if _G.SkillX then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
+                end
+                if _G.SkillC then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
+                end
+                if _G.SkillV then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
+                end
+                if _G.SkillF then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"F",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"F",false,game)
+                end
+			end
+		end)
+    end)
+end)
+   
+    spawn(function()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            pcall(function()
+                if _G.UseSkillSeaBeast then
+                    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+                        if v.Name == "NotificationTemplate" then
+                            if string.find(v.Text,"Skill locked!") then
+                                v:Destroy()
+                            end
+                        end
+                    end
+                end
+            end)
         end)
+    end)
+
 
         function CheckPirateBoatJir()
             local checkmmpb = {"PirateGrandBrigade", "PirateBrigade"}
@@ -10945,7 +11288,7 @@ spawn(function()
 											end
 										end
 									end
-									UseKillSea = true
+									_G.UseSkillPirateShip = true
 									wait(0.8) 
 									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 										if v:IsA("Tool") then
@@ -10954,7 +11297,7 @@ spawn(function()
 											end
 										end
 									end
-									UseKillSea = true
+									_G.UseSkillPirateShip = true
 									wait(0.8) 
 									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 										if v:IsA("Tool") then
@@ -10963,7 +11306,7 @@ spawn(function()
 											end
 										end
 									end
-									UseKillSea = true
+									_G.UseSkillPirateShip = true
 									wait(0.8) 
 									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 										if v:IsA("Tool") then
@@ -10972,25 +11315,71 @@ spawn(function()
 											end
 										end
 									end
-									UseKillSea = true
+									_G.UseSkillPirateShip = true
 									wait(0.8) 
                                 end
                             end
                         end
                     end
                 else
-                    UseKillSea = false
+                    _G.UseSkillPirateShip = false
+                    _G.KillGhostShip = false
                 end
             end)
         end
     end
 end)
 
-    
-SE:AddToggle("Auto Kill Terrorshark",_G.bjirTerrorshark,function(value)
-_G.bjirTerrorshark = value
-StopTween(_G.bjirTerrorshark)
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+		pcall(function()
+			if _G.UseSkillPirateShip then
+			    if _G.SkillZ then
+				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+                end
+                if _G.SkillX then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
+                end
+                if _G.SkillC then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
+                end
+                if _G.SkillV then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
+                end
+                if _G.SkillF then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"F",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"F",false,game)
+                end
+			end
+		end)
+    end)
 end)
+   
+    spawn(function()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            pcall(function()
+                if _G.UseSkillPirateShip then
+                    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+                        if v.Name == "NotificationTemplate" then
+                            if string.find(v.Text,"Skill locked!") then
+                                v:Destroy()
+                            end
+                        end
+                    end
+                end
+            end)
+        end)
+    end)
+
 
 spawn(function()
         while wait() do
@@ -11027,9 +11416,7 @@ spawn(function()
                         if game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark") then
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Terrorshark").HumanoidRootPart.CFrame * CFrame.new(2,60,2))
                         else
-                            if _G.StardHop then
-                                Hop()
-                            end
+                            _G.bjirTerrorshark = false
                         end
                     end
                 end)
@@ -11037,10 +11424,6 @@ spawn(function()
         end
     end)
     
-SE:AddToggle("Auto Kill Shark",_G.bjirShark,function(value)
-_G.bjirShark = value
-StopTween(_G.bjirShark)
-end)
 
 spawn(function()
         while wait() do
@@ -11070,9 +11453,7 @@ spawn(function()
                         if game:GetService("ReplicatedStorage"):FindFirstChild("Shark") then
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Shark").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
-                            if _G.StardHop then
-                                Hop()
-                            end
+                            _G.bjirShark = false
                         end
                     end
                 end)
@@ -11080,10 +11461,6 @@ spawn(function()
         end
     end)
     
-    SE:AddToggle("Auto Kill Piranha",_G.bjirPiranha,function(value)
-_G.bjirPiranha = value
-StopTween(_G.bjirPiranha)
-end)
 
 spawn(function()
         while wait() do
@@ -11113,9 +11490,7 @@ spawn(function()
                         if game:GetService("ReplicatedStorage"):FindFirstChild("Piranha") then
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Piranha").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
-                            if _G.StardHop then
-                                Hop()
-                            end
+                            _G.bjirPiranha = false
                         end
                     end
                 end)
@@ -11124,10 +11499,6 @@ spawn(function()
     end)
     
     
-SE:AddToggle("Auto Kill Fish Crew Member",_G.fishCrewMember,function(value)
-_G.fishCrewMember = value
-StopTween(_G.fishCrewMember)
-end)
 
 spawn(function()
         while wait() do
@@ -11157,9 +11528,7 @@ spawn(function()
                         if game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member") then
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Fish Crew Member").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
-                            if _G.StardHop then
-                                Hop()
-                            end
+                            _G.fishCrewMember = false
                         end
                     end
                 end)
@@ -11167,14 +11536,10 @@ spawn(function()
         end
     end)
     
-SE:AddToggle("Auto Kill Haunted Crew Member",_G.HountedCrew,function(value)
-_G.HountedCrew = value
-StopTween(_G.HountedCrew)
-end)
 
 spawn(function()
         while wait() do
-            if _G.fishCrewMember and World3 then
+            if _G.HountedCrew and World3 then
                 pcall(function()
                     if game:GetService("Workspace").Enemies:FindFirstChild("Haunted Crew Member") then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
@@ -11200,20 +11565,14 @@ spawn(function()
                         if game:GetService("ReplicatedStorage"):FindFirstChild("Haunted Crew Member") then
                             HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Haunted Crew Member").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
-                            if _G.StardHop then
-                                Hop()
-                            end
+                            _G.HountedCrew = false
                         end
                     end
                 end)
             end
         end
     end)
-    
-        SE:AddToggle('Auto Kill GhostShip', _G.bjirFishBoat, function(value)
-            _G.bjirFishBoat = value
-            StopTween(_G.bjirFishBoat) 
-        end)
+
 
         function CheckPirateBoat()
             local checkmmpb = {"FishBoat"}
@@ -11275,7 +11634,7 @@ spawn(function()
 											end
 										end
 									end
-									UseKillSea = true
+									_G.UseSkillFishBoat = true
 									wait(0.8) 
 									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 										if v:IsA("Tool") then
@@ -11284,7 +11643,7 @@ spawn(function()
 											end
 										end
 									end
-									UseKillSea = true
+									_G.UseSkillFishBoat = true
 									wait(0.8) 
 									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 										if v:IsA("Tool") then
@@ -11293,7 +11652,7 @@ spawn(function()
 											end
 										end
 									end
-									UseKillSea = true
+									_G.UseSkillFishBoat = true
 									wait(0.8) 
 									for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
 										if v:IsA("Tool") then
@@ -11302,19 +11661,70 @@ spawn(function()
 											end
 										end
 									end
-									UseKillSea = true
+									_G.UseSkillFishBoat = true
 									wait(0.8) 
                                 end
                             end
                         end
                     end
                 else
-                    UseKillSea = false
+                    _G.UseSkillFishBoat = false
+                    _G.bjirFishBoat = false
                 end
             end)
         end
     end
 end)
+
+spawn(function()
+    game:GetService("RunService").RenderStepped:Connect(function()
+		pcall(function()
+			if _G.UseSkillFishBoat then
+			    if _G.SkillZ then
+				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"Z",false,game)
+                end
+                if _G.SkillX then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"X",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"X",false,game)
+                end
+                if _G.SkillC then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"C",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"C",false,game)
+                end
+                if _G.SkillV then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"V",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"V",false,game)
+                end
+                if _G.SkillF then
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"F",false,game)
+				wait(0.1)
+                game:GetService("VirtualInputManager"):SendKeyEvent(false,"F",false,game)
+                end
+			end
+		end)
+    end)
+end)
+   
+    spawn(function()
+        game:GetService("RunService").RenderStepped:Connect(function()
+            pcall(function()
+                if _G.UseSkillFishBoat then
+                    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Notifications:GetChildren()) do
+                        if v.Name == "NotificationTemplate" then
+                            if string.find(v.Text,"Skill locked!") then
+                                v:Destroy()
+                            end
+                        end
+                    end
+                end
+            end)
+        end)
+    end)
           
     SE:AddToggle('Auto Kill Leviathan', _G.KillLevi, function(value)
     _G.KillLevi = value
@@ -11483,6 +11893,7 @@ end)
 						    end
 					    else
 				 	       UseKillSea = false
+				 	       _G.KillLevi = false
 					   	end
 			    	end
                 end) 
@@ -11491,7 +11902,7 @@ end)
     end)
 
 spawn(function()
-    while wait() do
+    game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
 			if UseKillSea then
 			    if _G.SkillZ then
@@ -11521,7 +11932,7 @@ spawn(function()
                 end
 			end
 		end)
-    end
+    end)
 end)
    
     spawn(function()
@@ -11548,7 +11959,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if Mirrage then
+            if Mirrage and game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Mirage Island") then
                 HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Mirage Island").CFrame * CFrame.new(0,150,0))
             end
         end)
@@ -11563,7 +11974,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if Frozen then
+            if Frozen and game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Frozen Dimension") then
                 HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Frozen Dimension").CFrame * CFrame.new(0,150,0))
             end
         end)
@@ -11578,7 +11989,7 @@ end)
 spawn(function()
     while wait() do
         pcall(function()
-            if Kitsune then
+            if Kitsune and game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Kitsune Island") then
                 HyperCahaya(game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Kitsune Island").CFrame * CFrame.new(0,150,0))
             end
         end)
@@ -15627,7 +16038,7 @@ closeButton.MouseButton1Click:Connect(closeGUI)
             while wait(.1) do wait(10)
                 if _G.AutoEatFruitHop and _G.SelectFruitEat ~= nil then
                     if not game:GetService("Players").LocalPlayer.Character:FindFirstChild(_G.SelectFruitEat) or not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild(_G.SelectFruitEat) then
-                        Hop()
+                        HopServer()
                     else
                         game:GetService("Players").LocalPlayer.Character:FindFirstChild(_G.SelectFruitEat).EatRemote:InvokeServer()
                     end
@@ -15778,7 +16189,7 @@ end)
     end)
     
     Misc:AddButton("Server Hop",function()
-        Hop()
+        HopServer()
     end)
     
     Misc:AddButton("Hop To Lower Player",function()
@@ -17666,227 +18077,6 @@ spawn(function()
     end)
 end)
 
-chrs:AddSeperator("Christmas")
-    
-local Presents_Time =  chrs:AddLabel("Present Time : 0:00:00 ")
-
-spawn(function()
-    while task.wait() do
-        pcall(function()
-            Presents_Time:Set("Present Time : " .. Workspace.Countdown.SurfaceGui.TextLabel.Text)
-        end)
-    end
-end)
-
-chrs:AddToggle("Auto Teleport If 5 Mins",false,function(value)
-TpMenit = value
-StopTween(TpMenit) 
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if TpMenit then
-                if World3 and Workspace.Countdown.SurfaceGui.TextLabel.Text <= "0:05:00" then
-                    HyperCahaya(CFrame.new(-1060.96923828125, 14.1738862991333, -14437.7294921875))
-                elseif World2 and Workspace.Countdown.SurfaceGui.TextLabel.Text <= "0:05:00" then
-                    HyperCahaya(CFrame.new(-5240.677734375, 14.68299388885498, 1509.819580078125))                
-                elseif World1 and Workspace.Countdown.SurfaceGui.TextLabel.Text <= "0:05:00" then
-                    HyperCahaya(CFrame.new(1018.90283203125, 14.68299388885498, -3734.6298828125))
-                end
-            end
-        end)
-    end
-end)
-
-chrs:AddToggle("Teleport To Present Box",false,function(value)
-TpBoxes = value
-StopTween(TpBoxes) 
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if TpBoxes then
-                for i, v in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do
-                    if v.Name == "Present" and v:FindFirstChild("Root") then
-                        local presentCFrame = v:FindFirstChild("Root").CFrame
-                        v:FindFirstChild("Root").CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.Position)
-                    end
-                end
-            end
-        end)
-    end
-end)
-
-
-chrs:AddToggle("Auto Open Present Box",false,function(value)
-praybox = value
-end)
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if praybox then
-                if game:GetService("Workspace")["_WorldOrigin"].Present then
-                    game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
-                    wait(0.2) 
-                    game:GetService("VirtualInputManager"):SendKeyEvent(false,"E",false,game)
-                end
-            end
-        end)
-    end
-end)
-
-chrs:AddSeperator("Buy Christmas Item")
-
-    CandyCheck = chrs:AddLabel("Your Candy : ??? ")
-    
-    spawn(function()
-        pcall(function()
-            while wait() do
-                CandyCheck:Set("Your Candy : "..(game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer("Candies", "Check")))
-            end
-        end)
-    end)
-
-Santalist = {
-    "Sleigh [ Boat ]",
-    "Santa Hat", 
-    "Elf Hat"
-}
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if Budi == "Sleigh [ Boat ]" then
-                _G.Budi = "Budi"
-            elseif budi == "Santa Hat" then
-                _G.Budi = "Budi Beli Sambel"
-            elseif budi == "Elf Hat" then
-                _G.Budi = "Budi Lagi Makan"
-            end
-        end)
-    end
-end)
-
-chrs:AddDropdown("Crishmast Item [ 1 ]",Santalist,function(value)
-Budi = value
-end)
-
-Santalisttwi = {
-    "200 Fragment",
-    "500 Fragment"
-}
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if Joki == "200 Fragment" then
-                Joko = "Budi 200"
-            elseif Joki == "500 Fragment" then
-                Joko = "Budi 500"
-            end
-        end)
-    end
-end)
-
-chrs:AddDropdown("Crishmast Item [ 2 ]",Santalisttwi,function(value)
-Joki = value
-end)
-
-Santalisttiga = {
-    "2x Exp [ 15 Mins ]",
-    "Stats Refound", 
-    "Race Reroll"
-}
-
-spawn(function()
-    while wait() do
-        pcall(function()
-            if Joti == "2x Exp [ 15 Mins ]" then
-                Jonti = "1"
-            elseif Joti == "Stats Refound" then
-                Jonti = "2"
-            elseif Joti == "Race Reroll" then
-                Jonti = "3"
-            end
-        end)
-    end
-end)
-
-chrs:AddDropdown("Crishmast Item [ 3 ]",Santalisttiga,function(value)
-Joti = value
-end)
-
-chrs:AddToggle("Buy Item Select",false,function(value)
-BeliBudi = value
-end)
-
-spawn(function()
-    while wait() do
-        if BeliBudi then
-            if _G.Budi == "Budi" then
-                local A_1 = "Candies"
-                local A_2 = "Buy"
-                local A_3 = 3
-                local A_4 = 3
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer(A_1, A_2, A_3, A_4)
-            elseif _G.Budi == "Budi Beli Sambel" then
-                local A_1 = "Candies"
-                local A_2 = "Buy"
-                local A_3 = 3
-                local A_4 = 2
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer(A_1, A_2, A_3, A_4)
-            elseif _G.Budi == "Budi Lagi Makan" then
-                local A_1 = "Candies"
-                local A_2 = "Buy"
-                local A_3 = 3
-                local A_4 = 1
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer(A_1, A_2, A_3, A_4)
-            elseif Joko == "Budi 200" then
-                local A_1 = "Candies"
-                local A_2 = "Buy"
-                local A_3 = 2
-                local A_4 = 1
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer(A_1, A_2, A_3, A_4)
-            elseif Joko == "Budi 500" then
-                local A_1 = "Candies"
-                local A_2 = "Buy"
-                local A_3 = 2
-                local A_4 = 2
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer(A_1, A_2, A_3, A_4)
-            elseif Jonti == "1" then
-                local A_1 = "Candies"
-                local A_2 = "Buy"
-                local A_3 = 1
-                local A_4 = 1
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer(A_1, A_2, A_3, A_4)
-            elseif Jonti == "2" then
-                local A_1 = "Candies"
-                local A_2 = "Buy"
-                local A_3 = 1
-                local A_4 = 2
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer(A_1, A_2, A_3, A_4)
-            elseif Jonti == "3" then
-                local A_1 = "Candies"
-                local A_2 = "Buy"
-                local A_3 = 1
-                local A_4 = 3
-                local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
-                Event:InvokeServer(A_1, A_2, A_3, A_4)
-            end       
-        end
-    end
-end)
-
 spawn(function()
     pcall(function()
     while wait() do
@@ -17896,12 +18086,13 @@ spawn(function()
             Notification.new("<Color=Red> ‼️ ADMIN DETECTED IN SERVER ‼️ <Color=/>"):Display() 
             wait() 
             Notification.new("<Color=Red> ‼️ AUTO HOP SERVER ACTIVED ‼️ <Color=/>"):Display() 
-            Hop()
+            HopServer()
             end
         end
     end
     end)
 end)
+
     
 notif("#stay ganteng", " subscribe YT isnahamzah")
 wait(1) 
