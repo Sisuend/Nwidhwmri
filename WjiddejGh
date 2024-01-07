@@ -11048,34 +11048,35 @@ SE:AddSeperator(" Optional Feature ")
 SE:AddMultiDropdown("Select Sea Monster", {"Kill Sea Beast", "Kill PirateShips", "Kill Terrorshark", "Kill Shark", "Kill Piranha", "Kill Fish Crew Member", "Kill Haunted Crew Member", "Kill GhostShip"}, function(tbl)
     for _, option in ipairs(tbl) do
         if option == "Kill Sea Beast" then
-            _G.AutoSeaBest = true
-            print("SB")
+            _G.Connect1 = true
         elseif option == "Kill PirateShips" then
-            _G.KillGhostShip = true
-            print("PirateShips")
+            _G.Connect2 = true
         elseif option == "Kill Terrorshark" then
-            _G.bjirTerrorshark = true
-            print("TS")
+            _G.Connect3 = true
         elseif option == "Kill Shark" then
-            _G.bjirShark = true
-            print("Shark")
+            _G.Connect4 = true
         elseif option == "Kill Piranha" then
-            _G.bjirPiranha = true
-            print("Piranha")
+            _G.Connect5 = true
         elseif option == "Kill Fish Crew Member" then
-            _G.fishCrewMember = true
-            print("FSCM")
+            _G.Connect6 = true
         elseif option == "Kill Haunted Crew Member" then
-            _G.HountedCrew = true
-            print("HCM")
+            _G.Connect7 = true
         elseif option == "Kill GhostShip" then
-            _G.bjirFishBoat = true
-            print("GS")
+            _G.Connect8 = true
         end
     end
 
     if #tbl == 0 then
         print(" False All + Stoptween All ") 
+        _G.Connect1 = false
+        _G.Connect2 = false
+        _G.Connect3 = false
+        _G.Connect4 = false
+        _G.Connect5 = false
+        _G.Connect6 = false
+        _G.Connect7 = false
+        _G.Connect8 = false
+                
         _G.AutoSeaBest = false
         _G.KillGhostShip = false
         _G.bjirTerrorshark = false
@@ -11097,9 +11098,13 @@ SE:AddMultiDropdown("Select Sea Monster", {"Kill Sea Beast", "Kill PirateShips",
 end)
 
 
-
-
-
+    spawn(function()
+        while wait() do
+            if _G.Connect1 then
+                _G.AutoSeaBest = true
+            end
+        end
+    end)
     
     spawn(function()
         while wait() do
@@ -11220,6 +11225,13 @@ end)
         end)
     end)
 
+    spawn(function()
+        while wait() do
+            if _G.Connect2 then
+                _G.KillGhostShip = true
+            end
+        end
+    end)
 
         function CheckPirateBoatJir()
             local checkmmpb = {"PirateGrandBrigade", "PirateBrigade"}
@@ -11380,6 +11392,13 @@ end)
         end)
     end)
 
+    spawn(function()
+        while wait() do
+            if _G.Connect3 then
+                _G.bjirTerrorshark = true
+            end
+        end
+    end)
 
 spawn(function()
         while wait() do
@@ -11423,7 +11442,14 @@ spawn(function()
             end
         end
     end)
-    
+ 
+    spawn(function()
+        while wait() do
+            if _G.Connect4 then
+                _G.bjirShark = true
+            end
+        end
+    end)
 
 spawn(function()
         while wait() do
@@ -11460,7 +11486,14 @@ spawn(function()
             end
         end
     end)
-    
+  
+    spawn(function()
+        while wait() do
+            if _G.Connect5 then
+                _G.bjirPiranha = true
+            end
+        end
+    end)
 
 spawn(function()
         while wait() do
@@ -11498,7 +11531,13 @@ spawn(function()
         end
     end)
     
-    
+    spawn(function()
+        while wait() do
+            if _G.Connect6 then
+                _G.fishCrewMember = true
+            end
+        end
+    end)
 
 spawn(function()
         while wait() do
@@ -11537,6 +11576,14 @@ spawn(function()
     end)
     
 
+    spawn(function()
+        while wait() do
+            if _G.Connect7 then
+                _G.HountedCrew = true
+            end
+        end
+    end)
+
 spawn(function()
         while wait() do
             if _G.HountedCrew and World3 then
@@ -11569,6 +11616,15 @@ spawn(function()
                         end
                     end
                 end)
+            end
+        end
+    end)
+
+
+    spawn(function()
+        while wait() do
+            if _G.Connect8 then
+                _G.bjirFishBoat = true
             end
         end
     end)
