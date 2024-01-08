@@ -1205,79 +1205,67 @@ if game.PlaceId == 2753915549 then
         end
     end
 
-local Settings = {}
-local HttpService = game:GetService("HttpService")
-local Workspace = game:GetService("Workspace")
-
-local Notification = require(game:GetService("ReplicatedStorage").Notification)
-
-local SaveFileName = "GantengHubHopServer.json"
-
-local function SaveSettings()
- local HttpService = game:GetService("HttpService")
- writefile(SaveFileName, HttpService:JSONEncode(Settings))
-end
-
-local function ReadSetting()
- local s,e = pcall(function()
-     local HttpService = game:GetService("HttpService")
-     return HttpService:JSONDecode(readfile(SaveFileName))
- end)
- if s then return e
- else
-     SaveSettings()
-     return ReadSetting()
- end
-end
-Settings = ReadSetting()
-
-local function HopServer()
- local function HopServer()
-     for i=1,200 do
-         local serverlist = game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer(i)
-         for k,v in pairs(serverlist) do
-             if k~=game.JobId and v.Count < 11 then
-                 if not Settings[k] or tick() - Settings[k].Time > 60*60  then
-                      Settings[k] = {
-                          Time = tick()
-                      }
-                      SaveSettings()
-                     game:GetService("ReplicatedStorage").__ServerBrowser:InvokeServer("teleport",k)
-                     return true
-                 elseif tick() - Settings[k].Time > 60*120 then
-                     Settings[k] = nil
-                 end
-             end
-         end
-     end
-     return false
- end
- if not getgenv().Loaded then
-     local function child(childinstance)
-         if childinstance.Name == "ErrorPrompt" then
-             if childinstance.Visible then
-                 if childinstance.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
-                     HopServer()
-                 end
-             end
-             childinstance:GetPropertyChangedSignal("Visible"):Connect(function()
-                 if childinstance.Visible then
-                     if childinstance.TitleFrame.ErrorTitle.Text == "Teleport Failed" then
-                         HopServer()
-                     end
-                 end
-             end)
-         end
-     end
-     for k,v in pairs(game.CoreGui.RobloxPromptGui.promptOverlay:GetChildren()) do
-         child(v)
-     end
-     game.CoreGui.RobloxPromptGui.promptOverlay.ChildAdded:Connect(child)
-     getgenv().Loaded = true
- end
- while not HopServer() do wait() end
- SaveSettings()
-end
+    function HopServer()
+        local PlaceID = game.PlaceId
+        local AllIDs = {}
+        local foundAnything = ""
+        local actualHour = os.date("!*t").hour
+        local Deleted = false
+        function TPReturner()
+            local Site;
+            if foundAnything == "" then
+                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+            else
+                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+            end
+            local ID = ""
+            if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+                foundAnything = Site.nextPageCursor
+            end
+            local num = 0;
+            for i,v in pairs(Site.data) do
+                local Possible = true
+                ID = tostring(v.id)
+                if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                    for _,Existing in pairs(AllIDs) do
+                        if num ~= 0 then
+                            if ID == tostring(Existing) then
+                                Possible = false
+                            end
+                        else
+                            if tonumber(actualHour) ~= tonumber(Existing) then
+                                local delFile = pcall(function()
+                                    AllIDs = {}
+                                    table.insert(AllIDs, actualHour)
+                                end)
+                            end
+                        end
+                        num = num + 1
+                    end
+                    if Possible == true then
+                        table.insert(AllIDs, ID)
+                        wait()
+                        pcall(function()
+                            wait()
+                            game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                        end)
+                        wait(4)
+                    end
+                end
+            end
+        end
+        function Teleport() 
+            while wait() do
+                pcall(function()
+                    TPReturner()
+                    if foundAnything ~= "" then
+                        TPReturner()
+                    end
+                end)
+            end
+        end
+        Teleport()
+    end       
     
     function UpdateIslandESP() 
         for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
@@ -11051,6 +11039,7 @@ end)
 SE:AddToggle('Auto Panic Low Health', true, function(value)
 _G.SaveAntiDie = value
 if value then
+wait(3) 
 notif("Sea Event", "Anti Die Aktif, So U Cant Die By Sea Event") 
 else
 notif("Sea Event", "Anti Die Deactive, So U Can Die By Sea Event")
@@ -15942,9 +15931,6 @@ for _, fruitData in pairs(result) do
     end
 end
 
--- Tampilkan daftar buah yang ["OnSale"] = true dengan \n di awal
-print("\n" .. table.concat(fruitsOnSale, "\n"))
-
 local gui = Instance.new("ScreenGui")
 gui.Parent = game.Players.LocalPlayer.PlayerGui
 gui.Name = "MyGUI"
@@ -16028,8 +16014,6 @@ for _, fruitData in pairs(result) do
     end
 end
 
--- Tampilkan daftar buah yang ["OnSale"] = true dengan \n di awal
-print("\n" .. table.concat(fruitsOnSale, "\n"))
 
 local gui = Instance.new("ScreenGui")
 gui.Parent = game.Players.LocalPlayer.PlayerGui
