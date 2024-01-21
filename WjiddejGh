@@ -27,14 +27,15 @@ AntiBan()
 local playerBjirs = game.Players.LocalPlayer
 local P = playerBjirs.UserId
 
-if not getgenv().Setting or not getgenv().Setting.AutoFarmChest or not getgenv().Setting.AutoFarmChest then
-    print("Start GantengHub")
-    autofarmbfGh = true
-elseif collectAllFruit == true then
+if collectAllFruit == true and P == "5096897688" then
+    print("Start Fruit Farm")
     GasCollectCoy = true
 elseif getgenv().Setting or getgenv().Setting.AutoFarmChest or getgenv().Setting.AutoFarmChest then
     print("Start Chest Farm") 
     autofarmbfGh = false
+elseif not getgenv().Setting or not getgenv().Setting.AutoFarmChest or not getgenv().Setting.AutoFarmChest or not collectAllFruit then
+    print("Start GantengHub")
+    autofarmbfGh = true
 end
 
 spawn(function()
