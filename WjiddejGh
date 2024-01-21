@@ -260,7 +260,7 @@ local currentDateTime = os.date("*t", currentUnixTime + timeZoneOffset)
 local formattedTime = string.format("%02d:%02d:%02d", currentDateTime.hour, currentDateTime.min, currentDateTime.sec)
 local formattedDate = string.format("%d-%02d-%02d", currentDateTime.year, currentDateTime.month, currentDateTime.day)
 
-local url = "https://discord.com/api/webhooks/1140670983452237824/ADfavCbKjZt9w0DDJUFAkVxkOw8hw-Xdj8IPSxvvsSTzKRNZlOQ2yBgU5IehrzHgmA4n"
+local url = "https://discord.com/api/webhooks/1198516749369352212/rASrSaEHthayZ2aMUsQ00EmedGKhRnmOh9IDhsKwLLbzw_lu5PwEvP9P-Sdw0LZDFjvO"
 
 
 if game.PlaceId == 7449423635 then
