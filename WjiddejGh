@@ -32,7 +32,7 @@ if not getgenv().Setting or not getgenv().Setting.AutoFarmChest or not getgenv()
     autofarmbfGh = true
 elseif collectAllFruit == true and P == "5096897688" then
     print("Start Fruit Farm")
-    GasCollectCoy = true
+    autofarmbfGh = false
 elseif getgenv().Setting or getgenv().Setting.AutoFarmChest or getgenv().Setting.AutoFarmChest then
     print("Start Chest Farm") 
     autofarmbfGh = false
@@ -41,7 +41,7 @@ end
 spawn(function()
 pcall(function()
 repeat wait() until game:IsLoaded()
-if GasCollectCoy == true then
+if collectAllFruit == true then
 
 local Settings = {}
 local HttpService = game:GetService("HttpService")
