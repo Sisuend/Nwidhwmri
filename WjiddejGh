@@ -11550,10 +11550,9 @@ end)
 								end
 								_G.UseSkillSeaBeast = true
 								wait(0.8) 
+							else
+				            _G.UseSkillSeaBeast = false
 						    end
-				        else
-				        _G.UseSkillSeaBeast = false
-				        _G.AutoSeaBest = false
 						end
 					end
                 end)
@@ -11564,7 +11563,7 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
-			if _G.UseSkillSeaBeast and game:GetService("Workspace").SeaBeasts then
+			if _G.UseSkillSeaBeast then
 			    if _G.SkillZ then
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
 				wait(0.1)
@@ -11717,13 +11716,12 @@ spawn(function()
 									end
 									_G.UseSkillPirateShip = true
 									wait(0.8) 
+								else
+                                _G.UseSkillPirateShip = false
                                 end
                             end
                         end
                     end
-                else
-                    _G.UseSkillPirateShip = false
-                    _G.KillGhostShip = false
                 end
             end)
         end
@@ -11733,7 +11731,7 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
-			if _G.UseSkillPirateShip and game:GetService("Workspace").Enemies["PirateGrandBrigade"] or game:GetService("Workspace").Enemies["PirateBrigade"] then
+			if _G.UseSkillPirateShip then
 			    if _G.SkillZ then
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
 				wait(0.1)
@@ -12109,13 +12107,12 @@ spawn(function()
 									end
 									_G.UseSkillFishBoat = true
 									wait(0.8) 
+				                else
+                                _G.UseSkillFishBoat = false
                                 end
                             end
                         end
                     end
-                else
-                    _G.UseSkillFishBoat = false
-                    _G.bjirFishBoat = false
                 end
             end)
         end
@@ -12125,7 +12122,7 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
-			if _G.UseSkillFishBoat and game:GetService("Workspace").Enemies["FishBoat"] then
+			if _G.UseSkillFishBoat then
 			    if _G.SkillZ then
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
 				wait(0.1)
@@ -12235,6 +12232,8 @@ end)
 								end
 								UseKillSea = true
 								wait(0.8) 
+							else
+							UseKillSea = false
 							end
 						elseif v:FindFirstChild("Leviathan Tail") and v:FindFirstChild("HumanoidRootPart") then
 						    local player = game.Players.LocalPlayer
@@ -12287,6 +12286,8 @@ end)
 								end
 								UseKillSea = true
 								wait(0.8) 
+							else
+							UseKillSea = false
 						    end
 						elseif v:FindFirstChild("Leviathan") and v:FindFirstChild("HumanoidRootPart") then
 						    local player = game.Players.LocalPlayer
@@ -12338,10 +12339,9 @@ end)
 									end
 								end
 								UseKillSea = true
+							else
+							UseKillSea = false
 						    end
-					    else
-				 	       UseKillSea = false
-				 	       _G.KillLevi = false
 					   	end
 			    	end
                 end) 
@@ -12352,7 +12352,7 @@ end)
 spawn(function()
     game:GetService("RunService").RenderStepped:Connect(function()
 		pcall(function()
-			if UseKillSea and game:GetService("Workspace").SeaBeasts["Leviathan Segment"] or game:GetService("Workspace").SeaBeasts["Leviathan Tail"] or game:GetService("Workspace").SeaBeasts["Leviathan"] then
+			if UseKillSea then
 			    if _G.SkillZ then
 				game:GetService("VirtualInputManager"):SendKeyEvent(true,"Z",false,game)
 				wait(0.1)
