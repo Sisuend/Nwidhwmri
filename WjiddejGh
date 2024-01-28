@@ -24,24 +24,26 @@ end
 Webhk() 
 AntiBan()
 
+
+
 local playerBjirs = game.Players.LocalPlayer
 local P = playerBjirs.UserId
 
-if not getgenv().Setting or not getgenv().Setting.AutoFarmChest or not getgenv().Setting.AutoFarmChest or not collectAllFruit then
-    print("Start GantengHub")
-    autofarmbfGh = true
-elseif collectAllFruit == true and P == "5096897688" then
+if getgenv().Setting and getgenv().Setting.FruitFinder then
     print("Start Fruit Farm")
     autofarmbfGh = false
-elseif getgenv().Setting or getgenv().Setting.AutoFarmChest or getgenv().Setting.AutoFarmChest then
+elseif getgenv().Setting and getgenv().Setting.AutoFarmChest then
     print("Start Chest Farm") 
     autofarmbfGh = false
+else
+    print("Start GantengHub")
+    autofarmbfGh = true
 end
 
 spawn(function()
 pcall(function()
 repeat wait() until game:IsLoaded()
-if collectAllFruit == true then
+if getgenv().Setting.FruitFinder then
 
 local Settings = {}
 local HttpService = game:GetService("HttpService")
@@ -49,7 +51,7 @@ local Workspace = game:GetService("Workspace")
 
 local Notification = require(game:GetService("ReplicatedStorage").Notification)
 
-local SaveFileName = "FruitFinderSonic.json"
+local SaveFileName = "FruitFinderGantengHub.json"
 
     function HopServer()
         local PlaceID = game.PlaceId
@@ -198,17 +200,25 @@ for _,v in next, workspace:GetChildren() do
         HopServer()
         end
         repeat
-            local anc1 = bv:Clone()
-            anc1.Parent = chr.HumanoidRootPart
-            local anc2 = bav:Clone()
-            anc2.Parent = chr.HumanoidRootPart
-            local p = t:Create(chr.HumanoidRootPart, TweenInfo.new((plr:DistanceFromCharacter(v.Handle.Position)-1)/10792660990526442019426788, Enum.EasingStyle.Linear), {CFrame=v.Handle.CFrame + Vector3.new(1, v.Handle.Size.Y, 1)})
-            p:Play()
-            p.Completed:Wait()
-            chr.HumanoidRootPart.CFrame = v.Handle.CFrame
-            anc1:Destroy()
-            anc2:Destroy()
-            wait(1)
+local anc1 = bv:Clone()
+anc1.Parent = chr.HumanoidRootPart
+local anc2 = bav:Clone()
+anc2.Parent = chr.HumanoidRootPart
+
+local targetPosition
+
+if v.Handle:IsA("Tool") then
+    targetPosition = chr.HumanoidRootPart.CFrame + Vector3.new(0, chr.HumanoidRootPart.Size.Y, 0)
+else
+    targetPosition = v.Handle.CFrame + Vector3.new(0, v.Handle.Size.Y, 0)
+end
+local p = t:Create(chr.HumanoidRootPart, TweenInfo.new((plr:DistanceFromCharacter(targetPosition.Position)-1)/10792660990526442019426788, Enum.EasingStyle.Linear), {CFrame=targetPosition})
+p:Play()
+p.Completed:Wait()
+
+anc1:Destroy()
+anc2:Destroy()
+wait()
         until v.Parent ~= workspace
         wait(1)
         local fruit = chr:FindFirstChildOfClass("Tool") and chr:FindFirstChildOfClass("Tool").Name:find("Fruit") and chr:FindFirstChildOfClass("Tool") or (function()
@@ -260,14 +270,14 @@ local currentDateTime = os.date("*t", currentUnixTime + timeZoneOffset)
 local formattedTime = string.format("%02d:%02d:%02d", currentDateTime.hour, currentDateTime.min, currentDateTime.sec)
 local formattedDate = string.format("%d-%02d-%02d", currentDateTime.year, currentDateTime.month, currentDateTime.day)
 
-local url = "https://discord.com/api/webhooks/1198516749369352212/rASrSaEHthayZ2aMUsQ00EmedGKhRnmOh9IDhsKwLLbzw_lu5PwEvP9P-Sdw0LZDFjvO"
+local url = getgenv().Setting.Webhook
 
 
 if game.PlaceId == 7449423635 then
 
 local embed = {
-    ["title"] = "FRUIT FINDER",
-    ["description"] = "** Someone Get Something Fruit Form Fruit Finder **",
+    ["title"] = "Ganteng Hub <-[Fruit Finder]->",
+    ["description"] = "** Get Something Fruit Form Fruit Finder **",
     ["color"] = 10181046,
     ["fields"] = {
         {
@@ -292,8 +302,8 @@ SendMessageEMBED(url, embed)
 elseif game.PlaceId == 4442272183 then
 
 local embed = {
-    ["title"] = "FRUIT FINDER",
-    ["description"] = "** Someone Get Something Fruit Form Fruit Finder **",
+    ["title"] = "Ganteng Hub <-[Fruit Finder]->",
+    ["description"] = "** Get Something Fruit Form Fruit Finder **",
     ["color"] = 10181046,
     ["fields"] = {
         {
@@ -318,8 +328,8 @@ SendMessageEMBED(url, embed)
 elseif game.PlaceId == 2753915549 then
 
 local embed = {
-    ["title"] = "FRUIT FINDER",
-    ["description"] = "** Someone Get Something Fruit Form Fruit Finder **",
+    ["title"] = "Ganteng Hub <-[Fruit Finder]->",
+    ["description"] = "** Get Something Fruit Form Fruit Finder **",
     ["color"] = 10181046,
     ["fields"] = {
         {
@@ -346,7 +356,7 @@ end
     end
 end
 wait(2)
-Notification.new("<Color=Red>Wait Hop Server !!<Color=/>"):Display()
+Notification.new("<Color=Green>!! Hopping Server !!<Color=/>"):Display()
 HopServer()
 wait(1)
 HopServer()
@@ -1964,6 +1974,8 @@ function UpdateIslandESP()
         end
     end
     
+
+    
     function isnil(thing)
 	return (thing == nil)
 end
@@ -2349,6 +2361,40 @@ spawn(function()
     end
 end)
 
+function UpdateGeaESP() 
+for i,v in pairs(game:GetService("Workspace").Map.MysticIsland:GetChildren()) do 
+    pcall(function()
+        if GearESP then 
+            if v.Name == "MeshPart" then
+                if not v:FindFirstChild('NameEsp') then
+                    local bill = Instance.new('BillboardGui',v)
+                    bill.Name = 'NameEsp'
+                    bill.ExtentsOffset = Vector3.new(0, 1, 0)
+                    bill.Size = UDim2.new(1,200,1,30)
+                    bill.Adornee = v
+                    bill.AlwaysOnTop = true
+                    local name = Instance.new('TextLabel',bill)
+                    name.Font = "Code"
+                    name.FontSize = "Size14"
+                    name.TextWrapped = true
+                    name.Size = UDim2.new(1,0,1,0)
+                    name.TextYAlignment = 'Top'
+                    name.BackgroundTransparency = 1
+                    name.TextStrokeTransparency = 0.5
+                    name.TextColor3 = Color3.fromRGB(80, 245, 245)
+                else
+                    v['NameEsp'].TextLabel.Text = (v.Name ..'   \n'.. round((game:GetService('Players').LocalPlayer.Character.Head.Position - v.Position).Magnitude/3) ..' M')
+                end
+            end
+        else
+            if v:FindFirstChild('NameEsp') then
+                v:FindFirstChild('NameEsp'):Destroy()
+            end
+        end
+    end)
+end
+end    
+
     
     function InfAb()
         if InfAbility then
@@ -2417,6 +2463,11 @@ function cari(name)
     end
     return false
 end
+
+function ClickCamera()
+    game:GetService("VirtualUser"):CaptureController()
+    game:GetService("VirtualUser"):ClickButton1(Vector2.new(851,158),game:GetService("Workspace").Camera.CFrame)
+    end
     
     function NoDodgeCool()
         if nododgecool then
@@ -2948,6 +2999,8 @@ getgenv().HyperCahayas = function(p)
 local Library = Update:Window("Ganteng Hub","",Enum.KeyCode.RightControl);
 SAT = Library
 newLib:AddChangelog({
+    ["3.3.0"] = "Update New Feature", 
+    ["3.2.0"] = "Update Fix Bug", 
     ["3.1.0"] = "Update New feature", 
     ["3.0.0"] = "Update Full Rilis", 
     ["2.5.0"] = "Update Christmas", 
@@ -3923,17 +3976,14 @@ end)
                                                     game:GetService("Players").LocalPlayer.Character[SelectWeaponGun].RemoteFunctionShoot:InvokeServer(unpack(args))
                                                 else
                                                     AutoHaki()
-                                                    EquipWeapon(_G.SelectWeapon)
+                                                    EquipWeapon(SelectWeaponGun)
                                                     v.Humanoid.WalkSpeed = 0
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Head.CanCollide = false               
                                                     v.HumanoidRootPart.Size = Vector3.new(60,60,60)
                                                     TP1(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
-                                                    local args = {
-                                                        [1] = v.HumanoidRootPart.Position,
-                                                        [2] = v.HumanoidRootPart
-                                                    }
-                                                    game:GetService("Players").LocalPlayer.Character[SelectWeaponGun].RemoteFunctionShoot:InvokeServer(unpack(args))
+                                                    game:GetService("Players").LocalPlayer.Character[SelectWeaponGun].RemoteFunctionShoot:InvokeServer(v.HumanoidRootPart.Position,v.HumanoidRootPart)
+                                                    ClickCamera()
                                                 end
                                                 StartMasteryGunMagnet = true 
                                                 PosMonMasteryGun = v.HumanoidRootPart.CFrame
@@ -3965,8 +4015,6 @@ end)
             end
         end)
     end)
-    
-    
     
 Sett:AddSeperator("Setting")
     
@@ -4084,10 +4132,10 @@ spawn(function()
     end
 end)
 
-local AttackList = {"0", "0.1", "0.15", "0.155", "0.16", "0.165", "0.17", "0.175", "0.18", "0.185"}
+
 _G.FastAttackDelay = "0.175"
-Sett:AddDropdown("Fast Attack Delay", AttackList,function(MakoGay)
-    _G.FastAttackDelay = MakoGay
+Sett:AddTextbox("Custom Delay Fast Attack", true, function(value)
+_G.FastAttackDelay = value
 end)
 spawn(function()
     while wait(.1) do
@@ -4095,31 +4143,15 @@ spawn(function()
             pcall(function()
                 if _G.FastAttackDelay == "0" then
                     _G.FastAttackDelay = 0
-                elseif _G.FastAttackDelay == "0.1" then
-                    _G.FastAttackDelay = 0.1
-                elseif _G.FastAttackDelay == "0.15" then
-                    _G.FastAttackDelay = 0.15
-                elseif _G.FastAttackDelay == "0.155" then
-                    _G.FastAttackDelay = 0.155
-                elseif _G.FastAttackDelay == "0.16" then
-                    _G.FastAttackDelay = 0.16
-                elseif _G.FastAttackDelay == "0.165" then
-                    _G.FastAttackDelay = 0.165
-                elseif _G.FastAttackDelay == "0.17" then
-                    _G.FastAttackDelay = 0.17
                 elseif _G.FastAttackDelay == "0.175" then
                     _G.FastAttackDelay = 0.175
-                elseif _G.FastAttackDelay == "0.18" then
-                    _G.FastAttackDelay = 0.18
-                elseif _G.FastAttackDelay == "0.185" then
-                    _G.FastAttackDelay = 0.185
-                elseif _G.FastAttackDelay == "0.09" then
-                    _G.FastAttackDelay = 0.09
                 end
             end)
         end
     end
 end)
+Sett:AddLabel("Normal Fast Attack Delay : 0.175") 
+
 
 local Client = game.Players.LocalPlayer
 local STOP = require(Client.PlayerScripts.CombatFramework.Particle)
@@ -4202,6 +4234,10 @@ while wait(.1) do
         pcall(function()
             repeat task.wait(_G.FastAttackDelay)
                 AttackHit()
+                AttackHit()
+                AttackHit()
+                AttackHit()
+                AttackHit()
             until not _G.FastAttack
         end)
     end
@@ -4213,6 +4249,15 @@ while wait(.1) do
     if _G.HyperSonic then
         pcall(function()
             repeat task.wait(0,09)
+                AttackHit()
+                AttackHit()
+                AttackHit()
+                AttackHit()
+                AttackHit()
+                AttackHit()
+                AttackHit()
+                AttackHit()
+                AttackHit()
                 AttackHit()
             until not _G.HyperSonic
         end)
@@ -8813,9 +8858,9 @@ end)
         while wait() do
             if  _G.KillDbBos and World2 then
                 pcall(function()
-                    if game:GetService("Workspace").Enemies:FindFirstChild("DarkBeard") then
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Darkbeard") then
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == "DarkBeard" then
+                            if v.Name == "Darkbeard" then
                                 if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
                                     repeat task.wait()
                                         AutoHaki()
@@ -8833,8 +8878,8 @@ end)
                         end
                     else
                     HyperCahaya(CFrame.new(3585.490478515625, 13.887286186218262, -3388.927490234375))
-                        if game:GetService("ReplicatedStorage"):FindFirstChild("DarkBeard") then
-                            HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("DarkBeard").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
+                        if game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard") then
+                            HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Darkbeard").HumanoidRootPart.CFrame * CFrame.new(2,20,2))
                         else
                             if  _GHopItemSea then
                                 HopServer()
@@ -11488,6 +11533,8 @@ end)
         while wait() do
             if _G.Connect1 then
                 _G.AutoSeaBest = true
+            else
+                _G.UseSkillSeaBeast = false
             end
         end
     end)
@@ -11550,11 +11597,11 @@ end)
 								end
 								_G.UseSkillSeaBeast = true
 								wait(0.8) 
-							else
-				            _G.UseSkillSeaBeast = false
 						    end
 						end
 					end
+					_G.UseSkillSeaBeast = false
+					print("Yoss") 
                 end)
             end
         end
@@ -11616,6 +11663,8 @@ end)
         while wait() do
             if _G.Connect2 then
                 _G.KillGhostShip = true
+            else
+                _G.UseSkillPirateShip = false
             end
         end
     end)
@@ -12013,6 +12062,8 @@ spawn(function()
         while wait() do
             if _G.Connect8 then
                 _G.bjirFishBoat = true
+            else
+                _G.UseSkillFishBoat = false
             end
         end
     end)
@@ -14563,6 +14614,13 @@ spawn(function()
         end
     end)
 end)
+
+    RaceV4:AddToggle("Esp Blue Gear",false,function(a)
+        Gearesp = a
+        while Gearesp do wait()
+            UpdateGeaESP() 
+        end
+    end)
 
 RaceV4:AddToggle("Auto Lock Moon",_G.LockCamToMoon,function(value)
     _G.LockCamToMoon = value
@@ -18791,7 +18849,7 @@ StarterGui:SetCore("ChatMakeSystemMessage", properties)
 Bjorka.Text = "[💬] Discord : discord.gg/isnahamzah"
 StarterGui:SetCore("ChatMakeSystemMessage", Bjorka)
 
-bjorking.Text = "[🎥] Youtube : youtube.com/@isnahamzah"
+bjorking.Text = "[🎥] Youtube : @isnahamzah"
 StarterGui:SetCore("ChatMakeSystemMessage", bjorking)
 
 end
