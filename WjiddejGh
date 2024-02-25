@@ -1,7 +1,7 @@
 local SAT
 
 function Webhk() 
-loadstring(game:HttpGet("https://isnahamzahpastebin.tech/src/mancing"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/RobloxIDGubkuk/snjdjsndmdkdd/main/NwjejdnWbhook"))()
 end
 
  function AntiBan()
@@ -4462,6 +4462,136 @@ function notif(label, text)
 notipLib:SendNotification(label, text)
 end
 
+function SG3() 
+notif("Soul Guitar","Loading.....")
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment1.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T1 = trophies.Quest.Trophy1.Handle.Orientation
+    local C1 = map["Haunted Castle"]["Tablet"].Segment1.Line.Orientation
+    local a    
+    if T1 == Vector3.new(0, -90, 0) or T1 == Vector3.new(0, 90, 0) then
+        a = Vector3.new(0, 0, 180)
+    elseif T1 == Vector3.new(0, 0, 0) or T1 == Vector3.new(0, 180, 0) then
+        a = Vector3.new(0, 0, -90)
+    end    
+    task.wait()   
+until C1 == a
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment2.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C10 = map["Haunted Castle"]["Tablet"].Segment2.Line.Orientation
+    task.wait()   
+until C10 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment3.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T2 = trophies.Quest.Trophy2.Handle.Orientation
+    local C2 = map["Haunted Castle"]["Tablet"].Segment3.Line.Orientation
+    local b    
+    if T2 == Vector3.new(0, -90, 0) or T2 == Vector3.new(0, 90, 0) then
+        b = Vector3.new(0, 0, 180)
+    elseif T2 == Vector3.new(0, 0, 0) or T2 == Vector3.new(0, 180, 0) then
+        b = Vector3.new(0, 0, -90)
+    end 
+    task.wait()   
+until C2 == b
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment4.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T3 = trophies.Quest.Trophy3.Handle.Orientation
+    local C3 = map["Haunted Castle"]["Tablet"].Segment4.Line.Orientation
+    local c    
+    if T3 == Vector3.new(0, -90, 0) or T3 == Vector3.new(0, 90, 0) then
+        c = Vector3.new(0, 0, 180)
+    elseif T3 == Vector3.new(0, 0, 0) or T3 == Vector3.new(0, 180, 0) then
+        c = Vector3.new(0, 0, -90)
+    end    
+    task.wait()   
+until C3 == c
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment5.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C11 = map["Haunted Castle"]["Tablet"].Segment5.Line.Orientation
+    task.wait()   
+until C11 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment6.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C12 = map["Haunted Castle"]["Tablet"].Segment6.Line.Orientation
+    task.wait()   
+until C12 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment7.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T4 = trophies.Quest.Trophy4.Handle.Orientation
+    local C4 = map["Haunted Castle"]["Tablet"].Segment7.Line.Orientation
+    local d    
+    if T4 == Vector3.new(0, -90, 0) or T4 == Vector3.new(0, 90, 0) then
+        d = Vector3.new(0, 0, 180)
+    elseif T4 == Vector3.new(0, 0, 0) or T4 == Vector3.new(0, 180, 0) then
+        d = Vector3.new(0, 0, -90)
+    end    
+    task.wait()   
+until C4 == d
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment8.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C13 = map["Haunted Castle"]["Tablet"].Segment8.Line.Orientation
+    task.wait()   
+until C13 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment9.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local C14 = map["Haunted Castle"]["Tablet"].Segment9.Line.Orientation
+    task.wait()   
+until C14 == Vector3.new(0, 0, 0)
+repeat
+    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment10.ClickDetector)
+    local workspace = game:GetService("Workspace")
+    local map = workspace.Map
+    local hauntedCastle = map["Haunted Castle"]
+    local trophies = hauntedCastle.Trophies
+    local T5 = trophies.Quest.Trophy5.Handle.Orientation
+    local C5 = map["Haunted Castle"]["Tablet"].Segment10.Line.Orientation
+    local e    
+    if T5 == Vector3.new(0, -90, 0) or T5 == Vector3.new(0, 90, 0) then
+        e = Vector3.new(0, 0, 180)
+    elseif T5 == Vector3.new(0, 0, 0) or T5 == Vector3.new(0, 180, 0) then
+        e = Vector3.new(0, 0, -90)
+    end    
+    task.wait()   
+until C5 == e
+notif("Soul Guitar","Completed Thopy Puzzle")
+end
+
 function BTP(P1)
 game.Players.LocalPlayer.Character.Head:Destroy()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = P1
@@ -8035,133 +8165,7 @@ spawn(function()
 										else
 											Quest3 = true	
 											notif("Soul Guitar","Started Puzzle 3")
-											notif("Soul Guitar","Loading.....")
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment1.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local T1 = trophies.Quest.Trophy1.Handle.Orientation
-    local C1 = map["Haunted Castle"]["Tablet"].Segment1.Line.Orientation
-    local a    
-    if T1 == Vector3.new(0, -90, 0) or T1 == Vector3.new(0, 90, 0) then
-        a = Vector3.new(0, 0, 180)
-    elseif T1 == Vector3.new(0, 0, 0) or T1 == Vector3.new(0, 180, 0) then
-        a = Vector3.new(0, 0, -90)
-    end    
-    task.wait()   
-until C1 == a
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment2.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local C10 = map["Haunted Castle"]["Tablet"].Segment2.Line.Orientation
-    task.wait()   
-until C10 == Vector3.new(0, 0, 0)
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment3.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local T2 = trophies.Quest.Trophy2.Handle.Orientation
-    local C2 = map["Haunted Castle"]["Tablet"].Segment3.Line.Orientation
-    local b    
-    if T2 == Vector3.new(0, -90, 0) or T2 == Vector3.new(0, 90, 0) then
-        b = Vector3.new(0, 0, 180)
-    elseif T2 == Vector3.new(0, 0, 0) or T2 == Vector3.new(0, 180, 0) then
-        b = Vector3.new(0, 0, -90)
-    end 
-    task.wait()   
-until C2 == b
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment4.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local T3 = trophies.Quest.Trophy3.Handle.Orientation
-    local C3 = map["Haunted Castle"]["Tablet"].Segment4.Line.Orientation
-    local c    
-    if T3 == Vector3.new(0, -90, 0) or T3 == Vector3.new(0, 90, 0) then
-        c = Vector3.new(0, 0, 180)
-    elseif T3 == Vector3.new(0, 0, 0) or T3 == Vector3.new(0, 180, 0) then
-        c = Vector3.new(0, 0, -90)
-    end    
-    task.wait()   
-until C3 == c
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment5.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local C11 = map["Haunted Castle"]["Tablet"].Segment5.Line.Orientation
-    task.wait()   
-until C11 == Vector3.new(0, 0, 0)
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment6.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local C12 = map["Haunted Castle"]["Tablet"].Segment6.Line.Orientation
-    task.wait()   
-until C12 == Vector3.new(0, 0, 0)
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment7.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local T4 = trophies.Quest.Trophy4.Handle.Orientation
-    local C4 = map["Haunted Castle"]["Tablet"].Segment7.Line.Orientation
-    local d    
-    if T4 == Vector3.new(0, -90, 0) or T4 == Vector3.new(0, 90, 0) then
-        d = Vector3.new(0, 0, 180)
-    elseif T4 == Vector3.new(0, 0, 0) or T4 == Vector3.new(0, 180, 0) then
-        d = Vector3.new(0, 0, -90)
-    end    
-    task.wait()   
-until C4 == d
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment8.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local C13 = map["Haunted Castle"]["Tablet"].Segment8.Line.Orientation
-    task.wait()   
-until C13 == Vector3.new(0, 0, 0)
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment9.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local C14 = map["Haunted Castle"]["Tablet"].Segment9.Line.Orientation
-    task.wait()   
-until C14 == Vector3.new(0, 0, 0)
-repeat
-    fireclickdetector(game:GetService("Workspace").Map["Haunted Castle"]["Tablet"].Segment10.ClickDetector)
-    local workspace = game:GetService("Workspace")
-    local map = workspace.Map
-    local hauntedCastle = map["Haunted Castle"]
-    local trophies = hauntedCastle.Trophies
-    local T5 = trophies.Quest.Trophy5.Handle.Orientation
-    local C5 = map["Haunted Castle"]["Tablet"].Segment10.Line.Orientation
-    local e    
-    if T5 == Vector3.new(0, -90, 0) or T5 == Vector3.new(0, 90, 0) then
-        e = Vector3.new(0, 0, 180)
-    elseif T5 == Vector3.new(0, 0, 0) or T5 == Vector3.new(0, 180, 0) then
-        e = Vector3.new(0, 0, -90)
-    end    
-    task.wait()   
-until C5 == e
-notif("Soul Guitar","Completed Thopy Puzzle")
+											SG3()
 											for _, v in pairs(game:GetService("Workspace").Map["Haunted Castle"].Tablet:GetChildren()) do
 											    if v:FindFirstChild("ClickDetector") and v.Line.p.Y < -999 then
 											        fireclickdetector(v.ClickDetector)
