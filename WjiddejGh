@@ -1,3 +1,29 @@
+local request = (syn and syn.request) or (http and http.request) or http_request
+local httpservice = game:GetService("HttpService")
+
+local function GET(url, headers)
+    return request({Url = url, Method = "GET", Headers = headers}).Body
+end
+
+local UsageApi = "https://code4zaa.xyz/api/usage/?"
+local LuarmorApi = "https://code4zaa.xyz/api/luarmor/v3/ganteng_hub?"
+
+local function checkPanel()
+    local CheckKey = httpservice:JSONDecode(GET(string.format("%suser_key=%s&discord_id=%s", LuarmorApi, ScriptKey or script_key or "", DiscordID)))
+    if CheckKey.pro_panel then 
+        return "Pro Rank", CheckKey.pro_panel
+    else
+        return "Basic Rank", CheckKey.basic_panel
+    end
+end
+
+local rankuser, response = checkPanel()
+local PakeUIBaru
+if rankuser == "Pro Rank" then
+    PakeUIBaru = true
+elseif rankuser == "Basic Rank" then
+    PakeUIBaru = false
+end
 local SAT
 
 function Webhk() 
@@ -30,12 +56,48 @@ function N(label, text)
 BijiKona:SendNotification(label, text)
 end
 
+if game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Main", 9e9):FindFirstChild("ChooseTeam") and getgenv().AutoSelectTeam then
+    -- Team
+    repeat task.wait() until game:IsLoaded()
+
+    local player = game.Players.LocalPlayer
+    repeat task.wait() until player and player:FindFirstChild("PlayerGui") and player.PlayerGui:FindFirstChild("Main")
+
+    local chooseTeam = player.PlayerGui.Main.ChooseTeam
+    local teamContainer = chooseTeam.Container
+
+    local function activateTeamButton(team)
+        for _, connection in pairs(getconnections(team.Frame.TextButton.Activated)) do
+            connection.Function()
+        end
+    end
+
+    repeat
+        local userteam = getgenv().SelectTeam
+        local v2 = userteam
+        local teamName = string.find(v2, "Marine") and "Marines" or "Pirates"
+
+        activateTeamButton(teamContainer[teamName])
+
+        task.wait()
+    until player.Team ~= nil and game:IsLoaded()
+end
 if getgenv().list and getgenv().list.Setting.StartHunt then
-    N("Ganteng Hub", "Start Auto Farm Bounty") 
-    autofarmbfGh = false
+    if rankuser == "Pro Rank" then
+        N("Ganteng Hub", "Start Auto Farm Bounty") 
+        autofarmbfGh = false
+    else
+        N("Ganteng Hub", "Sorry, Auto Farm Bounty Now Only For Pro Rank Only") 
+        N("Ganteng Hub", "Please Upgrade Your Rank To Pro") 
+    end
 elseif getgenv().Setting and getgenv().Setting.FruitFinder then
-    N("Ganteng Hub", "Start Auto Farm Fruit") 
-    autofarmbfGh = false
+    if rankuser == "Pro Rank" then
+        N("Ganteng Hub", "Start Auto Farm Fruit") 
+        autofarmbfGh = false
+    else
+        N("Ganteng Hub", "Sorry, Auto Farm Fruit Now Only For Pro Rank Only") 
+        N("Ganteng Hub", "Please Upgrade Your Rank To Pro") 
+    end
 elseif getgenv().Setting and getgenv().Setting.AutoFarmChest then
     N("Ganteng Hub", "Start Auto Farm Chest") 
     autofarmbfGh = false
@@ -2444,11 +2506,17 @@ spawn(function()
     end
 end)
 
-local Update = {}
+
 local pfp = "https://www.roblox.com/headshot-thumbnail/image?userId=".. game.Players.LocalPlayer.UserId .."&width=420&height=420&format=png"
 
+local Update
+local newLib
 
-local newLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/VanciSonic/Lgtihb/main/Lgantihub"))()
+if PakeUIBaru then -- pake ui baru ygy
+    Update = loadstring(game:HttpGet("https://raw.githubusercontent.com/VanciSonic/Lgtihb/main/LgantihubBaru"))()
+elseif not PakeUIBaru then -- pake ui lama, pake wrapper gini dah gw
+    Update = {}
+    newLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/VanciSonic/Lgtihb/main/Lgantihub"))()
 
 -- window
 function Update:Window(title, icon,...)
@@ -2466,9 +2534,9 @@ function Update:Window(title, icon,...)
 	end
 	
 	-- gw lupa add ini njir
-	function LIBRARY:AddChangelogs(list)
+	function LIBRARY:AddChangelog(list)
 		local self = setmetatable({}, LIBRARY)
-		return newLib:AddChangelogs(list)
+		return newLib:AddChangelog(list)
 	end
 	
 	
@@ -2560,6 +2628,7 @@ function Update:Window(title, icon,...)
 	end
 	
 	return LIBRARY
+end
 end
 
 
@@ -4759,7 +4828,7 @@ getgenv().HyperCahayas = function(p)
 
 local Library = Update:Window("Ganteng Hub","",Enum.KeyCode.RightControl);
 SAT = Library
-newLib:AddChangelog({
+Library:AddChangelog({
     ["3.3.0"] = "Update New Feature", 
     ["3.2.0"] = "Update Fix Bug", 
     ["3.1.0"] = "Update New feature", 
@@ -4807,7 +4876,8 @@ local Time = H:AddLabel("Executor Time");spawn(function() getgenv().Time = true;
 H:AddLabel("[🌐] Website : isnahamzah.tech ")
 H:AddLabel("[💬] Discord : discord.gg/isnahamzah ")
 H:AddLabel("[🎥] Youtube : @isnahamzah ") 
-H:AddLabel("[Ⓔ] Executor Support : Delta , Fluxus")
+H:AddLabel("[📀] Executor : ".. identifyexecutor())
+H:AddLabel("[💎] Rank : ".. rankuser)
 H:AddLabel("#StayGanteng") 
 H:AddLabel("#GantengHubOnTop")
 
@@ -5073,7 +5143,6 @@ task.spawn(function()
         end
     end)
    
-
 
    Main:AddToggle("Farm Nearest ",_G.AutoFarmNearest,function(value)
    _G.AutoFarmNearest = value
@@ -5773,10 +5842,10 @@ end)
                                                     function(...)
                                                     local a = {...}
                                                     if getnamecallmethod() == "InvokeServer" then
-                                                    if _G.SelectWeaponGun then
-                                                    if _G.SelectWeaponGun == "Soul Guitar" then
+                                                    if gunselect then
+                                                    if gunselect == "Soul Guitar" then
                                                     if tostring(a[2]) == "TAP" then
-                                                    if _G.AutoFarmGunMastery and UseSkill then
+                                                    if _G.AutoFarmGunMastery then
                                                     a[3] = PositionSkillMasteryGun
                                                     end
                                                     end
@@ -5904,10 +5973,14 @@ spawn(function()
         end
     end
 end)
-
-    Sett:AddToggle("HyperSonic [ SUPER OP ]",false,function(value)
-       _G.HyperSonic = value
-    end)      
+    
+    if rankuser == "Pro Rank" then
+        Sett:AddToggle("HyperSonic [ SUPER OP ]",false,function(value)
+           _G.HyperSonic = value
+        end)  
+    else
+        Sett:AddLabel("HyperSonic [🔒 Pro Only 🔒]") 
+    end
 
     Sett:AddToggle("Fast Attack ",true,function(value)
         _G.FastAttack = value
@@ -15855,6 +15928,24 @@ end)
             end
         end)
     end)
+    
+    if rankuser == "Pro Rank" then
+        Sts:AddToggle("Auto Send Webhook Super Fast", false, function(value)
+            _G.SuperWebhook = value
+        end)
+    else
+        Sts:AddLabel("Super Fast Webhook [🔒 Pro Only 🔒]") 
+    end
+    
+    spawn(function()
+        pcall(function()
+            while wait(5) do
+                if _G.SuperWebhook then
+                    webStatus(_G.LinkWebstat)
+                end
+            end
+        end)
+    end)
 
 Sts:AddSeperator("Webhook Status")
 
@@ -20645,6 +20736,12 @@ local bjorking = {
     TextSize = 17;
 }
 
+local kintils = {
+    Color = Color3.new(0,0,1);
+    Font = Enum.Font.RobotoMono;
+    TextSize = 17;
+}
+
 properties.Text = "[🌐] Website : isnahamzah.tech"
 StarterGui:SetCore("ChatMakeSystemMessage", properties)
 
@@ -20653,5 +20750,8 @@ StarterGui:SetCore("ChatMakeSystemMessage", Bjorka)
 
 bjorking.Text = "[🎥] Youtube : @isnahamzah"
 StarterGui:SetCore("ChatMakeSystemMessage", bjorking)
+
+kintils.Text = "[💎] Rank : ".. rankuser .. ""
+StarterGui:SetCore("ChatMakeSystemMessage", kintils)
 
 end
