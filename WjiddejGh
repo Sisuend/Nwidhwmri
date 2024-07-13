@@ -5,8 +5,7 @@ local function GET(url, headers)
     return request({Url = url, Method = "GET", Headers = headers}).Body
 end
 
-local UsageApi = "https://code4zaa.xyz/api/usage/?"
-local LuarmorApi = "https://code4zaa.xyz/api/luarmor/v3/ganteng_hub?"
+local LuarmorApi = "https://api.code4zaa.xyz/v1/luarmor/ganteng_hub?"
 
 local function checkPanel()
     local CheckKey = httpservice:JSONDecode(GET(string.format("%suser_key=%s&discord_id=%s", LuarmorApi, ScriptKey or script_key or "", DiscordID)))
