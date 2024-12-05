@@ -17443,4 +17443,6 @@ StarterGui:SetCore("ChatMakeSystemMessage", bjorking)
 kintils.Text = "[💎] Rank : Pro"
 StarterGui:SetCore("ChatMakeSystemMessage", kintils)
 
+StopTween(Mirrage)
+
 end
