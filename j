@@ -3967,7 +3967,7 @@ function Paragraph:New(Config)
 	Paragraph.Border.Transparency = 0.6
 
 	function Paragraph:SetValue(Value)
-	    self.Frame.Text = Value
+	    Paragraph.Frame.Text = Value
 	end
 
 	return Paragraph
