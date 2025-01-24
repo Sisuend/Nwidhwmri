@@ -3960,16 +3960,14 @@ Paragraph.__type = "Paragraph"
 
 function Paragraph:New(Config)
 	assert(Config.Title, "Paragraph - Missing Title")
+	kontolTITLE = Config.Title
+	kontolCONTENT = Config.Content
 
 	function Paragraph:SetValue(Value)
-	    if value then
-	        Config.Content = Value
-		else
-		    Config.Content = Config.Content or ""
-		end
+	    kontolCONTENT = Value
 	end
 
-	local Paragraph = require(Components.Element)(Config.Title, Config.Content, Paragraph.Container, false)
+	local Paragraph = require(Components.Element)(kontolTITLE, kontolCONTENT, Paragraph.Container, false)
 	Paragraph.Frame.BackgroundTransparency = 0.92
 	Paragraph.Border.Transparency = 0.6
 
