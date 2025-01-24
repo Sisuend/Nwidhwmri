@@ -3960,10 +3960,13 @@ Paragraph.__type = "Paragraph"
 
 function Paragraph:New(Config)
 	assert(Config.Title, "Paragraph - Missing Title")
-	Config.Content = Config.Content or ""
 
 	function Paragraph:SetValue(Value)
-	    Config.Content = Value
+	    if value then
+	        Config.Content = Value
+		else
+		    Config.Content = Config.Content or ""
+		end
 	end
 
 	local Paragraph = require(Components.Element)(Config.Title, Config.Content, Paragraph.Container, false)
